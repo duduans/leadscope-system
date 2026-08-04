@@ -1,0 +1,4444 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LeadScope - Sistema Completo</title>
+    
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    
+    <style>
+        /* ============================================================
+           ESTILOS GERAIS
+        ============================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #F9F5EA;
+            color: #333333;
+            min-height: 100vh;
+        }
+
+        /* ============================================================
+           TELA DE LOGIN
+        ============================================================ */
+        .login-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #F9F5EA 0%, #f0ede5 100%);
+        }
+
+        .login-container {
+            background: #ffffff;
+            border-radius: 28px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.10);
+            width: 100%;
+            max-width: 480px;
+            padding: 44px 40px 36px;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .logo-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin-bottom: 8px;
+        }
+
+        .logo-symbol {
+            width: 56px;
+            height: 56px;
+            background: #027075;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .logo-symbol .center-circle {
+            width: 20px;
+            height: 20px;
+            background: #ffffff;
+            border-radius: 50%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-symbol .triangle {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 11px solid transparent;
+            border-right: 11px solid transparent;
+            border-bottom: 19px solid #F7B31C;
+        }
+        .logo-symbol .triangle.t1 { top: 4px; left: 50%; transform: translateX(-50%) rotate(0deg); }
+        .logo-symbol .triangle.t2 { bottom: 4px; left: 50%; transform: translateX(-50%) rotate(180deg); }
+        .logo-symbol .triangle.t3 { top: 50%; left: 4px; transform: translateY(-50%) rotate(270deg); }
+        .logo-symbol .triangle.t4 { top: 50%; right: 4px; transform: translateY(-50%) rotate(90deg); }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 34px;
+            color: #027075;
+            letter-spacing: -0.5px;
+            line-height: 1;
+        }
+        .logo-text span { color: #F7B31C; }
+
+        .subtitle {
+            text-align: center;
+            font-weight: 400;
+            font-size: 14px;
+            color: #666666;
+            margin-top: -2px;
+            margin-bottom: 32px;
+        }
+
+        /* Switch de Perfil */
+        .profile-switch-wrapper {
+            background: #f5f3ee;
+            border-radius: 16px;
+            padding: 6px;
+            display: flex;
+            position: relative;
+            margin-bottom: 28px;
+            border: 2px solid #e8e4d8;
+        }
+
+        .profile-switch-wrapper .slider-bg {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: calc(50% - 4px);
+            height: calc(100% - 8px);
+            background: #ffffff;
+            border-radius: 12px;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+        .profile-switch-wrapper .slider-bg.sdr { left: 4px; }
+        .profile-switch-wrapper .slider-bg.closer { left: calc(50% + 2px); }
+
+        .profile-option {
+            flex: 1;
+            padding: 12px 16px;
+            border: none;
+            background: transparent;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            border-radius: 12px;
+            position: relative;
+            z-index: 2;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: #999999;
+        }
+        .profile-option.active { color: #333333; }
+        .profile-option.sdr.active { color: #027075; }
+        .profile-option.closer.active { color: #1e40af; }
+        .profile-option:hover:not(.active) { color: #666666; }
+
+        .profile-badge {
+            display: none;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+        .profile-badge.show { display: inline-block; }
+        .profile-badge.sdr { background: #e0f5f1; color: #027075; }
+        .profile-badge.closer { background: #dbeafe; color: #1e40af; }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            font-size: 13px;
+            color: #666666;
+            margin-bottom: 5px;
+        }
+        .form-group .input-wrapper {
+            position: relative;
+        }
+        .form-group .input-wrapper i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999999;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 14px 14px 14px 46px;
+            border: 2px solid #e5e7eb;
+            border-radius: 14px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 15px;
+            font-weight: 400;
+            color: #333333;
+            background: #fcfcfc;
+            transition: all 0.25s ease;
+        }
+        .form-group input:focus {
+            outline: none;
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(2, 112, 117, 0.08);
+        }
+        .form-group input:focus.border-sdr { border-color: #027075; }
+        .form-group input:focus.border-closer { border-color: #1e40af; }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 16px 0 24px;
+            font-size: 14px;
+        }
+        .form-options label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #666666;
+            cursor: pointer;
+        }
+        .form-options label input[type="checkbox"] {
+            width: 17px;
+            height: 17px;
+            accent-color: #027075;
+            cursor: pointer;
+        }
+        .form-options a {
+            color: #027075;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .form-options a:hover { text-decoration: underline; }
+
+        .btn-login {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 14px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 17px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: #333333;
+            background: #F7B31C;
+            box-shadow: 0 4px 16px rgba(247, 179, 28, 0.30);
+        }
+        .btn-login:hover {
+            background: #e6a010;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(247, 179, 28, 0.40);
+        }
+        .btn-login:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .btn-login .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(51, 51, 51, 0.2);
+            border-top: 3px solid #333333;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .auth-links {
+            text-align: center;
+            margin-top: 26px;
+            font-size: 14px;
+            color: #666666;
+        }
+        .auth-links a {
+            color: #027075;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .auth-links a:hover { text-decoration: underline; }
+
+        .message {
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 500;
+            display: none;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+        .message.error {
+            display: flex;
+            background: #fde8e8;
+            color: #991b1b;
+            border-left: 4px solid #dc2626;
+        }
+        .message.success {
+            display: flex;
+            background: #e0f5f1;
+            color: #027075;
+            border-left: 4px solid #027075;
+        }
+
+        .demo-hint {
+            text-align: center;
+            font-size: 12px;
+            color: #aaaaaa;
+            margin-top: 16px;
+            padding: 10px;
+            background: #f9fafb;
+            border-radius: 10px;
+            border: 1px dashed #e5e7eb;
+        }
+        .demo-hint strong { color: #666666; }
+
+        /* ============================================================
+           DASHBOARDS
+        ============================================================ */
+        .dashboard-page {
+            display: none;
+            min-height: 100vh;
+        }
+        .dashboard-page.active { display: block; }
+
+        /* Topbar */
+        .topbar {
+            background: #ffffff;
+            padding: 16px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px solid #e8e4d8;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .topbar-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .topbar-logo .symbol-mini {
+            width: 36px;
+            height: 36px;
+            background: #027075;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .topbar-logo .symbol-mini .center-dot {
+            width: 12px;
+            height: 12px;
+            background: #ffffff;
+            border-radius: 50%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .topbar-logo .symbol-mini .tri {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 7px solid transparent;
+            border-right: 7px solid transparent;
+            border-bottom: 12px solid #F7B31C;
+        }
+        .topbar-logo .symbol-mini .tri.t1 { top: 3px; left: 50%; transform: translateX(-50%) rotate(0deg); }
+        .topbar-logo .symbol-mini .tri.t2 { bottom: 3px; left: 50%; transform: translateX(-50%) rotate(180deg); }
+        .topbar-logo .symbol-mini .tri.t3 { top: 50%; left: 3px; transform: translateY(-50%) rotate(270deg); }
+        .topbar-logo .symbol-mini .tri.t4 { top: 50%; right: 3px; transform: translateY(-50%) rotate(90deg); }
+
+        .topbar-logo .text {
+            font-weight: 700;
+            font-size: 22px;
+            color: #027075;
+        }
+        .topbar-logo .text span { color: #F7B31C; }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .topbar-user {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .topbar-user .name {
+            font-weight: 500;
+            font-size: 14px;
+            color: #333333;
+        }
+        .topbar-user .badge-sdr {
+            background: #e0f5f1;
+            color: #027075;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .topbar-user .badge-closer {
+            background: #dbeafe;
+            color: #1e40af;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .topbar-user .avatar-sdr {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #027075, #015c60);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        .topbar-user .avatar-closer {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #1e40af, #1e3a8a);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .topbar .notifications {
+            position: relative;
+            cursor: pointer;
+            font-size: 20px;
+            color: #666666;
+            transition: color 0.2s;
+        }
+        .topbar .notifications:hover { color: #027075; }
+        .topbar .notifications .count {
+            position: absolute;
+            top: -6px;
+            right: -8px;
+            background: #F7B31C;
+            color: #333333;
+            font-size: 10px;
+            font-weight: 700;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logout-btn {
+            background: #fee2e2;
+            border: 2px solid #dc2626;
+            color: #991b1b;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            padding: 8px 16px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+        .logout-btn:hover {
+            background: #dc2626;
+            color: white;
+            transform: scale(1.02);
+            box-shadow: 0 4px 16px rgba(220, 38, 38, 0.3);
+        }
+        .logout-btn i { font-size: 16px; }
+
+        /* Conteúdo do Dashboard */
+        .main-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 28px 32px 60px;
+        }
+
+        .page-header {
+            margin-bottom: 28px;
+        }
+        .page-header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .page-header h1.sdr-title { color: #027075; }
+        .page-header h1.closer-title { color: #1e40af; }
+        .page-header p {
+            font-size: 15px;
+            color: #666666;
+            font-weight: 400;
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+
+        .stat-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 20px 24px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            border: 1px solid #f0ede5;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(2, 112, 117, 0.08);
+            border-color: #027075;
+        }
+        .stat-card .stat-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        .stat-card .stat-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #666666;
+        }
+        .stat-card .stat-icon { font-size: 22px; opacity: 0.8; }
+        .stat-card .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: #333333;
+            line-height: 1.1;
+        }
+        .stat-card .stat-change {
+            font-size: 13px;
+            font-weight: 500;
+            color: #059669;
+            margin-top: 6px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .stat-card .stat-change.negative { color: #dc2626; }
+        .stat-card.blue .stat-icon { color: #027075; }
+        .stat-card.green .stat-icon { color: #059669; }
+        .stat-card.yellow .stat-icon { color: #F7B31C; }
+        .stat-card.dark .stat-icon { color: #1f2937; }
+
+        /* Action Bar */
+        .action-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 24px;
+            background: #ffffff;
+            padding: 16px 20px;
+            border-radius: 16px;
+            border: 1px solid #f0ede5;
+        }
+
+        .action-bar .filters {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .action-bar .filter-group {
+            display: flex;
+            gap: 6px;
+            background: #f5f3ee;
+            padding: 4px;
+            border-radius: 12px;
+        }
+
+        .action-bar .filter-group .filter-btn {
+            padding: 6px 16px;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            background: transparent;
+            color: #666666;
+            transition: all 0.2s;
+        }
+        .action-bar .filter-group .filter-btn.active-sdr {
+            background: #027075;
+            color: white;
+            box-shadow: 0 2px 8px rgba(2, 112, 117, 0.20);
+        }
+        .action-bar .filter-group .filter-btn.active-closer {
+            background: #1e40af;
+            color: white;
+            box-shadow: 0 2px 8px rgba(30, 64, 175, 0.20);
+        }
+        .action-bar .filter-group .filter-btn:hover:not(.active-sdr):not(.active-closer) {
+            background: #e8e4d8;
+        }
+
+        .action-bar .search-box {
+            display: flex;
+            align-items: center;
+            background: #f5f3ee;
+            border-radius: 12px;
+            padding: 0 16px;
+            gap: 10px;
+            flex: 1;
+            min-width: 200px;
+            max-width: 320px;
+        }
+        .action-bar .search-box i { color: #999999; font-size: 15px; }
+        .action-bar .search-box input {
+            border: none;
+            background: transparent;
+            padding: 10px 0;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            width: 100%;
+            outline: none;
+            color: #333333;
+        }
+        .action-bar .search-box input::placeholder { color: #aaaaaa; }
+
+        .action-bar .sdr-filter {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .action-bar .sdr-filter label {
+            font-size: 13px;
+            color: #666666;
+            font-weight: 500;
+        }
+        .action-bar .sdr-filter select {
+            padding: 8px 14px;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            background: white;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: #F7B31C;
+            color: #333333;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 12px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 8px rgba(247, 179, 28, 0.25);
+            white-space: nowrap;
+        }
+        .btn-primary:hover {
+            background: #e6a010;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(247, 179, 28, 0.35);
+        }
+
+        /* Lista de Leads */
+        .leads-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .lead-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 18px 24px;
+            border: 1px solid #f0ede5;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.25s ease;
+            cursor: pointer;
+        }
+        .lead-card:hover {
+            border-color: #027075;
+            box-shadow: 0 4px 16px rgba(2, 112, 117, 0.06);
+            transform: translateX(4px);
+        }
+
+        .lead-card .lead-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .lead-card .lead-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 18px;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .lead-card .lead-info { flex: 1; min-width: 0; }
+        .lead-card .lead-info .name-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .lead-card .lead-info .name-row .lead-name {
+            font-weight: 600;
+            font-size: 16px;
+            color: #333333;
+        }
+
+        .badge-category.hot {
+            background: #d1fae5;
+            color: #065f46;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
+        .badge-category.warm {
+            background: #fef3c7;
+            color: #92400e;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
+        .badge-category.cold {
+            background: #fee2e2;
+            color: #991b1b;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+        }
+
+        .badge-status {
+            font-size: 11px;
+            font-weight: 500;
+            padding: 2px 12px;
+            border-radius: 20px;
+            background: #e5e7eb;
+            color: #4b5563;
+        }
+        .badge-status.ready {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .lead-card .lead-info .company-row {
+            font-size: 14px;
+            color: #666666;
+            margin-top: 2px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .lead-card .lead-info .meta-row {
+            font-size: 13px;
+            color: #999999;
+            margin-top: 2px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .lead-card .lead-info .meta-row i { font-size: 12px; }
+        .lead-card .lead-info .sdr-info {
+            font-size: 12px;
+            color: #666666;
+            margin-top: 2px;
+            background: #f3f4f6;
+            padding: 2px 10px;
+            border-radius: 12px;
+            display: inline-block;
+        }
+
+        .lead-card .lead-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-shrink: 0;
+            margin-left: 16px;
+        }
+
+        .lead-card .lead-right .score { text-align: right; }
+        .lead-card .lead-right .score .number {
+            font-weight: 700;
+            font-size: 18px;
+            color: #333333;
+        }
+        .lead-card .lead-right .score .number span {
+            font-weight: 400;
+            font-size: 14px;
+            color: #999999;
+        }
+        .lead-card .lead-right .score .bar {
+            width: 80px;
+            height: 4px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            margin-top: 4px;
+            overflow: hidden;
+        }
+        .lead-card .lead-right .score .bar .fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.6s ease;
+        }
+        .lead-card .lead-right .score .bar .fill.high { background: #059669; }
+        .lead-card .lead-right .score .bar .fill.medium { background: #F7B31C; }
+        .lead-card .lead-right .score .bar .fill.low { background: #dc2626; }
+
+        .lead-card .lead-right .action-link {
+            font-weight: 500;
+            font-size: 14px;
+            text-decoration: none;
+            transition: color 0.2s;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+        .lead-card .lead-right .action-link.sdr-link {
+            color: #027075;
+        }
+        .lead-card .lead-right .action-link.sdr-link:hover {
+            color: #015c60;
+            text-decoration: underline;
+        }
+        .lead-card .lead-right .action-link.closer-link {
+            color: #1e40af;
+        }
+        .lead-card .lead-right .action-link.closer-link:hover {
+            color: #1e3a8a;
+            text-decoration: underline;
+        }
+
+        /* Paginação */
+        .pagination {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+            padding-top: 8px;
+        }
+        .pagination .info {
+            font-size: 14px;
+            color: #666666;
+        }
+        .pagination .controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .pagination .controls button {
+            padding: 8px 14px;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            background: white;
+            color: #333333;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .pagination .controls button:hover:not(:disabled) {
+            border-color: #027075;
+            color: #027075;
+        }
+        .pagination .controls button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        .pagination .controls button.active {
+            background: #027075;
+            color: white;
+            border-color: #027075;
+        }
+
+        /* Footer */
+        .footer {
+            border-top: 1px solid #e8e4d8;
+            padding: 20px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            background: #ffffff;
+            margin-top: 20px;
+        }
+        .footer .copyright {
+            font-size: 13px;
+            color: #999999;
+        }
+        .footer .links {
+            display: flex;
+            gap: 20px;
+            font-size: 13px;
+        }
+        .footer .links a {
+            color: #666666;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer .links a:hover { color: #027075; }
+
+        /* ============================================================
+           MODAL - NOVO LEAD
+        ============================================================ */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+        .modal-overlay.active { display: flex; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal {
+            background: #ffffff;
+            border-radius: 24px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 36px 40px 32px;
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.20);
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #f0ede5;
+        }
+        .modal-header h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #027075;
+        }
+        .modal-header .close-btn {
+            background: none;
+            border: none;
+            font-size: 28px;
+            color: #999999;
+            cursor: pointer;
+            transition: color 0.2s;
+            padding: 4px 8px;
+            line-height: 1;
+        }
+        .modal-header .close-btn:hover { color: #dc2626; }
+
+        .modal .form-group {
+            margin-bottom: 18px;
+        }
+        .modal .form-group label {
+            display: block;
+            font-weight: 500;
+            font-size: 13px;
+            color: #666666;
+            margin-bottom: 5px;
+        }
+        .modal .form-group label .required { color: #dc2626; }
+        .modal .form-group input,
+        .modal .form-group select,
+        .modal .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            color: #333333;
+            background: #fcfcfc;
+            transition: all 0.25s ease;
+        }
+        .modal .form-group input:focus,
+        .modal .form-group select:focus,
+        .modal .form-group textarea:focus {
+            outline: none;
+            border-color: #027075;
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(2, 112, 117, 0.10);
+        }
+        .modal .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .modal .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .modal .form-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 2px solid #f0ede5;
+        }
+
+        .modal .btn-secondary {
+            padding: 12px 28px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            background: transparent;
+            color: #666666;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+        .modal .btn-secondary:hover {
+            border-color: #027075;
+            color: #027075;
+        }
+
+        .modal .btn-success {
+            padding: 12px 32px;
+            background: #F7B31C;
+            color: #333333;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 2px 8px rgba(247, 179, 28, 0.25);
+        }
+        .modal .btn-success:hover {
+            background: #e6a010;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(247, 179, 28, 0.35);
+        }
+        .modal .btn-success:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 3px solid #e5e7eb;
+            border-top: 3px solid #027075;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+            margin-right: 8px;
+        }
+
+        /* ============================================================
+           MODAL - EDITAR LEAD
+        ============================================================ */
+        .modal-edit {
+            max-width: 600px;
+        }
+
+        /* ============================================================
+           MODAL - RESULTADO DO LEAD
+        ============================================================ */
+        .modal-result {
+            max-width: 780px;
+        }
+
+        .result-score-section {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            border-radius: 16px;
+            margin-bottom: 24px;
+        }
+
+        .result-score-section .big-score {
+            font-size: 56px;
+            font-weight: 700;
+            color: #065f46;
+        }
+
+        .result-score-section .big-score span {
+            font-size: 24px;
+            font-weight: 400;
+            color: #999999;
+        }
+
+        .result-score-section .result-badges {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .result-score-section .result-badges .badge {
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .result-score-section .result-badges .badge.hot {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        .result-score-section .result-badges .badge.warm {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        .result-score-section .result-badges .badge.cold {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        .result-score-section .result-badges .badge.status {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .result-score-section .result-breakdown {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+
+        .result-score-section .result-breakdown .item {
+            font-size: 13px;
+            color: #666666;
+        }
+
+        .result-score-section .result-breakdown .item strong {
+            color: #065f46;
+            font-weight: 600;
+        }
+
+        .result-spin-tabs {
+            display: flex;
+            gap: 4px;
+            border-bottom: 2px solid #f0ede5;
+            margin: 16px 0 20px;
+            flex-wrap: wrap;
+        }
+
+        .result-spin-tabs .spin-tab {
+            padding: 8px 20px;
+            border: none;
+            background: transparent;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 13px;
+            color: #666666;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+        }
+
+        .result-spin-tabs .spin-tab:hover { color: #027075; }
+        .result-spin-tabs .spin-tab.active {
+            color: #027075;
+            border-bottom-color: #027075;
+        }
+
+        .result-spin-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        .result-spin-content.active { display: block; }
+
+        .result-spin-content .spin-question {
+            padding: 12px 16px;
+            background: #f9fafb;
+            border-radius: 10px;
+            margin-bottom: 8px;
+            border-left: 4px solid #F7B31C;
+        }
+
+        .result-spin-content .spin-question .q-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #027075;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .result-spin-content .spin-question .q-text {
+            font-size: 14px;
+            color: #333333;
+            margin-top: 2px;
+        }
+
+        .result-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 2px solid #f0ede5;
+            flex-wrap: wrap;
+        }
+
+        .result-actions .btn-action {
+            padding: 10px 28px;
+            border-radius: 12px;
+            border: none;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .result-actions .btn-action.primary {
+            background: #F7B31C;
+            color: #333333;
+            box-shadow: 0 2px 8px rgba(247, 179, 28, 0.25);
+        }
+        .result-actions .btn-action.primary:hover {
+            background: #e6a010;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(247, 179, 28, 0.35);
+        }
+
+        .result-actions .btn-action.outline {
+            background: transparent;
+            color: #027075;
+            border: 2px solid #027075;
+        }
+        .result-actions .btn-action.outline:hover {
+            background: #e0f5f1;
+        }
+
+        .result-actions .btn-action.success {
+            background: #059669;
+            color: white;
+            box-shadow: 0 2px 8px rgba(5, 150, 105, 0.25);
+        }
+        .result-actions .btn-action.success:hover {
+            background: #047857;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(5, 150, 105, 0.35);
+        }
+
+        .result-actions .btn-action:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        /* ============================================================
+           MODAL - DETALHE DO LEAD
+        ============================================================ */
+        .modal-detail {
+            max-width: 820px;
+            padding: 32px 36px;
+        }
+
+        .modal-detail .modal-header {
+            margin-bottom: 16px;
+        }
+        .modal-detail .modal-header h2.sdr-modal-title { color: #027075; }
+        .modal-detail .modal-header h2.closer-modal-title { color: #1e40af; }
+
+        .detail-lead-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 20px;
+            background: #f9fafb;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .detail-lead-header .big-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 22px;
+            color: white;
+            flex-shrink: 0;
+        }
+        .detail-lead-header .lead-info h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #333333;
+        }
+        .detail-lead-header .lead-info p {
+            font-size: 14px;
+            color: #666666;
+        }
+
+        .detail-lead-header .lead-badges {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-left: auto;
+        }
+        .detail-lead-header .lead-badges .badge {
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-detail.hot {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        .badge-detail.warm {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        .badge-detail.cold {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        .badge-detail.ready {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+        .badge-detail.qualificacao {
+            background: #e5e7eb;
+            color: #4b5563;
+        }
+
+        .status-badge {
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .status-badge.ready {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+        .status-badge.negotiating {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        .status-badge.won {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        .status-badge.lost {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 4px;
+            border-bottom: 2px solid #f0ede5;
+            margin-bottom: 20px;
+        }
+        .tabs .tab-btn {
+            padding: 10px 24px;
+            border: none;
+            background: transparent;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            color: #666666;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+        }
+        .tabs .tab-btn:hover { color: #027075; }
+        .tabs .tab-btn.active-sdr {
+            color: #027075;
+            border-bottom-color: #027075;
+        }
+        .tabs .tab-btn.active-closer {
+            color: #1e40af;
+            border-bottom-color: #1e40af;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        .tab-content.active { display: block; }
+
+        .detail-section {
+            margin-bottom: 16px;
+        }
+        .detail-section .section-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #666666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        .detail-section .section-value {
+            font-size: 15px;
+            color: #333333;
+            padding: 10px 14px;
+            background: #f9fafb;
+            border-radius: 10px;
+            line-height: 1.6;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .detail-grid .detail-item {
+            background: #f9fafb;
+            border-radius: 10px;
+            padding: 10px 14px;
+        }
+        .detail-grid .detail-item .label {
+            font-size: 12px;
+            color: #999999;
+            font-weight: 500;
+        }
+        .detail-grid .detail-item .value {
+            font-size: 15px;
+            color: #333333;
+            font-weight: 500;
+        }
+
+        .score-breakdown {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+        .score-breakdown .score-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 12px;
+            background: #f9fafb;
+            border-radius: 8px;
+            font-size: 13px;
+        }
+        .score-breakdown .score-item .label { color: #666666; }
+        .score-breakdown .score-item .value {
+            font-weight: 600;
+            color: #027075;
+        }
+
+        .spin-question {
+            padding: 12px 16px;
+            background: #f9fafb;
+            border-radius: 10px;
+            margin-bottom: 8px;
+            border-left: 4px solid #F7B31C;
+        }
+        .spin-question .q-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #027075;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        .spin-question .q-text {
+            font-size: 14px;
+            color: #333333;
+            margin-top: 2px;
+        }
+
+        .history-item {
+            display: flex;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0ede5;
+        }
+        .history-item:last-child { border-bottom: none; }
+        .history-item .h-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #e0f5f1;
+            color: #027075;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 14px;
+        }
+        .history-item .h-content { flex: 1; }
+        .history-item .h-content .h-action {
+            font-size: 14px;
+            color: #333333;
+            font-weight: 500;
+        }
+        .history-item .h-content .h-detail {
+            font-size: 13px;
+            color: #666666;
+        }
+        .history-item .h-content .h-time {
+            font-size: 12px;
+            color: #999999;
+        }
+
+        /* Ações - SDR */
+        .detail-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 2px solid #f0ede5;
+            flex-wrap: wrap;
+        }
+
+        .detail-actions .btn-action {
+            padding: 8px 20px;
+            border-radius: 10px;
+            border: none;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .detail-actions .btn-action.primary {
+            background: #F7B31C;
+            color: #333333;
+        }
+        .detail-actions .btn-action.primary:hover {
+            background: #e6a010;
+        }
+
+        .detail-actions .btn-action.success {
+            background: #059669;
+            color: white;
+        }
+        .detail-actions .btn-action.success:hover {
+            background: #047857;
+        }
+
+        .detail-actions .btn-action.danger-revert {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 2px solid #dc2626;
+        }
+        .detail-actions .btn-action.danger-revert:hover {
+            background: #fecaca;
+        }
+
+        .detail-actions .btn-action.outline {
+            background: transparent;
+            color: #027075;
+            border: 2px solid #027075;
+        }
+        .detail-actions .btn-action.outline:hover {
+            background: #e0f5f1;
+        }
+
+        .detail-actions .btn-action.danger {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        .detail-actions .btn-action.danger:hover {
+            background: #fecaca;
+        }
+        .detail-actions .btn-action:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* Ações - Closer */
+        .closer-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 2px solid #f0ede5;
+            flex-wrap: wrap;
+        }
+
+        .closer-actions .btn-action {
+            padding: 10px 24px;
+            border-radius: 12px;
+            border: none;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .closer-actions .btn-action.negotiating {
+            background: #F7B31C;
+            color: #333333;
+            box-shadow: 0 2px 8px rgba(247, 179, 28, 0.25);
+        }
+        .closer-actions .btn-action.negotiating:hover {
+            background: #e6a010;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(247, 179, 28, 0.35);
+        }
+
+        .closer-actions .btn-action.won {
+            background: #059669;
+            color: white;
+            box-shadow: 0 2px 8px rgba(5, 150, 105, 0.25);
+        }
+        .closer-actions .btn-action.won:hover {
+            background: #047857;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(5, 150, 105, 0.35);
+        }
+
+        .closer-actions .btn-action.lost {
+            background: #dc2626;
+            color: white;
+            box-shadow: 0 2px 8px rgba(220, 38, 38, 0.25);
+        }
+        .closer-actions .btn-action.lost:hover {
+            background: #b91c1c;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(220, 38, 38, 0.35);
+        }
+
+        .closer-actions .btn-action:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        /* ============================================================
+           MODAL DE CONFIRMAÇÃO
+        ============================================================ */
+        .confirm-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(6px);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+        .confirm-modal-overlay.active { display: flex; }
+
+        .confirm-modal {
+            background: #ffffff;
+            border-radius: 24px;
+            max-width: 480px;
+            width: 100%;
+            padding: 32px 36px;
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.25);
+            text-align: center;
+            animation: scaleIn 0.3s ease;
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .confirm-modal .icon-warning {
+            font-size: 56px;
+            color: #dc2626;
+            margin-bottom: 12px;
+        }
+        .confirm-modal h3 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #333333;
+            margin-bottom: 8px;
+        }
+        .confirm-modal p {
+            font-size: 15px;
+            color: #666666;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+        .confirm-modal .confirm-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+        .confirm-modal .confirm-actions button {
+            padding: 10px 28px;
+            border-radius: 12px;
+            border: none;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+        .confirm-modal .confirm-actions .btn-cancel {
+            background: #f3f4f6;
+            color: #666666;
+        }
+        .confirm-modal .confirm-actions .btn-cancel:hover {
+            background: #e5e7eb;
+        }
+        .confirm-modal .confirm-actions .btn-confirm {
+            background: #dc2626;
+            color: white;
+        }
+        .confirm-modal .confirm-actions .btn-confirm:hover {
+            background: #b91c1c;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(220, 38, 38, 0.3);
+        }
+
+        /* ============================================================
+           NOTIFICAÇÃO E TOAST
+        ============================================================ */
+        .closer-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 20px 24px;
+            max-width: 380px;
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+            z-index: 3000;
+            border-left: 5px solid #F7B31C;
+            display: none;
+            animation: slideDown 0.5s ease;
+        }
+        .closer-notification.show { display: block; }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .closer-notification .notif-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+        .closer-notification .notif-header .notif-icon {
+            width: 40px;
+            height: 40px;
+            background: #d1fae5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #059669;
+            font-size: 18px;
+        }
+        .closer-notification .notif-header h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333333;
+        }
+        .closer-notification .notif-body {
+            font-size: 14px;
+            color: #666666;
+            line-height: 1.6;
+            padding-left: 52px;
+        }
+        .closer-notification .notif-body strong { color: #027075; }
+        .closer-notification .notif-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+            padding-left: 52px;
+        }
+        .closer-notification .notif-actions button {
+            padding: 6px 16px;
+            border-radius: 8px;
+            border: none;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .closer-notification .notif-actions .btn-view {
+            background: #027075;
+            color: white;
+        }
+        .closer-notification .notif-actions .btn-view:hover {
+            background: #015c60;
+        }
+        .closer-notification .notif-actions .btn-dismiss {
+            background: #f3f4f6;
+            color: #666666;
+        }
+        .closer-notification .notif-actions .btn-dismiss:hover {
+            background: #e5e7eb;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #065f46;
+            color: white;
+            padding: 16px 24px;
+            border-radius: 14px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            gap: 12px;
+            animation: slideUp 0.4s ease;
+        }
+        .toast.show { display: flex; }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .toast i { font-size: 20px; }
+
+        /* ============================================================
+           RESPONSIVIDADE
+        ============================================================ */
+        @media (max-width: 1024px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .main-content {
+                padding: 20px;
+            }
+            .topbar {
+                padding: 12px 20px;
+            }
+            .detail-grid {
+                grid-template-columns: 1fr;
+            }
+            .score-breakdown {
+                grid-template-columns: 1fr;
+            }
+            .closer-notification {
+                max-width: 320px;
+                right: 16px;
+                top: 16px;
+                padding: 16px 20px;
+            }
+            .modal-result .result-breakdown {
+                gap: 12px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+            .stat-card {
+                padding: 16px;
+            }
+            .stat-card .stat-number {
+                font-size: 24px;
+            }
+            .lead-card {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+                padding: 16px;
+            }
+            .lead-card .lead-right {
+                margin-left: 0;
+                justify-content: space-between;
+                width: 100%;
+            }
+            .action-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .action-bar .search-box {
+                max-width: 100%;
+            }
+            .action-bar .filters {
+                justify-content: center;
+            }
+            .topbar-right .topbar-user .name {
+                display: none;
+            }
+            .pagination {
+                flex-direction: column;
+                align-items: center;
+            }
+            .footer {
+                flex-direction: column;
+                text-align: center;
+                padding: 16px;
+            }
+            .modal {
+                padding: 24px 20px;
+            }
+            .modal .form-row {
+                grid-template-columns: 1fr;
+            }
+            .modal .form-actions {
+                flex-direction: column;
+            }
+            .modal .form-actions button {
+                width: 100%;
+                justify-content: center;
+            }
+            .detail-lead-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .detail-lead-header .lead-badges {
+                margin-left: 0;
+            }
+            .tabs {
+                overflow-x: auto;
+                flex-wrap: nowrap;
+            }
+            .tabs .tab-btn {
+                padding: 8px 14px;
+                font-size: 13px;
+                white-space: nowrap;
+            }
+            .detail-actions {
+                flex-direction: column;
+            }
+            .detail-actions .btn-action {
+                width: 100%;
+                text-align: center;
+            }
+            .closer-actions {
+                flex-direction: column;
+            }
+            .closer-actions .btn-action {
+                width: 100%;
+                justify-content: center;
+            }
+            .toast {
+                left: 20px;
+                right: 20px;
+                bottom: 20px;
+            }
+            .closer-notification {
+                left: 16px;
+                right: 16px;
+                top: 16px;
+                max-width: none;
+            }
+            .closer-notification .notif-body {
+                padding-left: 0;
+            }
+            .closer-notification .notif-actions {
+                padding-left: 0;
+            }
+            .confirm-modal {
+                padding: 24px 20px;
+            }
+            .login-container {
+                padding: 30px 20px 24px;
+            }
+            .logout-btn span {
+                display: none;
+            }
+            .result-score-section .big-score {
+                font-size: 40px;
+            }
+            .result-score-section .result-breakdown {
+                flex-direction: column;
+                align-items: center;
+                gap: 4px;
+            }
+            .result-actions {
+                flex-direction: column;
+            }
+            .result-actions .btn-action {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .topbar .topbar-logo .text {
+                font-size: 18px;
+            }
+            .lead-card .lead-info .name-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+            .logo-text {
+                font-size: 28px;
+            }
+            .logo-symbol {
+                width: 48px;
+                height: 48px;
+            }
+            .logo-symbol .center-circle {
+                width: 16px;
+                height: 16px;
+            }
+            .logo-symbol .triangle {
+                border-left-width: 9px;
+                border-right-width: 9px;
+                border-bottom-width: 16px;
+            }
+            .profile-option {
+                font-size: 13px;
+                padding: 10px 12px;
+            }
+            .form-options {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .btn-login {
+                font-size: 15px;
+                padding: 14px;
+            }
+            .logout-btn {
+                padding: 6px 12px;
+            }
+            .logout-btn span {
+                display: none;
+            }
+            .result-score-section .big-score {
+                font-size: 32px;
+            }
+            .result-score-section .big-score span {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================
+    TELA DE LOGIN
+    ============================================================ -->
+    <div class="login-page" id="loginPage">
+        <div class="login-container">
+            
+            <div class="logo-wrapper">
+                <div class="logo-symbol">
+                    <div class="triangle t1"></div>
+                    <div class="triangle t2"></div>
+                    <div class="triangle t3"></div>
+                    <div class="triangle t4"></div>
+                    <div class="center-circle"></div>
+                </div>
+                <div class="logo-text">Lead<span>Scope</span></div>
+            </div>
+            <div class="subtitle">Qualificador Inteligente de Leads</div>
+
+            <!-- Switch de Perfil -->
+            <div class="profile-switch-wrapper" id="profileSwitch">
+                <div class="slider-bg sdr" id="sliderBg"></div>
+                <button class="profile-option sdr active" data-profile="SDR" id="sdrOption">
+                    <span class="icon"><i class="fas fa-user-tie"></i></span>
+                    SDR <span style="font-size:11px;font-weight:400;color:#999;">(Qualifica)</span>
+                </button>
+                <button class="profile-option closer" data-profile="Closer" id="closerOption">
+                    <span class="icon"><i class="fas fa-handshake"></i></span>
+                    Closer <span style="font-size:11px;font-weight:400;color:#999;">(Fecha)</span>
+                </button>
+            </div>
+
+            <div style="text-align:center;">
+                <span class="profile-badge show sdr" id="profileBadge">
+                    <i class="fas fa-check-circle"></i> Perfil SDR selecionado
+                </span>
+            </div>
+
+            <div id="messageBox" class="message"></div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-envelope" id="emailIcon"></i>
+                        <input type="email" id="email" placeholder="seu@email.com" required class="border-sdr" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock" id="passwordIcon"></i>
+                        <input type="password" id="password" placeholder="••••••••" required minlength="6" class="border-sdr" />
+                    </div>
+                </div>
+
+                <div class="form-options">
+                    <label><input type="checkbox" id="remember" /> Lembrar-me</label>
+                    <a href="#" id="forgotPassword">Esqueci minha senha</a>
+                </div>
+
+                <button type="submit" class="btn-login" id="loginBtn">
+                    <i class="fas fa-sign-in-alt"></i> Entrar como <span id="btnProfileLabel">SDR</span>
+                </button>
+            </form>
+
+            <div class="auth-links">
+                Não tem uma conta? <a href="#" id="goToRegister">Criar conta</a>
+            </div>
+
+            <div class="demo-hint">
+                <i class="fas fa-info-circle" style="color:#027075;"></i>
+                <strong>Demo:</strong> <span id="demoEmail">sdr@leadscope.com</span> • Senha: <strong>123456</strong>
+                <br />
+                <span style="font-size:11px;color:#bbb;">
+                    <i class="fas fa-arrow-right"></i> SDR: sdr@leadscope.com • Closer: closer@leadscope.com
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    DASHBOARD SDR
+    ============================================================ -->
+    <div class="dashboard-page" id="dashboardSDR">
+        <header class="topbar">
+            <div class="topbar-left">
+                <a href="#" class="topbar-logo">
+                    <div class="symbol-mini">
+                        <div class="tri t1"></div>
+                        <div class="tri t2"></div>
+                        <div class="tri t3"></div>
+                        <div class="tri t4"></div>
+                        <div class="center-dot"></div>
+                    </div>
+                    <span class="text">Lead<span>Scope</span></span>
+                </a>
+            </div>
+            <div class="topbar-right">
+                <div class="topbar-user">
+                    <span class="name" id="sdrUserName">Maria Silva</span>
+                    <span class="badge-sdr">SDR</span>
+                    <div class="avatar-sdr" id="sdrAvatar">MS</div>
+                </div>
+                <div class="notifications">
+                    <i class="fas fa-bell"></i>
+                    <span class="count" id="sdrNotifCount">0</span>
+                </div>
+                <button class="logout-btn" onclick="logout()" title="Sair do sistema">
+                    <i class="fas fa-sign-out-alt"></i> <span>Sair</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="page-header">
+                <h1 class="sdr-title">Dashboard SDR</h1>
+                <p>Gerencie e qualifique seus leads de forma inteligente</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card blue">
+                    <div class="stat-header">
+                        <span class="stat-label">Leads Hoje</span>
+                        <span class="stat-icon"><i class="fas fa-users"></i></span>
+                    </div>
+                    <div class="stat-number" id="sdrStatTotal">8</div>
+                    <div class="stat-change"><i class="fas fa-arrow-up"></i> +3 vs ontem</div>
+                </div>
+                <div class="stat-card green">
+                    <div class="stat-header">
+                        <span class="stat-label">Hot</span>
+                        <span class="stat-icon"><i class="fas fa-fire"></i></span>
+                    </div>
+                    <div class="stat-number" id="sdrStatHot">3</div>
+                    <div class="stat-change"><i class="fas fa-arrow-up"></i> +2 vs ontem</div>
+                </div>
+                <div class="stat-card yellow">
+                    <div class="stat-header">
+                        <span class="stat-label">Warm</span>
+                        <span class="stat-icon"><i class="fas fa-temperature-high"></i></span>
+                    </div>
+                    <div class="stat-number" id="sdrStatWarm">3</div>
+                    <div class="stat-change"><i class="fas fa-arrow-down"></i> -1 vs ontem</div>
+                </div>
+                <div class="stat-card dark">
+                    <div class="stat-header">
+                        <span class="stat-label">Prontos p/ Closer</span>
+                        <span class="stat-icon"><i class="fas fa-check-circle"></i></span>
+                    </div>
+                    <div class="stat-number" id="sdrStatReady">2</div>
+                    <div class="stat-change"><i class="fas fa-arrow-up"></i> +1 vs ontem</div>
+                </div>
+            </div>
+
+            <div class="action-bar">
+                <div class="filters">
+                    <div class="filter-group">
+                        <button class="filter-btn active-sdr">Todos</button>
+                        <button class="filter-btn">Hot</button>
+                        <button class="filter-btn">Warm</button>
+                        <button class="filter-btn">Cold</button>
+                    </div>
+                    <select style="padding:8px 16px;border:1px solid #e5e7eb;border-radius:10px;font-family:'Poppins',sans-serif;font-size:13px;background:white;color:#333;cursor:pointer;">
+                        <option>Hoje</option>
+                        <option>Últimos 7 dias</option>
+                        <option>Últimos 30 dias</option>
+                    </select>
+                </div>
+                <div style="display:flex;gap:12px;flex:1;justify-content:flex-end;">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Buscar por nome ou empresa..." id="sdrSearchInput" />
+                    </div>
+                    <button class="btn-primary" id="openNewLeadBtn">
+                        <i class="fas fa-plus"></i> Novo Lead
+                    </button>
+                </div>
+            </div>
+
+            <div class="leads-grid" id="sdrLeadsContainer"></div>
+
+            <div class="pagination">
+                <span class="info">Mostrando <strong id="sdrShowingCount">8</strong> de <strong id="sdrTotalCount">8</strong> leads</span>
+                <div class="controls">
+                    <button disabled><i class="fas fa-chevron-left"></i></button>
+                    <button class="active">1</button>
+                    <button>2</button>
+                    <button><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <span class="copyright">© 2026 LeadScope. Todos os direitos reservados.</span>
+            <div class="links">
+                <a href="#">Termos de Uso</a>
+                <a href="#">Política de Privacidade</a>
+                <a href="#" onclick="alert('Entre em contato: suporte@leadscope.com')">Suporte</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ============================================================
+    DASHBOARD CLOSER
+    ============================================================ -->
+    <div class="dashboard-page" id="dashboardCloser">
+        <header class="topbar">
+            <div class="topbar-left">
+                <a href="#" class="topbar-logo">
+                    <div class="symbol-mini">
+                        <div class="tri t1"></div>
+                        <div class="tri t2"></div>
+                        <div class="tri t3"></div>
+                        <div class="tri t4"></div>
+                        <div class="center-dot"></div>
+                    </div>
+                    <span class="text">Lead<span>Scope</span></span>
+                </a>
+            </div>
+            <div class="topbar-right">
+                <div class="topbar-user">
+                    <span class="name" id="closerUserName">João Closer</span>
+                    <span class="badge-closer">Closer</span>
+                    <div class="avatar-closer" id="closerAvatar">JC</div>
+                </div>
+                <div class="notifications">
+                    <i class="fas fa-bell"></i>
+                    <span class="count" id="closerNotifCount">0</span>
+                </div>
+                <button class="logout-btn" onclick="logout()" title="Sair do sistema">
+                    <i class="fas fa-sign-out-alt"></i> <span>Sair</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="page-header">
+                <h1 class="closer-title">Dashboard Closer</h1>
+                <p>Leads prontos para serem contatados. Priorize e feche negócios!</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card blue">
+                    <div class="stat-header">
+                        <span class="stat-label">Total para Você</span>
+                        <span class="stat-icon"><i class="fas fa-users"></i></span>
+                    </div>
+                    <div class="stat-number" id="closerStatTotal">2</div>
+                    <div class="stat-change"><i class="fas fa-arrow-up"></i> +2 hoje</div>
+                </div>
+                <div class="stat-card green">
+                    <div class="stat-header">
+                        <span class="stat-label">Alta Prioridade</span>
+                        <span class="stat-icon"><i class="fas fa-fire"></i></span>
+                    </div>
+                    <div class="stat-number" id="closerStatHot">1</div>
+                    <div class="stat-change"><i class="fas fa-arrow-up"></i> +1 vs ontem</div>
+                </div>
+                <div class="stat-card yellow">
+                    <div class="stat-header">
+                        <span class="stat-label">Média Prioridade</span>
+                        <span class="stat-icon"><i class="fas fa-temperature-high"></i></span>
+                    </div>
+                    <div class="stat-number" id="closerStatWarm">1</div>
+                    <div class="stat-change"><i class="fas fa-arrow-down"></i> -1 vs ontem</div>
+                </div>
+                <div class="stat-card dark">
+                    <div class="stat-header">
+                        <span class="stat-label">Baixa Prioridade</span>
+                        <span class="stat-icon"><i class="fas fa-snowflake"></i></span>
+                    </div>
+                    <div class="stat-number" id="closerStatCold">0</div>
+                    <div class="stat-change"><i class="fas fa-arrow-up"></i> +0 vs ontem</div>
+                </div>
+            </div>
+
+            <div class="action-bar">
+                <div class="filters">
+                    <div class="filter-group">
+                        <button class="filter-btn active-closer">Todos</button>
+                        <button class="filter-btn">Hot</button>
+                        <button class="filter-btn">Warm</button>
+                        <button class="filter-btn">Cold</button>
+                    </div>
+                    <select style="padding:8px 16px;border:1px solid #e5e7eb;border-radius:10px;font-family:'Poppins',sans-serif;font-size:13px;background:white;color:#333;cursor:pointer;">
+                        <option>Hoje</option>
+                        <option>Últimos 7 dias</option>
+                        <option>Últimos 30 dias</option>
+                    </select>
+                </div>
+                <div style="display:flex;gap:12px;flex:1;justify-content:flex-end;">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Buscar por nome ou empresa..." id="closerSearchInput" />
+                    </div>
+                    <div class="sdr-filter">
+                        <label><i class="fas fa-user-tie"></i> SDR:</label>
+                        <select id="closerSdrFilter">
+                            <option value="todos">Todos</option>
+                            <option value="Maria Silva">Maria Silva</option>
+                            <option value="Pedro Santos">Pedro Santos</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="leads-grid" id="closerLeadsContainer"></div>
+
+            <div class="pagination">
+                <span class="info">Mostrando <strong id="closerShowingCount">2</strong> de <strong id="closerTotalCount">2</strong> leads</span>
+                <div class="controls">
+                    <button disabled><i class="fas fa-chevron-left"></i></button>
+                    <button class="active">1</button>
+                    <button>2</button>
+                    <button><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <span class="copyright">© 2026 LeadScope. Todos os direitos reservados.</span>
+            <div class="links">
+                <a href="#">Termos de Uso</a>
+                <a href="#">Política de Privacidade</a>
+                <a href="#" onclick="alert('Entre em contato: suporte@leadscope.com')">Suporte</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ============================================================
+    MODAL - NOVO LEAD
+    ============================================================ -->
+    <div class="modal-overlay" id="newLeadModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2><i class="fas fa-user-plus" style="color:#F7B31C;margin-right:10px;"></i>Novo Lead</h2>
+                <button class="close-btn" id="closeNewLeadBtn">&times;</button>
+            </div>
+
+            <form id="newLeadForm">
+                <!-- Seção 1: Contato -->
+                <div style="margin-bottom:20px;">
+                    <h3 style="font-size:14px;color:#027075;font-weight:600;margin-bottom:12px;letter-spacing:0.5px;">
+                        <i class="fas fa-user" style="margin-right:8px;"></i>Dados do Contato
+                    </h3>
+                    <div class="form-group">
+                        <label>Nome completo <span class="required">*</span></label>
+                        <input type="text" id="leadName" placeholder="Ex: João Silva" required />
+                    </div>
+                    <div class="form-group">
+                        <label>E-mail <span class="required">*</span></label>
+                        <input type="email" id="leadEmail" placeholder="joao@empresa.com" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Cargo</label>
+                        <input type="text" id="leadRole" placeholder="Ex: Head de Vendas" />
+                    </div>
+                </div>
+
+                <!-- Seção 2: Empresa -->
+                <div style="margin-bottom:20px;">
+                    <h3 style="font-size:14px;color:#027075;font-weight:600;margin-bottom:12px;letter-spacing:0.5px;">
+                        <i class="fas fa-building" style="margin-right:8px;"></i>Dados da Empresa
+                    </h3>
+                    <div class="form-group">
+                        <label>Nome da empresa <span class="required">*</span></label>
+                        <input type="text" id="leadCompany" placeholder="Ex: TechCorp Soluções" required />
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Segmento</label>
+                            <select id="leadSegment">
+                                <option value="">Selecione...</option>
+                                <option value="SaaS">SaaS</option>
+                                <option value="Fintech">Fintech</option>
+                                <option value="HealthTech">HealthTech</option>
+                                <option value="EdTech">EdTech</option>
+                                <option value="Logística">Logística</option>
+                                <option value="Varejo">Varejo</option>
+                                <option value="Indústria">Indústria</option>
+                                <option value="Consultoria">Consultoria</option>
+                                <option value="Outro">Outro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Tamanho</label>
+                            <select id="leadSize">
+                                <option value="">Selecione...</option>
+                                <option value="Pequena">Pequena (1-10)</option>
+                                <option value="Média">Média (11-50)</option>
+                                <option value="Grande">Grande (51+)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Site</label>
+                        <input type="url" id="leadWebsite" placeholder="https://empresa.com" />
+                    </div>
+                </div>
+
+                <!-- Seção 3: Interesse -->
+                <div style="margin-bottom:16px;">
+                    <h3 style="font-size:14px;color:#027075;font-weight:600;margin-bottom:12px;letter-spacing:0.5px;">
+                        <i class="fas fa-bullseye" style="margin-right:8px;"></i>Interesse e Origem
+                    </h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Origem</label>
+                            <select id="leadOrigin">
+                                <option value="Inbound">Inbound</option>
+                                <option value="Outbound">Outbound</option>
+                                <option value="Indicação">Indicação</option>
+                                <option value="Evento">Evento</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Interesse (0-10)</label>
+                            <select id="leadInterest">
+                                <option value="10">10 - Muito Alto</option>
+                                <option value="8">8 - Alto</option>
+                                <option value="6" selected>6 - Médio</option>
+                                <option value="4">4 - Baixo</option>
+                                <option value="2">2 - Muito Baixo</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Observações</label>
+                        <textarea id="leadObservations" placeholder="Informações adicionais sobre o lead..."></textarea>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" id="cancelNewLeadBtn">Cancelar</button>
+                    <button type="submit" class="btn-success" id="submitLeadBtn">
+                        <i class="fas fa-check"></i> Salvar e Qualificar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    MODAL - EDITAR LEAD
+    ============================================================ -->
+    <div class="modal-overlay" id="editLeadModal">
+        <div class="modal modal-edit">
+            <div class="modal-header">
+                <h2><i class="fas fa-edit" style="color:#F7B31C;margin-right:10px;"></i>Editar Lead</h2>
+                <button class="close-btn" id="closeEditLeadBtn">&times;</button>
+            </div>
+
+            <form id="editLeadForm">
+                <!-- Seção 1: Contato -->
+                <div style="margin-bottom:20px;">
+                    <h3 style="font-size:14px;color:#027075;font-weight:600;margin-bottom:12px;letter-spacing:0.5px;">
+                        <i class="fas fa-user" style="margin-right:8px;"></i>Dados do Contato
+                    </h3>
+                    <div class="form-group">
+                        <label>Nome completo <span class="required">*</span></label>
+                        <input type="text" id="editName" required />
+                    </div>
+                    <div class="form-group">
+                        <label>E-mail <span class="required">*</span></label>
+                        <input type="email" id="editEmail" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Cargo</label>
+                        <input type="text" id="editRole" />
+                    </div>
+                </div>
+
+                <!-- Seção 2: Empresa -->
+                <div style="margin-bottom:20px;">
+                    <h3 style="font-size:14px;color:#027075;font-weight:600;margin-bottom:12px;letter-spacing:0.5px;">
+                        <i class="fas fa-building" style="margin-right:8px;"></i>Dados da Empresa
+                    </h3>
+                    <div class="form-group">
+                        <label>Nome da empresa <span class="required">*</span></label>
+                        <input type="text" id="editCompany" required />
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Segmento</label>
+                            <select id="editSegment">
+                                <option value="">Selecione...</option>
+                                <option value="SaaS">SaaS</option>
+                                <option value="Fintech">Fintech</option>
+                                <option value="HealthTech">HealthTech</option>
+                                <option value="EdTech">EdTech</option>
+                                <option value="Logística">Logística</option>
+                                <option value="Varejo">Varejo</option>
+                                <option value="Indústria">Indústria</option>
+                                <option value="Consultoria">Consultoria</option>
+                                <option value="Outro">Outro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Tamanho</label>
+                            <select id="editSize">
+                                <option value="">Selecione...</option>
+                                <option value="Pequena">Pequena (1-10)</option>
+                                <option value="Média">Média (11-50)</option>
+                                <option value="Grande">Grande (51+)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Site</label>
+                        <input type="url" id="editWebsite" />
+                    </div>
+                </div>
+
+                <!-- Seção 3: Interesse -->
+                <div style="margin-bottom:16px;">
+                    <h3 style="font-size:14px;color:#027075;font-weight:600;margin-bottom:12px;letter-spacing:0.5px;">
+                        <i class="fas fa-bullseye" style="margin-right:8px;"></i>Interesse e Origem
+                    </h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Origem</label>
+                            <select id="editOrigin">
+                                <option value="Inbound">Inbound</option>
+                                <option value="Outbound">Outbound</option>
+                                <option value="Indicação">Indicação</option>
+                                <option value="Evento">Evento</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select id="editStatus">
+                                <option value="Em Qualificação">Em Qualificação</option>
+                                <option value="Pronto">Pronto para Closer</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Observações</label>
+                        <textarea id="editObservations" rows="3"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" id="cancelEditLeadBtn">Cancelar</button>
+                    <button type="submit" class="btn-success" id="submitEditLeadBtn">
+                        <i class="fas fa-save"></i> Salvar Alterações
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    MODAL - RESULTADO DO LEAD
+    ============================================================ -->
+    <div class="modal-overlay" id="resultModal">
+        <div class="modal modal-result">
+            <div class="modal-header">
+                <h2><i class="fas fa-chart-bar" style="color:#F7B31C;margin-right:10px;"></i>Resultado da Qualificação</h2>
+                <button class="close-btn" id="closeResultBtn">&times;</button>
+            </div>
+
+            <div id="resultContent">
+                <!-- Score -->
+                <div class="result-score-section" id="resultScoreSection">
+                    <div class="big-score" id="resultScore">78<span>/100</span></div>
+                    <div class="result-badges">
+                        <span class="badge hot" id="resultCategory">Hot</span>
+                        <span class="badge status" id="resultStatus">Em Qualificação</span>
+                    </div>
+                    <div class="result-breakdown" id="resultBreakdown">
+                        <span class="item">Cargo: <strong id="resultRoleScore">20</strong></span>
+                        <span class="item">Segmento: <strong id="resultSegmentScore">15</strong></span>
+                        <span class="item">Origem: <strong id="resultOriginScore">15</strong></span>
+                        <span class="item">Interesse: <strong id="resultInterestScore">28</strong></span>
+                    </div>
+                </div>
+
+                <!-- Briefing IA -->
+                <div style="margin-bottom:16px;">
+                    <h3 style="font-size:15px;color:#027075;font-weight:600;margin-bottom:8px;">
+                        <i class="fas fa-robot" style="margin-right:8px;"></i>Briefing IA
+                    </h3>
+                    <div style="font-size:14px;color:#333;padding:12px 16px;background:#f9fafb;border-radius:10px;line-height:1.8;" id="resultBriefing">
+                        A TechCorp é uma startup de tecnologia especializada em CRM para empresas B2B. Fundada em 2018, a empresa tem crescido rapidamente no mercado brasileiro. João Silva é Head de Vendas com 15 anos de experiência em vendas B2B, já atuou em empresas como Salesforce e HubSpot. Demonstrou interesse em otimizar o processo de qualificação de leads.
+                    </div>
+                </div>
+
+                <!-- Roteiro SPIN -->
+                <div style="margin-bottom:8px;">
+                    <h3 style="font-size:15px;color:#027075;font-weight:600;margin-bottom:8px;">
+                        <i class="fas fa-list-check" style="margin-right:8px;"></i>Roteiro SPIN
+                    </h3>
+                    <p style="font-size:13px;color:#999;margin-bottom:12px;">
+                        Perguntas personalizadas para qualificação deste lead:
+                    </p>
+
+                    <div class="result-spin-tabs" id="spinTabs">
+                        <button class="spin-tab active" data-spin="situacao">🔍 Situação</button>
+                        <button class="spin-tab" data-spin="problema">⚠️ Problema</button>
+                        <button class="spin-tab" data-spin="implicacao">💥 Implicação</button>
+                        <button class="spin-tab" data-spin="need">💎 Need-Payoff</button>
+                    </div>
+
+                    <div id="spinContent">
+                        <div class="result-spin-content active" id="spin-situacao">
+                            <div class="spin-question"><div class="q-label">Situação 1</div><div class="q-text">Como está estruturada a área de vendas da empresa atualmente?</div></div>
+                            <div class="spin-question"><div class="q-label">Situação 2</div><div class="q-text">Quais são os principais canais de geração de demanda que vocês utilizam?</div></div>
+                            <div class="spin-question"><div class="q-label">Situação 3</div><div class="q-text">Como você descreveria o relacionamento com seus clientes atuais?</div></div>
+                        </div>
+                        <div class="result-spin-content" id="spin-problema">
+                            <div class="spin-question"><div class="q-label">Problema 1</div><div class="q-text">Quais são os maiores desafios que sua equipe enfrenta na prospecção?</div></div>
+                            <div class="spin-question"><div class="q-label">Problema 2</div><div class="q-text">Como você avalia a eficiência do processo atual de qualificação de leads?</div></div>
+                            <div class="spin-question"><div class="q-label">Problema 3</div><div class="q-text">Que gargalos você identifica no funil de vendas?</div></div>
+                        </div>
+                        <div class="result-spin-content" id="spin-implicacao">
+                            <div class="spin-question"><div class="q-label">Implicação 1</div><div class="q-text">O que acontece se esses problemas de prospecção continuarem pelos próximos 6 meses?</div></div>
+                            <div class="spin-question"><div class="q-label">Implicação 2</div><div class="q-text">Como isso impacta as metas de crescimento da empresa?</div></div>
+                            <div class="spin-question"><div class="q-label">Implicação 3</div><div class="q-text">Qual o custo de oportunidade de leads mal qualificados?</div></div>
+                        </div>
+                        <div class="result-spin-content" id="spin-need">
+                            <div class="spin-question"><div class="q-label">Need-Payoff 1</div><div class="q-text">Se você pudesse qualificar leads com mais precisão, como isso impactaria seu time?</div></div>
+                            <div class="spin-question"><div class="q-label">Need-Payoff 2</div><div class="q-text">Como uma ferramenta de qualificação inteligente poderia ajudar você a bater suas metas?</div></div>
+                            <div class="spin-question"><div class="q-label">Need-Payoff 3</div><div class="q-text">Qual seria o impacto de ter roteiros estruturados para cada tipo de abordagem?</div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ações -->
+                <div class="result-actions">
+                    <button class="btn-action success" id="resultMarkReadyBtn">
+                        <i class="fas fa-check-circle"></i> Marcar como Pronto
+                    </button>
+                    <button class="btn-action outline" id="resultBackBtn">
+                        <i class="fas fa-arrow-left"></i> Voltar ao Painel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    MODAL - DETALHE DO LEAD
+    ============================================================ -->
+    <div class="modal-overlay" id="detailModalOverlay">
+        <div class="modal modal-detail">
+            <div class="modal-header">
+                <h2 id="detailModalTitle"><i class="fas fa-user" style="color:#027075;margin-right:10px;"></i>Detalhe do Lead</h2>
+                <button class="close-btn" id="closeDetailModalBtn">&times;</button>
+            </div>
+
+            <div class="detail-lead-header" id="detailHeader">
+                <div class="big-avatar" id="detailAvatar">JS</div>
+                <div class="lead-info">
+                    <h3 id="detailName">João Silva</h3>
+                    <p id="detailCompany">TechCorp Soluções • Head de Vendas</p>
+                </div>
+                <div class="lead-badges">
+                    <span class="badge badge-detail" id="detailCategory">Hot</span>
+                    <span class="status-badge ready" id="detailStatus">Pronto</span>
+                </div>
+            </div>
+
+            <div class="tabs">
+                <button class="tab-btn active-sdr" data-tab="tab-resumo" id="tabResumoBtn">📋 Resumo</button>
+                <button class="tab-btn" data-tab="tab-spin" id="tabSpinBtn">🎯 SPIN</button>
+                <button class="tab-btn" data-tab="tab-history" id="tabHistoryBtn">📜 Histórico</button>
+            </div>
+
+            <div class="tab-content active" id="tab-resumo">
+                <div class="detail-grid">
+                    <div class="detail-item">
+                        <div class="label">E-mail</div>
+                        <div class="value" id="detailEmail">joao@techcorp.com</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="label">Score</div>
+                        <div class="value" id="detailScore">78/100</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="label">Segmento</div>
+                        <div class="value" id="detailSegment">SaaS</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="label">Tamanho</div>
+                        <div class="value" id="detailSize">Média</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="label">Origem</div>
+                        <div class="value" id="detailOrigin">Inbound</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="label" id="detailSDRLabel">SDR Responsável</div>
+                        <div class="value" id="detailSDR">Maria Silva</div>
+                    </div>
+                </div>
+
+                <div class="detail-section" style="margin-top:16px;">
+                    <div class="section-title">📊 Detalhamento do Score</div>
+                    <div class="score-breakdown" id="detailScoreBreakdown">
+                        <div class="score-item"><span class="label">Cargo</span><span class="value">20</span></div>
+                        <div class="score-item"><span class="label">Segmento</span><span class="value">15</span></div>
+                        <div class="score-item"><span class="label">Origem</span><span class="value">15</span></div>
+                        <div class="score-item"><span class="label">Interesse</span><span class="value">28</span></div>
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <div class="section-title">🤖 Briefing IA</div>
+                    <div class="section-value" id="detailBriefing">
+                        A TechCorp é uma startup de tecnologia especializada em CRM para empresas B2B.
+                    </div>
+                </div>
+
+                <div class="detail-section">
+                    <div class="section-title">📝 Observações</div>
+                    <div class="section-value" id="detailObservations">
+                        Lead com alto potencial, já conhece a empresa.
+                    </div>
+                </div>
+
+                <div class="detail-actions" id="sdrActions">
+                    <button class="btn-action success" id="markReadyBtn">
+                        <i class="fas fa-check-circle"></i> Marcar como Pronto
+                    </button>
+                    <button class="btn-action danger-revert" id="revertStatusBtn" style="display:none;">
+                        <i class="fas fa-undo"></i> Reverter Status
+                    </button>
+                    <button class="btn-action outline" id="openEditBtn">
+                        <i class="fas fa-edit"></i> Editar
+                    </button>
+                    <button class="btn-action danger" id="archiveBtn">
+                        <i class="fas fa-archive"></i> Arquivar
+                    </button>
+                </div>
+
+                <div class="closer-actions" id="closerActions" style="display:none;">
+                    <button class="btn-action negotiating" id="statusNegotiating">
+                        <i class="fas fa-handshake"></i> Em Negociação
+                    </button>
+                    <button class="btn-action won" id="statusWon">
+                        <i class="fas fa-trophy"></i> Fechado (Ganho)
+                    </button>
+                    <button class="btn-action lost" id="statusLost">
+                        <i class="fas fa-times-circle"></i> Perdido
+                    </button>
+                </div>
+            </div>
+
+            <div class="tab-content" id="tab-spin">
+                <p style="color:#666666;font-size:14px;margin-bottom:16px;">
+                    Roteiro SPIN personalizado para este lead:
+                </p>
+                <div id="spinContainer">
+                    <h4 style="font-size:14px;color:#027075;font-weight:600;margin:12px 0 8px;">🔍 Situação</h4>
+                    <div class="spin-question"><div class="q-label">Situação 1</div><div class="q-text">Como está estruturada a área de vendas da empresa atualmente?</div></div>
+                    <div class="spin-question"><div class="q-label">Situação 2</div><div class="q-text">Quais são os principais canais de geração de demanda que vocês utilizam?</div></div>
+                    
+                    <h4 style="font-size:14px;color:#027075;font-weight:600;margin:12px 0 8px;">⚠️ Problema</h4>
+                    <div class="spin-question"><div class="q-label">Problema 1</div><div class="q-text">Quais são os maiores desafios que sua equipe enfrenta na prospecção?</div></div>
+                    
+                    <h4 style="font-size:14px;color:#027075;font-weight:600;margin:12px 0 8px;">💥 Implicação</h4>
+                    <div class="spin-question"><div class="q-label">Implicação 1</div><div class="q-text">O que acontece se esses problemas continuarem pelos próximos 6 meses?</div></div>
+                    
+                    <h4 style="font-size:14px;color:#027075;font-weight:600;margin:12px 0 8px;">💎 Need-Payoff</h4>
+                    <div class="spin-question"><div class="q-label">Need-Payoff 1</div><div class="q-text">Como uma ferramenta de qualificação inteligente poderia ajudar você a bater suas metas?</div></div>
+                </div>
+            </div>
+
+            <div class="tab-content" id="tab-history">
+                <p style="color:#666666;font-size:14px;margin-bottom:16px;">
+                    Registro de todas as ações realizadas neste lead:
+                </p>
+                <div id="historyContainer">
+                    <div class="history-item">
+                        <div class="h-icon"><i class="fas fa-plus"></i></div>
+                        <div class="h-content">
+                            <div class="h-action">Lead criado</div>
+                            <div class="h-detail">Maria Silva • Lead cadastrado</div>
+                            <div class="h-time">30/07/2026 10:00</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    MODAL DE CONFIRMAÇÃO
+    ============================================================ -->
+    <div class="confirm-modal-overlay" id="confirmModalOverlay">
+        <div class="confirm-modal">
+            <div class="icon-warning">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <h3>⚠️ Reverter Status</h3>
+            <p>
+                Você tem certeza que deseja reverter o status deste lead para 
+                <strong>"Em Qualificação"</strong>?
+                <br /><br />
+                <span style="font-size:13px;color:#999;">
+                    O lead será removido do painel do Closer e voltará para sua lista de qualificação.
+                </span>
+            </p>
+            <div class="confirm-actions">
+                <button class="btn-cancel" id="confirmCancelBtn">Cancelar</button>
+                <button class="btn-confirm" id="confirmRevertBtn">
+                    <i class="fas fa-undo"></i> Sim, Reverter
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    NOTIFICAÇÃO DO CLOSER
+    ============================================================ -->
+    <div class="closer-notification" id="closerNotification">
+        <div class="notif-header">
+            <div class="notif-icon"><i class="fas fa-user-check"></i></div>
+            <h4>🎯 Lead Entregue ao Closer!</h4>
+        </div>
+        <div class="notif-body" id="notifBody">
+            O lead <strong id="notifLeadName">João Silva</strong> da empresa 
+            <strong id="notifLeadCompany">TechCorp</strong> foi marcado como <strong>Pronto</strong>.
+            <br />
+            <span style="font-size:12px;color:#999;">Score: <strong id="notifLeadScore">78</strong>/100 • 
+            Categoria: <strong id="notifLeadCategory">Hot</strong></span>
+        </div>
+        <div class="notif-actions">
+            <button class="btn-view" onclick="alert('Abrindo lead no painel do Closer...')">
+                <i class="fas fa-eye"></i> Ver no Closer
+            </button>
+            <button class="btn-dismiss" onclick="dismissNotification()">
+                <i class="fas fa-times"></i> Dispensar
+            </button>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    TOAST
+    ============================================================ -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Lead criado com sucesso!</span>
+    </div>
+
+    <script>
+        // ============================================================
+        // DADOS - USUÁRIOS DEMO
+        // ============================================================
+        const DEMO_USERS = [
+            { email: 'sdr@leadscope.com', password: '123456', profile: 'SDR', name: 'Maria Silva' },
+            { email: 'closer@leadscope.com', password: '123456', profile: 'Closer', name: 'João Closer' }
+        ];
+
+        // ============================================================
+        // DADOS - LEADS
+        // ============================================================
+        let leadsData = [{
+            id: 1,
+            name: 'João Silva',
+            company: 'TechCorp Soluções',
+            role: 'Head de Vendas',
+            email: 'joao@techcorp.com',
+            category: 'Hot',
+            status: 'Pronto',
+            score: 78,
+            initials: 'JS',
+            color: '#027075',
+            time: 'Há 2 horas',
+            origin: 'Inbound',
+            segment: 'SaaS',
+            size: 'Média',
+            website: 'https://techcorp.com',
+            sdr: 'Maria Silva',
+            observations: 'Lead com alto potencial, já conhece a empresa. Solicitação de demonstração recebida.',
+            createdAt: new Date().toLocaleString('pt-BR'),
+            scoreBreakdown: { roleScore: 20, segmentScore: 15, originScore: 15, interestScore: 28, bonus: 0 },
+            briefing: 'A TechCorp é uma startup de tecnologia especializada em CRM para empresas B2B. Fundada em 2018, a empresa tem crescido rapidamente no mercado brasileiro. João Silva é Head de Vendas com 15 anos de experiência em vendas B2B.',
+            history: [
+                { action: 'Lead criado', user: 'Maria Silva', detail: 'Lead cadastrado com score 78/100 (Hot)',
+                    time: new Date().toLocaleString('pt-BR') },
+                { action: 'IA processou lead', user: 'Sistema', detail: 'Enriquecimento de dados e geração de SPIN concluídos',
+                    time: new Date().toLocaleString('pt-BR') },
+                { action: 'Lead marcado como "Pronto"', user: 'Maria Silva',
+                    detail: 'Status alterado para Pronto para Closer', time: new Date().toLocaleString('pt-BR') }
+            ]
+        }, {
+            id: 2,
+            name: 'Ana Santos',
+            company: 'DataFlow Analytics',
+            role: 'CEO',
+            email: 'ana@dataflow.com',
+            category: 'Hot',
+            status: 'Em Qualificação',
+            score: 85,
+            initials: 'AS',
+            color: '#059669',
+            time: 'Há 1 hora',
+            origin: 'Outbound',
+            segment: 'Fintech',
+            size: 'Pequena',
+            website: 'https://dataflow.com',
+            sdr: 'Maria Silva',
+            observations: 'CEO muito interessada em soluções de análise de dados.',
+            createdAt: new Date().toLocaleString('pt-BR'),
+            scoreBreakdown: { roleScore: 20, segmentScore: 15, originScore: 5, interestScore: 30, bonus: 15 },
+            briefing: 'DataFlow Analytics é uma fintech especializada em análise de dados para o setor financeiro.',
+            history: [
+                { action: 'Lead criado', user: 'Maria Silva', detail: 'Lead cadastrado com score 85/100 (Hot)',
+                    time: new Date().toLocaleString('pt-BR') },
+                { action: 'IA processou lead', user: 'Sistema', detail: 'Enriquecimento de dados concluído',
+                    time: new Date().toLocaleString('pt-BR') }
+            ]
+        }, {
+            id: 3,
+            name: 'Carlos Mendes',
+            company: 'InovaTech Group',
+            role: 'Gerente de Marketing',
+            email: 'carlos@inovatech.com',
+            category: 'Warm',
+            status: 'Pronto',
+            score: 62,
+            initials: 'CM',
+            color: '#F7B31C',
+            time: 'Há 4 horas',
+            origin: 'Indicação',
+            segment: 'EdTech',
+            size: 'Média',
+            website: 'https://inovatech.com',
+            sdr: 'Maria Silva',
+            observations: 'Indicação de um cliente atual.',
+            createdAt: new Date().toLocaleString('pt-BR'),
+            scoreBreakdown: { roleScore: 15, segmentScore: 12, originScore: 12, interestScore: 18, bonus: 5 },
+            briefing: 'InovaTech Group atua no setor de educação tecnológica.',
+            history: [
+                { action: 'Lead criado', user: 'Maria Silva', detail: 'Lead cadastrado com score 62/100 (Warm)',
+                    time: new Date().toLocaleString('pt-BR') },
+                { action: 'IA processou lead', user: 'Sistema', detail: 'Geração de SPIN concluída',
+                    time: new Date().toLocaleString('pt-BR') },
+                { action: 'Lead marcado como "Pronto"', user: 'Maria Silva',
+                    detail: 'Status alterado para Pronto para Closer', time: new Date().toLocaleString('pt-BR') }
+            ]
+        }, {
+            id: 4,
+            name: 'Fernanda Lima',
+            company: 'GreenEnergy Brasil',
+            role: 'Diretora Comercial',
+            email: 'fernanda@greenenergy.com',
+            category: 'Warm',
+            status: 'Em Qualificação',
+            score: 55,
+            initials: 'FL',
+            color: '#f59e0b',
+            time: 'Há 6 horas',
+            origin: 'Evento',
+            segment: 'Indústria',
+            size: 'Grande',
+            website: 'https://greenenergy.com',
+            sdr: 'Maria Silva',
+            observations: 'Conheceu a empresa em um evento do setor.',
+            createdAt: new Date().toLocaleString('pt-BR'),
+            scoreBreakdown: { roleScore: 18, segmentScore: 8, originScore: 8, interestScore: 15, bonus: 6 },
+            briefing: 'GreenEnergy Brasil é uma empresa do setor de energia renovável.',
+            history: [
+                { action: 'Lead criado', user: 'Maria Silva', detail: 'Lead cadastrado com score 55/100 (Warm)',
+                    time: new Date().toLocaleString('pt-BR') },
+                { action: 'IA processou lead', user: 'Sistema', detail: 'Enriquecimento de dados concluído',
+                    time: new Date().toLocaleString('pt-BR') }
+            ]
+        }, {
+            id: 5,
+            name: 'Roberto Alves',
+            company: 'FinTech Solutions',
+            role: 'CFO',
+            email: 'roberto@fintech.com',
+            category: 'Cold',
+            status: 'Em Qualificação',
+            score: 28,
+            initials: 'RA',
+            color: '#6b7280',
+            time: 'Há 1 dia',
+            origin: 'Inbound',
+            segment: 'Fintech',
+            size: 'Média',
+            website: 'https://fintechsolutions.com',
+            sdr: 'Maria Silva',
+            observations: 'Lead com baixo engajamento.',
+            createdAt: new Date().toLocaleString('pt-BR'),
+            scoreBreakdown: { roleScore: 20, segmentScore: 15, originScore: 15, interestScore: 6, bonus: -28 },
+            briefing: 'FinTech Solutions atua no mercado de soluções financeiras.',
+            history: [
+                { action: 'Lead criado', user: 'Maria Silva', detail: 'Lead cadastrado com score 28/100 (Cold)',
+                    time: new Date().toLocaleString('pt-BR') },
+                { action: 'IA processou lead', user: 'Sistema', detail: 'Enriquecimento de dados concluído',
+                    time: new Date().toLocaleString('pt-BR') }
+            ]
+        }, {
+            id: 6,
+            name: 'Patrícia Souza',
+            company: 'HealthCare Plus',
+            role: 'Head de Produto',
+            email: 'patricia@healthcare.com',
+            category: 'Hot',
+            status: 'Em Qualificação',
+            score: 92,
+            initials: 'PS',
+            color: '#047857',
+            time: 'Há 30 min',
+            origin: 'Outbound',
+            segment: 'HealthTech',
+            size: 'Média',
+            website: 'https://healthcareplus.com',
+            sdr: 'Pedro Santos',
+            observations: 'Lead muito engajado. Pediu demonstração do produto.',
+            createdAt: new Date().toLocaleString('pt-BR'),
+            scoreBreakdown: { roleScore: 18, segmentScore: 14, originScore: 5, interestScore: 30, bonus: 25 },
+            briefing: 'HealthCare Plus é uma HealthTech que desenvolve soluções para gestão hospitalar.',
+            history: [
+                { action: 'Lead criado', user: 'Pedro Santos', detail: 'Lead cadastrado com score 92/100 (Hot)',
+                    time: new Date().toLocaleString('pt-BR') },
+                { action: 'IA processou lead', user: 'Sistema', detail: 'Enriquecimento e SPIN concluídos',
+                    time: new Date().toLocaleString('pt-BR') }
+            ]
+        }, {
+            id: 7,
+            name: 'Marcos Oliveira',
+            company: 'EduTech Brasil',
+            role: 'Coordenador de Vendas',
+            email: 'marcos@edutech.com',
+            category: 'Warm',
+            status: 'Em Qualificação',
+            score: 48,
+            initials: 'MO',
+            color: '#d97706',
+            time: 'Há 3 horas',
+            origin: 'Indicação',
+            segment: 'EdTech',
+            size: 'Pequena',
+            website: 'https://edutech.com',
+            sdr: 'Pedro Santos',
+            observations: 'Indicação de um parceiro de negócios.',
+            createdAt: new Date().toLocaleString('pt-BR'),
+            scoreBreakdown: { roleScore: 12, segmentScore: 12, originScore: 12, interestScore: 12, bonus: 0 },
+            briefing: 'EduTech Brasil é uma startup de educação tecnológica.',
+            history: [
+                { action: 'Lead criado', user: 'Pedro Santos', detail: 'Lead cadastrado com score 48/100 (Warm)',
+                    time: new Date().toLocaleString('pt-BR') },
+                { action: 'IA processou lead', user: 'Sistema', detail: 'Geração de SPIN concluída',
+                    time: new Date().toLocaleString('pt-BR') }
+            ]
+        }, {
+            id: 8,
+            name: 'Juliana Costa',
+            company: 'Logística Expressa',
+            role: 'Gerente Operacional',
+            email: 'juliana@logexpress.com',
+            category: 'Cold',
+            status: 'Em Qualificação',
+            score: 15,
+            initials: 'JC',
+            color: '#9ca3af',
+            time: 'Há 2 dias',
+            origin: 'Evento',
+            segment: 'Logística',
+            size: 'Grande',
+            website: 'https://logexpress.com',
+            sdr: 'Maria Silva',
+            observations: 'Participou de um evento mas não demonstrou interesse.',
+            createdAt: new Date().toLocaleString('pt-BR'),
+            scoreBreakdown: { roleScore: 10, segmentScore: 10, originScore: 8, interestScore: 6, bonus: -19 },
+            briefing: 'Logística Expressa atua no setor de logística e transporte.',
+            history: [
+                { action: 'Lead criado', user: 'Maria Silva', detail: 'Lead cadastrado com score 15/100 (Cold)',
+                    time: new Date().toLocaleString('pt-BR') },
+                { action: 'IA processou lead', user: 'Sistema', detail: 'Enriquecimento de dados concluído',
+                    time: new Date().toLocaleString('pt-BR') }
+            ]
+        }];
+
+        let nextId = 9;
+        let newlyCreatedLead = null;
+
+        // ============================================================
+        // ESTADO DA SESSÃO
+        // ============================================================
+        let currentUser = null;
+        let selectedProfile = 'SDR';
+        let currentLeadId = null;
+        let pendingNotifications = 0;
+
+        // ============================================================
+        // FUNÇÕES - LOGIN / LOGOUT
+        // ============================================================
+        function login(user) {
+            currentUser = user;
+            document.getElementById('loginPage').style.display = 'none';
+            
+            if (user.profile === 'SDR') {
+                document.getElementById('dashboardSDR').classList.add('active');
+                document.getElementById('sdrUserName').textContent = user.name;
+                document.getElementById('sdrAvatar').textContent = user.name.split(' ').map(n => n[0]).join('').substring(0, 2);
+                renderSDRLeads(leadsData);
+            } else {
+                document.getElementById('dashboardCloser').classList.add('active');
+                document.getElementById('closerUserName').textContent = user.name;
+                document.getElementById('closerAvatar').textContent = user.name.split(' ').map(n => n[0]).join('').substring(0, 2);
+                renderCloserLeads(leadsData.filter(l => l.status === 'Pronto'));
+            }
+        }
+
+        function logout() {
+            if (confirm('Deseja realmente sair do sistema?')) {
+                currentUser = null;
+                document.getElementById('dashboardSDR').classList.remove('active');
+                document.getElementById('dashboardCloser').classList.remove('active');
+                document.getElementById('loginPage').style.display = 'flex';
+                document.getElementById('loginForm').reset();
+                document.getElementById('messageBox').className = 'message';
+                setProfile('SDR');
+                const sdrUser = DEMO_USERS.find(u => u.profile === 'SDR');
+                if (sdrUser) {
+                    document.getElementById('email').value = sdrUser.email;
+                    document.getElementById('password').value = sdrUser.password;
+                }
+                closeDetailModal();
+                closeEditModal();
+                closeResultModal();
+            }
+        }
+
+        // ============================================================
+        // FUNÇÕES - AUXILIARES
+        // ============================================================
+        function getInitials(name) {
+            return name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+        }
+
+        function getRandomColor() {
+            const colors = ['#027075', '#059669', '#F7B31C', '#f59e0b', '#6b7280', '#047857', '#d97706', '#9ca3af', '#7c3aed', '#db2777'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        function getCategory(score) {
+            if (score >= 70) return 'Hot';
+            if (score >= 40) return 'Warm';
+            return 'Cold';
+        }
+
+        function calculateScore(role, segment, origin, interest) {
+            const roleScores = {
+                'CEO': 20,
+                'Diretor': 20,
+                'Head': 18,
+                'Gerente': 15,
+                'Coordenador': 12,
+                'Analista': 8,
+                '': 5
+            };
+            const roleScore = Object.keys(roleScores).reduce((max, key) => {
+                if (role && role.toLowerCase().includes(key.toLowerCase())) {
+                    return Math.max(max, roleScores[key]);
+                }
+                return max;
+            }, 5);
+
+            const segmentScores = {
+                'SaaS': 15,
+                'Fintech': 15,
+                'HealthTech': 14,
+                'EdTech': 12,
+                'Logística': 10,
+                'Varejo': 10,
+                'Indústria': 8,
+                'Consultoria': 12,
+                'Outro': 5
+            };
+            const segmentScore = segmentScores[segment] || 5;
+
+            const originScores = {
+                'Inbound': 15,
+                'Indicação': 12,
+                'Evento': 8,
+                'Outbound': 5
+            };
+            const originScore = originScores[origin] || 5;
+
+            const interestScore = parseInt(interest) * 3;
+            const bonus = Math.floor(Math.random() * 6);
+            let total = roleScore + segmentScore + originScore + interestScore + bonus;
+            total = Math.min(100, total);
+
+            return {
+                score: total,
+                breakdown: { roleScore, segmentScore, originScore, interestScore, bonus }
+            };
+        }
+
+        function generateBriefing(name, company, role, segment) {
+            return `${company} é uma empresa do setor de ${segment || 'tecnologia'}. ${name} é ${role || 'profissional'} com experiência no mercado. Demonstrou interesse em soluções de qualificação de leads para otimizar o processo comercial da empresa.`;
+        }
+
+        function generateSpinQuestions(company, role) {
+            return {
+                situacao: [
+                    `Como está estruturada a área de vendas da ${company} atualmente?`,
+                    `Quais são os principais canais de geração de demanda que vocês utilizam?`,
+                    `Como você descreveria o relacionamento com seus clientes atuais?`
+                ],
+                problema: [
+                    `Quais são os maiores desafios que sua equipe enfrenta na prospecção?`,
+                    `Como você avalia a eficiência do processo atual de qualificação de leads?`,
+                    `Que gargalos você identifica no funil de vendas?`
+                ],
+                implicacao: [
+                    `O que acontece se esses problemas de prospecção continuarem pelos próximos 6 meses?`,
+                    `Como isso impacta as metas de crescimento da empresa?`,
+                    `Qual o custo de oportunidade de leads mal qualificados?`
+                ],
+                need: [
+                    `Se você pudesse qualificar leads com mais precisão, como isso impactaria seu time?`,
+                    `Como uma ferramenta de qualificação inteligente poderia ajudar você a bater suas metas?`,
+                    `Qual seria o impacto de ter roteiros estruturados para cada tipo de abordagem?`
+                ]
+            };
+        }
+
+        // ============================================================
+        // FUNÇÕES - RENDERIZAR SDR
+        // ============================================================
+        function renderSDRLeads(leads) {
+            const container = document.getElementById('sdrLeadsContainer');
+            container.innerHTML = '';
+
+            leads.forEach(lead => {
+                const scorePercent = lead.score;
+                let scoreClass = 'high';
+                if (scorePercent < 40) scoreClass = 'low';
+                else if (scorePercent < 70) scoreClass = 'medium';
+
+                const card = document.createElement('div');
+                card.className = 'lead-card';
+                card.innerHTML = `
+                    <div class="lead-left">
+                        <div class="lead-avatar" style="background:${lead.color}">
+                            ${lead.initials}
+                        </div>
+                        <div class="lead-info">
+                            <div class="name-row">
+                                <span class="lead-name">${lead.name}</span>
+                                <span class="badge-category ${lead.category.toLowerCase()}">${lead.category}</span>
+                                <span class="badge-status ${lead.status === 'Pronto' ? 'ready' : ''}">${lead.status}</span>
+                            </div>
+                            <div class="company-row">
+                                ${lead.company} • ${lead.role || 'Sem cargo'}
+                            </div>
+                            <div class="meta-row">
+                                <span><i class="far fa-clock"></i> ${lead.time || 'Agora'}</span>
+                                <span>•</span>
+                                <span><i class="fas fa-tag"></i> ${lead.origin || 'Inbound'}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lead-right">
+                        <div class="score">
+                            <div class="number">${lead.score}<span>/100</span></div>
+                            <div class="bar">
+                                <div class="fill ${scoreClass}" style="width:${scorePercent}%"></div>
+                            </div>
+                        </div>
+                        <a href="#" class="action-link sdr-link" onclick="openDetail(${lead.id})">Ver Detalhes →</a>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+
+            const total = leads.length;
+            const hot = leads.filter(l => l.category === 'Hot').length;
+            const warm = leads.filter(l => l.category === 'Warm').length;
+            const ready = leads.filter(l => l.status === 'Pronto').length;
+
+            document.getElementById('sdrStatTotal').textContent = total;
+            document.getElementById('sdrStatHot').textContent = hot;
+            document.getElementById('sdrStatWarm').textContent = warm;
+            document.getElementById('sdrStatReady').textContent = ready;
+            document.getElementById('sdrShowingCount').textContent = total;
+            document.getElementById('sdrTotalCount').textContent = leadsData.length;
+        }
+
+        // ============================================================
+        // FUNÇÕES - RENDERIZAR CLOSER
+        // ============================================================
+        function renderCloserLeads(leads) {
+            const container = document.getElementById('closerLeadsContainer');
+            container.innerHTML = '';
+
+            const priorityOrder = { 'Hot': 0, 'Warm': 1, 'Cold': 2 };
+            const sorted = [...leads].sort((a, b) => priorityOrder[a.category] - priorityOrder[b.category]);
+
+            sorted.forEach(lead => {
+                const scorePercent = lead.score;
+                let scoreClass = 'high';
+                if (scorePercent < 40) scoreClass = 'low';
+                else if (scorePercent < 70) scoreClass = 'medium';
+
+                const card = document.createElement('div');
+                card.className = 'lead-card';
+                card.innerHTML = `
+                    <div class="lead-left">
+                        <div class="lead-avatar" style="background:${lead.color}">
+                            ${lead.initials}
+                        </div>
+                        <div class="lead-info">
+                            <div class="name-row">
+                                <span class="lead-name">${lead.name}</span>
+                                <span class="badge-category ${lead.category.toLowerCase()}">${lead.category}</span>
+                                <span class="badge-status ready">Pronto</span>
+                            </div>
+                            <div class="company-row">
+                                ${lead.company} • ${lead.role || 'Sem cargo'}
+                            </div>
+                            <div class="meta-row">
+                                <span><i class="far fa-clock"></i> ${lead.time || 'Agora'}</span>
+                                <span>•</span>
+                                <span><i class="fas fa-tag"></i> ${lead.origin || 'Inbound'}</span>
+                            </div>
+                            <div class="sdr-info">
+                                <i class="fas fa-user-tie"></i> SDR: ${lead.sdr || 'Não informado'}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lead-right">
+                        <div class="score">
+                            <div class="number">${lead.score}<span>/100</span></div>
+                            <div class="bar">
+                                <div class="fill ${scoreClass}" style="width:${scorePercent}%"></div>
+                            </div>
+                        </div>
+                        <a href="#" class="action-link closer-link" onclick="openDetail(${lead.id})">Ver Detalhes →</a>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+
+            const total = leads.length;
+            const hot = leads.filter(l => l.category === 'Hot').length;
+            const warm = leads.filter(l => l.category === 'Warm').length;
+            const cold = leads.filter(l => l.category === 'Cold').length;
+
+            document.getElementById('closerStatTotal').textContent = total;
+            document.getElementById('closerStatHot').textContent = hot;
+            document.getElementById('closerStatWarm').textContent = warm;
+            document.getElementById('closerStatCold').textContent = cold;
+            document.getElementById('closerShowingCount').textContent = total;
+            document.getElementById('closerTotalCount').textContent = leadsData.filter(l => l.status === 'Pronto').length;
+        }
+
+        // ============================================================
+        // FUNÇÕES - BUSCA E FILTROS
+        // ============================================================
+        let sdrSearchTimeout, closerSearchTimeout;
+
+        document.getElementById('sdrSearchInput').addEventListener('input', function(e) {
+            clearTimeout(sdrSearchTimeout);
+            sdrSearchTimeout = setTimeout(() => {
+                const term = e.target.value.toLowerCase().trim();
+                let filtered = leadsData;
+                if (term) {
+                    filtered = filtered.filter(l =>
+                        l.name.toLowerCase().includes(term) ||
+                        l.company.toLowerCase().includes(term)
+                    );
+                }
+                renderSDRLeads(filtered);
+            }, 500);
+        });
+
+        document.getElementById('closerSearchInput').addEventListener('input', function(e) {
+            clearTimeout(closerSearchTimeout);
+            closerSearchTimeout = setTimeout(() => {
+                const term = e.target.value.toLowerCase().trim();
+                let filtered = leadsData.filter(l => l.status === 'Pronto');
+                if (term) {
+                    filtered = filtered.filter(l =>
+                        l.name.toLowerCase().includes(term) ||
+                        l.company.toLowerCase().includes(term)
+                    );
+                }
+                renderCloserLeads(filtered);
+            }, 500);
+        });
+
+        document.getElementById('closerSdrFilter').addEventListener('change', function() {
+            const sdr = this.value;
+            let filtered = leadsData.filter(l => l.status === 'Pronto');
+            if (sdr !== 'todos') {
+                filtered = filtered.filter(l => l.sdr === sdr);
+            }
+            renderCloserLeads(filtered);
+        });
+
+        document.querySelectorAll('#dashboardSDR .filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('#dashboardSDR .filter-btn').forEach(b => b.classList.remove('active-sdr'));
+                this.classList.add('active-sdr');
+                const category = this.textContent.trim();
+                let filtered = leadsData;
+                if (category !== 'Todos') {
+                    filtered = filtered.filter(lead => lead.category === category);
+                }
+                renderSDRLeads(filtered);
+            });
+        });
+
+        document.querySelectorAll('#dashboardCloser .filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('#dashboardCloser .filter-btn').forEach(b => b.classList.remove('active-closer'));
+                this.classList.add('active-closer');
+                const category = this.textContent.trim();
+                let filtered = leadsData.filter(l => l.status === 'Pronto');
+                if (category !== 'Todos') {
+                    filtered = filtered.filter(lead => lead.category === category);
+                }
+                renderCloserLeads(filtered);
+            });
+        });
+
+        // ============================================================
+        // FUNÇÕES - NOTIFICAÇÕES
+        // ============================================================
+        function showCloserNotification(lead) {
+            const notif = document.getElementById('closerNotification');
+            if (lead) {
+                document.getElementById('notifLeadName').textContent = lead.name;
+                document.getElementById('notifLeadCompany').textContent = lead.company;
+                document.getElementById('notifLeadScore').textContent = lead.score;
+                document.getElementById('notifLeadCategory').textContent = lead.category;
+            }
+            notif.classList.add('show');
+            pendingNotifications++;
+            updateNotifCount();
+            clearTimeout(window.notifTimeout);
+            window.notifTimeout = setTimeout(dismissNotification, 8000);
+        }
+
+        function dismissNotification() {
+            document.getElementById('closerNotification').classList.remove('show');
+            pendingNotifications = Math.max(0, pendingNotifications - 1);
+            updateNotifCount();
+        }
+
+        function updateNotifCount() {
+            const countEls = [document.getElementById('sdrNotifCount'), document.getElementById('closerNotifCount')];
+            countEls.forEach(el => {
+                el.textContent = pendingNotifications;
+                el.style.display = pendingNotifications > 0 ? 'flex' : 'none';
+            });
+        }
+
+        // ============================================================
+        // FUNÇÕES - TOAST
+        // ============================================================
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toastMessage');
+
+        function showToast(message, type = 'success') {
+            toastMessage.textContent = message;
+            toast.className = 'toast show';
+            if (type === 'error') {
+                toast.style.background = '#dc2626';
+            } else if (type === 'info') {
+                toast.style.background = '#2563EB';
+            } else {
+                toast.style.background = '#065f46';
+            }
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 4000);
+        }
+
+        // ============================================================
+        // FUNÇÕES - RESULTADO DO LEAD
+        // ============================================================
+        const resultModal = document.getElementById('resultModal');
+        const closeResultBtn = document.getElementById('closeResultBtn');
+
+        function showResult(lead) {
+            // Score
+            document.getElementById('resultScore').innerHTML = `${lead.score}<span>/100</span>`;
+            
+            const catEl = document.getElementById('resultCategory');
+            catEl.textContent = lead.category;
+            catEl.className = `badge ${lead.category.toLowerCase()}`;
+            
+            document.getElementById('resultStatus').textContent = lead.status;
+            
+            // Breakdown
+            const bd = lead.scoreBreakdown || { roleScore: 0, segmentScore: 0, originScore: 0, interestScore: 0 };
+            document.getElementById('resultRoleScore').textContent = bd.roleScore || 0;
+            document.getElementById('resultSegmentScore').textContent = bd.segmentScore || 0;
+            document.getElementById('resultOriginScore').textContent = bd.originScore || 0;
+            document.getElementById('resultInterestScore').textContent = bd.interestScore || 0;
+            
+            // Briefing
+            document.getElementById('resultBriefing').textContent = lead.briefing || 'Briefing não disponível.';
+            
+            // SPIN
+            const spin = lead.spin || generateSpinQuestions(lead.company, lead.role);
+            
+            // Situação
+            document.querySelector('#spin-situacao .spin-question:nth-child(1) .q-text').textContent = spin.situacao[0] || 'Pergunta não disponível';
+            document.querySelector('#spin-situacao .spin-question:nth-child(2) .q-text').textContent = spin.situacao[1] || 'Pergunta não disponível';
+            document.querySelector('#spin-situacao .spin-question:nth-child(3) .q-text').textContent = spin.situacao[2] || 'Pergunta não disponível';
+            
+            // Problema
+            document.querySelector('#spin-problema .spin-question:nth-child(1) .q-text').textContent = spin.problema[0] || 'Pergunta não disponível';
+            document.querySelector('#spin-problema .spin-question:nth-child(2) .q-text').textContent = spin.problema[1] || 'Pergunta não disponível';
+            document.querySelector('#spin-problema .spin-question:nth-child(3) .q-text').textContent = spin.problema[2] || 'Pergunta não disponível';
+            
+            // Implicação
+            document.querySelector('#spin-implicacao .spin-question:nth-child(1) .q-text').textContent = spin.implicacao[0] || 'Pergunta não disponível';
+            document.querySelector('#spin-implicacao .spin-question:nth-child(2) .q-text').textContent = spin.implicacao[1] || 'Pergunta não disponível';
+            document.querySelector('#spin-implicacao .spin-question:nth-child(3) .q-text').textContent = spin.implicacao[2] || 'Pergunta não disponível';
+            
+            // Need
+            document.querySelector('#spin-need .spin-question:nth-child(1) .q-text').textContent = spin.need[0] || 'Pergunta não disponível';
+            document.querySelector('#spin-need .spin-question:nth-child(2) .q-text').textContent = spin.need[1] || 'Pergunta não disponível';
+            document.querySelector('#spin-need .spin-question:nth-child(3) .q-text').textContent = spin.need[2] || 'Pergunta não disponível';
+            
+            // Resetar abas do SPIN
+            document.querySelectorAll('.spin-tab').forEach(t => t.classList.remove('active'));
+            document.querySelector('.spin-tab[data-spin="situacao"]').classList.add('active');
+            document.querySelectorAll('.result-spin-content').forEach(c => c.classList.remove('active'));
+            document.getElementById('spin-situacao').classList.add('active');
+            
+            // Guardar o lead para ações
+            newlyCreatedLead = lead;
+            
+            // Abrir modal
+            resultModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeResultModal() {
+            resultModal.classList.remove('active');
+            document.body.style.overflow = '';
+            newlyCreatedLead = null;
+        }
+
+        closeResultBtn.addEventListener('click', closeResultModal);
+        resultModal.addEventListener('click', function(e) {
+            if (e.target === this) closeResultModal();
+        });
+
+        // Abas do SPIN no resultado
+        document.querySelectorAll('.spin-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.spin-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                const target = this.dataset.spin;
+                document.querySelectorAll('.result-spin-content').forEach(c => c.classList.remove('active'));
+                document.getElementById(`spin-${target}`).classList.add('active');
+            });
+        });
+
+        // ============================================================
+        // FUNÇÕES - NOVO LEAD
+        // ============================================================
+        const newLeadModal = document.getElementById('newLeadModal');
+        const openNewLeadBtn = document.getElementById('openNewLeadBtn');
+        const closeNewLeadBtn = document.getElementById('closeNewLeadBtn');
+        const cancelNewLeadBtn = document.getElementById('cancelNewLeadBtn');
+        const newLeadForm = document.getElementById('newLeadForm');
+        const submitLeadBtn = document.getElementById('submitLeadBtn');
+
+        function openNewLead() {
+            newLeadModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            newLeadForm.reset();
+            submitLeadBtn.disabled = false;
+            submitLeadBtn.innerHTML = '<i class="fas fa-check"></i> Salvar e Qualificar';
+        }
+
+        function closeNewLead() {
+            newLeadModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        openNewLeadBtn.addEventListener('click', openNewLead);
+        closeNewLeadBtn.addEventListener('click', closeNewLead);
+        cancelNewLeadBtn.addEventListener('click', closeNewLead);
+        newLeadModal.addEventListener('click', function(e) {
+            if (e.target === this) closeNewLead();
+        });
+
+        newLeadForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('leadName').value.trim();
+            const email = document.getElementById('leadEmail').value.trim();
+            const role = document.getElementById('leadRole').value.trim();
+            const company = document.getElementById('leadCompany').value.trim();
+            const segment = document.getElementById('leadSegment').value;
+            const size = document.getElementById('leadSize').value;
+            const origin = document.getElementById('leadOrigin').value;
+            const interest = document.getElementById('leadInterest').value;
+            const observations = document.getElementById('leadObservations').value.trim();
+
+            if (!name || !email || !company) {
+                alert('Preencha os campos obrigatórios: Nome, E-mail e Empresa.');
+                return;
+            }
+
+            if (!email.includes('@') || !email.includes('.')) {
+                alert('Digite um e-mail válido.');
+                return;
+            }
+
+            submitLeadBtn.disabled = true;
+            submitLeadBtn.innerHTML = '<span class="spinner"></span> Processando...';
+
+            setTimeout(() => {
+                const { score, breakdown } = calculateScore(role, segment, origin, interest);
+                const category = getCategory(score);
+                const spin = generateSpinQuestions(company, role);
+                const briefing = generateBriefing(name, company, role, segment);
+
+                const newLead = {
+                    id: nextId++,
+                    name: name,
+                    company: company,
+                    role: role || 'Sem cargo',
+                    email: email,
+                    category: category,
+                    status: 'Em Qualificação',
+                    score: score,
+                    initials: getInitials(name),
+                    color: getRandomColor(),
+                    time: 'Agora',
+                    origin: origin,
+                    segment: segment || 'Outro',
+                    size: size || 'Não informado',
+                    website: '',
+                    sdr: currentUser ? currentUser.name : 'Maria Silva',
+                    observations: observations || 'Sem observações',
+                    createdAt: new Date().toLocaleString('pt-BR'),
+                    scoreBreakdown: breakdown,
+                    briefing: briefing,
+                    spin: spin,
+                    history: [
+                        { action: 'Lead criado', user: currentUser ? currentUser.name : 'Maria Silva',
+                            detail: `Lead cadastrado com score ${score}/100 (${category})`,
+                            time: new Date().toLocaleString('pt-BR') },
+                        { action: 'IA processou lead', user: 'Sistema',
+                            detail: 'Enriquecimento de dados e geração de SPIN concluídos',
+                            time: new Date().toLocaleString('pt-BR') }
+                    ]
+                };
+
+                leadsData.unshift(newLead);
+                renderSDRLeads(leadsData);
+                renderCloserLeads(leadsData.filter(l => l.status === 'Pronto'));
+                closeNewLead();
+                
+                // Mostrar resultado
+                showResult(newLead);
+                
+                showToast(`✅ Lead "${name}" criado com sucesso! Score: ${score}/100 - ${category}`);
+
+                submitLeadBtn.disabled = false;
+                submitLeadBtn.innerHTML = '<i class="fas fa-check"></i> Salvar e Qualificar';
+            }, 1500);
+        });
+
+        // ============================================================
+        // FUNÇÕES - EDITAR LEAD
+        // ============================================================
+        const editLeadModal = document.getElementById('editLeadModal');
+        const closeEditLeadBtn = document.getElementById('closeEditLeadBtn');
+        const cancelEditLeadBtn = document.getElementById('cancelEditLeadBtn');
+        const editLeadForm = document.getElementById('editLeadForm');
+        const submitEditLeadBtn = document.getElementById('submitEditLeadBtn');
+        let editingLeadId = null;
+
+        function openEditModal(leadId) {
+            const lead = leadsData.find(l => l.id === leadId);
+            if (!lead) return;
+
+            editingLeadId = leadId;
+
+            document.getElementById('editName').value = lead.name;
+            document.getElementById('editEmail').value = lead.email;
+            document.getElementById('editRole').value = lead.role || '';
+            document.getElementById('editCompany').value = lead.company;
+            document.getElementById('editSegment').value = lead.segment || '';
+            document.getElementById('editSize').value = lead.size || '';
+            document.getElementById('editWebsite').value = lead.website || '';
+            document.getElementById('editOrigin').value = lead.origin || 'Inbound';
+            document.getElementById('editStatus').value = lead.status || 'Em Qualificação';
+            document.getElementById('editObservations').value = lead.observations || '';
+
+            editLeadModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            submitEditLeadBtn.disabled = false;
+            submitEditLeadBtn.innerHTML = '<i class="fas fa-save"></i> Salvar Alterações';
+        }
+
+        function closeEditModal() {
+            editLeadModal.classList.remove('active');
+            document.body.style.overflow = '';
+            editingLeadId = null;
+        }
+
+        closeEditLeadBtn.addEventListener('click', closeEditModal);
+        cancelEditLeadBtn.addEventListener('click', closeEditModal);
+        editLeadModal.addEventListener('click', function(e) {
+            if (e.target === this) closeEditModal();
+        });
+
+        editLeadForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('editName').value.trim();
+            const email = document.getElementById('editEmail').value.trim();
+            const role = document.getElementById('editRole').value.trim();
+            const company = document.getElementById('editCompany').value.trim();
+            const segment = document.getElementById('editSegment').value;
+            const size = document.getElementById('editSize').value;
+            const website = document.getElementById('editWebsite').value.trim();
+            const origin = document.getElementById('editOrigin').value;
+            const status = document.getElementById('editStatus').value;
+            const observations = document.getElementById('editObservations').value.trim();
+
+            if (!name || !email || !company) {
+                alert('Preencha os campos obrigatórios: Nome, E-mail e Empresa.');
+                return;
+            }
+
+            if (!email.includes('@') || !email.includes('.')) {
+                alert('Digite um e-mail válido.');
+                return;
+            }
+
+            submitEditLeadBtn.disabled = true;
+            submitEditLeadBtn.innerHTML = '<span class="spinner"></span> Salvando...';
+
+            setTimeout(() => {
+                const lead = leadsData.find(l => l.id === editingLeadId);
+                if (!lead) return;
+
+                const oldName = lead.name;
+                const oldStatus = lead.status;
+
+                lead.name = name;
+                lead.email = email;
+                lead.role = role || 'Sem cargo';
+                lead.company = company;
+                lead.segment = segment || 'Outro';
+                lead.size = size || 'Não informado';
+                lead.website = website;
+                lead.origin = origin;
+                lead.status = status;
+                lead.observations = observations || 'Sem observações';
+                lead.initials = getInitials(name);
+                lead.time = 'Agora';
+
+                const interest = lead.scoreBreakdown ? Math.round(lead.scoreBreakdown.interestScore / 3) : 6;
+                const { score, breakdown } = calculateScore(role, segment, origin, String(interest));
+                lead.score = score;
+                lead.category = getCategory(score);
+                lead.scoreBreakdown = breakdown;
+                lead.briefing = generateBriefing(name, company, role, segment);
+                lead.spin = generateSpinQuestions(company, role);
+
+                lead.history.unshift({
+                    action: 'Lead editado',
+                    user: currentUser ? currentUser.name : 'Maria Silva',
+                    detail: `Dados atualizados: ${oldName} → ${name} | Status: ${oldStatus} → ${status}`,
+                    time: new Date().toLocaleString('pt-BR')
+                });
+
+                renderSDRLeads(leadsData);
+                renderCloserLeads(leadsData.filter(l => l.status === 'Pronto'));
+
+                closeEditModal();
+
+                if (detailModalOverlay.classList.contains('active')) {
+                    openDetail(lead.id);
+                }
+
+                showToast(`✅ Lead "${name}" atualizado com sucesso! Score: ${score}/100 - ${lead.category}`);
+
+                submitEditLeadBtn.disabled = false;
+                submitEditLeadBtn.innerHTML = '<i class="fas fa-save"></i> Salvar Alterações';
+            }, 1500);
+        });
+
+        // ============================================================
+        // FUNÇÕES - AÇÕES DO SDR
+        // ============================================================
+        function markAsReady() {
+            if (!currentLeadId) return;
+            const lead = leadsData.find(l => l.id === currentLeadId);
+            if (!lead) return;
+
+            if (lead.status === 'Pronto') {
+                showToast('ℹ️ Este lead já está marcado como Pronto.', 'info');
+                return;
+            }
+
+            lead.status = 'Pronto';
+            lead.time = 'Agora';
+            lead.history.unshift({
+                action: 'Lead marcado como "Pronto"',
+                user: currentUser ? currentUser.name : 'Maria Silva',
+                detail: 'Status alterado para Pronto para Closer',
+                time: new Date().toLocaleString('pt-BR')
+            });
+
+            renderSDRLeads(leadsData);
+            renderCloserLeads(leadsData.filter(l => l.status === 'Pronto'));
+            openDetail(lead.id);
+            showCloserNotification(lead);
+            showToast(`✅ "${lead.name}" marcado como Pronto para o Closer!`);
+        }
+
+        function markAsReadyFromResult() {
+            if (!newlyCreatedLead) return;
+            const lead = leadsData.find(l => l.id === newlyCreatedLead.id);
+            if (!lead) return;
+
+            if (lead.status === 'Pronto') {
+                showToast('ℹ️ Este lead já está marcado como Pronto.', 'info');
+                return;
+            }
+
+            lead.status = 'Pronto';
+            lead.time = 'Agora';
+            lead.history.unshift({
+                action: 'Lead marcado como "Pronto"',
+                user: currentUser ? currentUser.name : 'Maria Silva',
+                detail: 'Status alterado para Pronto para Closer',
+                time: new Date().toLocaleString('pt-BR')
+            });
+
+            renderSDRLeads(leadsData);
+            renderCloserLeads(leadsData.filter(l => l.status === 'Pronto'));
+            closeResultModal();
+            showCloserNotification(lead);
+            showToast(`✅ "${lead.name}" marcado como Pronto para o Closer!`);
+        }
+
+        function backToDashboard() {
+            closeResultModal();
+        }
+
+        document.getElementById('resultMarkReadyBtn').addEventListener('click', markAsReadyFromResult);
+        document.getElementById('resultBackBtn').addEventListener('click', backToDashboard);
+
+        // ============================================================
+        // FUNÇÕES - REVERTER STATUS
+        // ============================================================
+        function revertStatus() {
+            if (!currentLeadId) return;
+            const lead = leadsData.find(l => l.id === currentLeadId);
+            if (!lead) return;
+
+            if (lead.status !== 'Pronto') {
+                showToast('ℹ️ Este lead não está marcado como Pronto.', 'info');
+                return;
+            }
+            document.getElementById('confirmModalOverlay').classList.add('active');
+        }
+
+        function confirmRevertStatus() {
+            if (!currentLeadId) return;
+            const lead = leadsData.find(l => l.id === currentLeadId);
+            if (!lead) return;
+
+            lead.status = 'Em Qualificação';
+            lead.time = 'Agora';
+            lead.history.unshift({
+                action: 'Status revertido',
+                user: currentUser ? currentUser.name : 'Maria Silva',
+                detail: 'Status revertido de "Pronto" para "Em Qualificação"',
+                time: new Date().toLocaleString('pt-BR')
+            });
+
+            document.getElementById('confirmModalOverlay').classList.remove('active');
+            renderSDRLeads(leadsData);
+            renderCloserLeads(leadsData.filter(l => l.status === 'Pronto'));
+            openDetail(lead.id);
+            showToast(`↩️ Status de "${lead.name}" revertido para Em Qualificação!`);
+        }
+
+        function cancelRevert() {
+            document.getElementById('confirmModalOverlay').classList.remove('active');
+        }
+
+        function archiveLead() {
+            if (!currentLeadId) return;
+            const lead = leadsData.find(l => l.id === currentLeadId);
+            if (!lead) return;
+
+            if (confirm(`Tem certeza que deseja arquivar o lead "${lead.name}"?`)) {
+                leadsData = leadsData.filter(l => l.id !== currentLeadId);
+                renderSDRLeads(leadsData);
+                renderCloserLeads(leadsData.filter(l => l.status === 'Pronto'));
+                closeDetailModal();
+                showToast(`📦 Lead "${lead.name}" arquivado com sucesso!`);
+            }
+        }
+
+        // ============================================================
+        // FUNÇÕES - AÇÕES DO CLOSER
+        // ============================================================
+        function updateLeadStatus(status, actionName) {
+            if (!currentLeadId) return;
+            const lead = leadsData.find(l => l.id === currentLeadId);
+            if (!lead) return;
+
+            if (lead.status === 'Fechado' || lead.status === 'Perdido') {
+                showToast('ℹ️ Este lead já foi finalizado.', 'info');
+                return;
+            }
+
+            const oldStatus = lead.status;
+            lead.status = status;
+            lead.time = 'Agora';
+            lead.history.unshift({
+                action: actionName,
+                user: currentUser ? currentUser.name : 'João Closer',
+                detail: `Status alterado de "${oldStatus}" para "${status}"`,
+                time: new Date().toLocaleString('pt-BR')
+            });
+
+            renderSDRLeads(leadsData);
+            renderCloserLeads(leadsData.filter(l => l.status === 'Pronto'));
+            if (detailModalOverlay.classList.contains('active')) {
+                openDetail(lead.id);
+            }
+            const emoji = status === 'Em Negociação' ? '🤝' : status === 'Fechado' ? '🏆' : '❌';
+            showToast(`${emoji} Lead "${lead.name}" - ${status}!`);
+        }
+
+        // ============================================================
+        // FUNÇÕES - MODAL DETALHE
+        // ============================================================
+        const detailModalOverlay = document.getElementById('detailModalOverlay');
+        const closeDetailModalBtn = document.getElementById('closeDetailModalBtn');
+
+        function openDetail(leadId) {
+            const lead = leadsData.find(l => l.id === leadId);
+            if (!lead) return;
+
+            currentLeadId = leadId;
+
+            const isSDR = currentUser && currentUser.profile === 'SDR';
+            
+            const titleEl = document.getElementById('detailModalTitle');
+            if (isSDR) {
+                titleEl.className = 'sdr-modal-title';
+                titleEl.innerHTML = '<i class="fas fa-user" style="color:#027075;margin-right:10px;"></i>Detalhe do Lead';
+            } else {
+                titleEl.className = 'closer-modal-title';
+                titleEl.innerHTML = '<i class="fas fa-user" style="color:#1e40af;margin-right:10px;"></i>Detalhe do Lead';
+            }
+
+            document.getElementById('detailAvatar').textContent = lead.initials;
+            document.getElementById('detailAvatar').style.background = lead.color;
+            document.getElementById('detailName').textContent = lead.name;
+            document.getElementById('detailCompany').textContent = `${lead.company} • ${lead.role}`;
+
+            const catEl = document.getElementById('detailCategory');
+            catEl.textContent = lead.category;
+            catEl.className = `badge badge-detail ${lead.category.toLowerCase()}`;
+
+            const statusEl = document.getElementById('detailStatus');
+            statusEl.textContent = lead.status;
+            statusEl.className = `status-badge ${lead.status.toLowerCase()}`;
+
+            document.getElementById('detailEmail').textContent = lead.email;
+            document.getElementById('detailScore').textContent = `${lead.score}/100`;
+            document.getElementById('detailSegment').textContent = lead.segment || 'Não informado';
+            document.getElementById('detailSize').textContent = lead.size || 'Não informado';
+            document.getElementById('detailOrigin').textContent = lead.origin || 'Inbound';
+            document.getElementById('detailSDR').textContent = lead.sdr || 'Não informado';
+
+            const breakdown = lead.scoreBreakdown || { roleScore: 0, segmentScore: 0, originScore: 0, interestScore: 0, bonus: 0 };
+            document.getElementById('detailScoreBreakdown').innerHTML = `
+                <div class="score-item"><span class="label">Cargo</span><span class="value">${breakdown.roleScore || 0}</span></div>
+                <div class="score-item"><span class="label">Segmento</span><span class="value">${breakdown.segmentScore || 0}</span></div>
+                <div class="score-item"><span class="label">Origem</span><span class="value">${breakdown.originScore || 0}</span></div>
+                <div class="score-item"><span class="label">Interesse</span><span class="value">${breakdown.interestScore || 0}</span></div>
+                ${breakdown.bonus ? `<div class="score-item"><span class="label">Bônus</span><span class="value">${breakdown.bonus}</span></div>` : ''}
+            `;
+
+            document.getElementById('detailBriefing').textContent = lead.briefing || 'Briefing não disponível.';
+            document.getElementById('detailObservations').textContent = lead.observations || 'Sem observações.';
+
+            const historyContainer = document.getElementById('historyContainer');
+            if (lead.history && lead.history.length > 0) {
+                historyContainer.innerHTML = lead.history.map(h => {
+                    let icon = 'fa-plus';
+                    if (h.action.includes('IA')) icon = 'fa-robot';
+                    else if (h.action.includes('Pronto')) icon = 'fa-check-circle';
+                    else if (h.action.includes('revertido')) icon = 'fa-undo';
+                    else if (h.action.includes('editado')) icon = 'fa-edit';
+                    else if (h.action.includes('criado')) icon = 'fa-plus';
+                    else if (h.action.includes('negociação')) icon = 'fa-handshake';
+                    else if (h.action.includes('Fechado') || h.action.includes('Ganho')) icon = 'fa-trophy';
+                    else if (h.action.includes('Perdido')) icon = 'fa-times-circle';
+                    return `
+                        <div class="history-item">
+                            <div class="h-icon"><i class="fas ${icon}"></i></div>
+                            <div class="h-content">
+                                <div class="h-action">${h.action}</div>
+                                <div class="h-detail">${h.user} • ${h.detail}</div>
+                                <div class="h-time">${h.time}</div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            } else {
+                historyContainer.innerHTML = '<p style="color:#999;text-align:center;padding:20px;">Nenhum histórico registrado.</p>';
+            }
+
+            const spinContainer = document.getElementById('spinContainer');
+            const company = lead.company || 'empresa';
+            const spin = lead.spin || generateSpinQuestions(company, lead.role);
+            spinContainer.innerHTML = `
+                <h4 style="font-size:14px;color:#027075;font-weight:600;margin:12px 0 8px;">🔍 Situação</h4>
+                <div class="spin-question"><div class="q-label">Situação 1</div><div class="q-text">${spin.situacao[0] || 'Pergunta não disponível'}</div></div>
+                <div class="spin-question"><div class="q-label">Situação 2</div><div class="q-text">${spin.situacao[1] || 'Pergunta não disponível'}</div></div>
+                <div class="spin-question"><div class="q-label">Situação 3</div><div class="q-text">${spin.situacao[2] || 'Pergunta não disponível'}</div></div>
+                
+                <h4 style="font-size:14px;color:#027075;font-weight:600;margin:12px 0 8px;">⚠️ Problema</h4>
+                <div class="spin-question"><div class="q-label">Problema 1</div><div class="q-text">${spin.problema[0] || 'Pergunta não disponível'}</div></div>
+                <div class="spin-question"><div class="q-label">Problema 2</div><div class="q-text">${spin.problema[1] || 'Pergunta não disponível'}</div></div>
+                <div class="spin-question"><div class="q-label">Problema 3</div><div class="q-text">${spin.problema[2] || 'Pergunta não disponível'}</div></div>
+                
+                <h4 style="font-size:14px;color:#027075;font-weight:600;margin:12px 0 8px;">💥 Implicação</h4>
+                <div class="spin-question"><div class="q-label">Implicação 1</div><div class="q-text">${spin.implicacao[0] || 'Pergunta não disponível'}</div></div>
+                <div class="spin-question"><div class="q-label">Implicação 2</div><div class="q-text">${spin.implicacao[1] || 'Pergunta não disponível'}</div></div>
+                <div class="spin-question"><div class="q-label">Implicação 3</div><div class="q-text">${spin.implicacao[2] || 'Pergunta não disponível'}</div></div>
+                
+                <h4 style="font-size:14px;color:#027075;font-weight:600;margin:12px 0 8px;">💎 Need-Payoff</h4>
+                <div class="spin-question"><div class="q-label">Need-Payoff 1</div><div class="q-text">${spin.need[0] || 'Pergunta não disponível'}</div></div>
+                <div class="spin-question"><div class="q-label">Need-Payoff 2</div><div class="q-text">${spin.need[1] || 'Pergunta não disponível'}</div></div>
+                <div class="spin-question"><div class="q-label">Need-Payoff 3</div><div class="q-text">${spin.need[2] || 'Pergunta não disponível'}</div></div>
+            `;
+
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => {
+                b.classList.remove('active-sdr', 'active-closer');
+            });
+            document.getElementById('tabResumoBtn').classList.add(isSDR ? 'active-sdr' : 'active-closer');
+            document.getElementById('tab-resumo').classList.add('active');
+
+            document.getElementById('sdrActions').style.display = isSDR ? 'flex' : 'none';
+            document.getElementById('closerActions').style.display = isSDR ? 'none' : 'flex';
+
+            const markBtn = document.getElementById('markReadyBtn');
+            const revertBtn = document.getElementById('revertStatusBtn');
+            if (lead.status === 'Pronto') {
+                markBtn.style.display = 'none';
+                revertBtn.style.display = 'inline-flex';
+            } else {
+                markBtn.style.display = 'inline-flex';
+                revertBtn.style.display = 'none';
+            }
+
+            const isClosed = lead.status === 'Fechado' || lead.status === 'Perdido';
+            document.querySelectorAll('.closer-actions .btn-action').forEach(btn => {
+                btn.disabled = isClosed;
+                if (isClosed) btn.style.opacity = '0.5';
+            });
+
+            detailModalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeDetailModal() {
+            detailModalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+            currentLeadId = null;
+        }
+
+        closeDetailModalBtn.addEventListener('click', closeDetailModal);
+        detailModalOverlay.addEventListener('click', function(e) {
+            if (e.target === this) closeDetailModal();
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeDetailModal();
+                closeResultModal();
+                if (document.getElementById('confirmModalOverlay').classList.contains('active')) {
+                    cancelRevert();
+                }
+                if (newLeadModal.classList.contains('active')) {
+                    closeNewLead();
+                }
+                if (editLeadModal.classList.contains('active')) {
+                    closeEditModal();
+                }
+            }
+        });
+
+        // ============================================================
+        // ABAS DO MODAL DETALHE
+        // ============================================================
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const isSDR = currentUser && currentUser.profile === 'SDR';
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active-sdr', 'active-closer'));
+                this.classList.add(isSDR ? 'active-sdr' : 'active-closer');
+                const target = this.dataset.tab;
+                document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+                document.getElementById(target).classList.add('active');
+            });
+        });
+
+        // ============================================================
+        // EVENTOS DOS BOTÕES
+        // ============================================================
+        document.getElementById('markReadyBtn').addEventListener('click', markAsReady);
+        document.getElementById('revertStatusBtn').addEventListener('click', revertStatus);
+        document.getElementById('archiveBtn').addEventListener('click', archiveLead);
+        document.getElementById('openEditBtn').addEventListener('click', function() {
+            if (currentLeadId) {
+                closeDetailModal();
+                setTimeout(() => {
+                    openEditModal(currentLeadId);
+                }, 300);
+            }
+        });
+
+        document.getElementById('statusNegotiating').addEventListener('click', function() {
+            updateLeadStatus('Em Negociação', 'Lead em negociação');
+        });
+        document.getElementById('statusWon').addEventListener('click', function() {
+            if (confirm('Confirmar que o lead foi FECHADO (GANHO)?')) {
+                updateLeadStatus('Fechado', 'Lead fechado (Ganho)');
+            }
+        });
+        document.getElementById('statusLost').addEventListener('click', function() {
+            if (confirm('Confirmar que o lead foi PERDIDO?')) {
+                updateLeadStatus('Perdido', 'Lead perdido');
+            }
+        });
+
+        // ============================================================
+        // CONFIRMAÇÃO REVERTER
+        // ============================================================
+        document.getElementById('confirmCancelBtn').addEventListener('click', cancelRevert);
+        document.getElementById('confirmRevertBtn').addEventListener('click', confirmRevertStatus);
+        document.getElementById('confirmModalOverlay').addEventListener('click', function(e) {
+            if (e.target === this) cancelRevert();
+        });
+
+        // ============================================================
+        // TELA DE LOGIN - SWITCH DE PERFIL
+        // ============================================================
+        const sliderBg = document.getElementById('sliderBg');
+        const sdrOption = document.getElementById('sdrOption');
+        const closerOption = document.getElementById('closerOption');
+        const profileBadge = document.getElementById('profileBadge');
+        const btnProfileLabel = document.getElementById('btnProfileLabel');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+
+        function setProfile(profile) {
+            selectedProfile = profile;
+            
+            sliderBg.className = `slider-bg ${profile.toLowerCase()}`;
+            sdrOption.classList.toggle('active', profile === 'SDR');
+            closerOption.classList.toggle('active', profile === 'Closer');
+            
+            profileBadge.className = `profile-badge show ${profile.toLowerCase()}`;
+            profileBadge.innerHTML = `
+                <i class="fas fa-check-circle"></i> Perfil ${profile} selecionado
+                ${profile === 'SDR' ? '(Qualifica leads)' : '(Fecha negócios)'}
+            `;
+            
+            btnProfileLabel.textContent = profile;
+            
+            const inputs = document.querySelectorAll('#loginForm input');
+            inputs.forEach(input => {
+                input.className = `border-${profile.toLowerCase()}`;
+            });
+            
+            const demoUser = DEMO_USERS.find(u => u.profile === profile);
+            if (demoUser) {
+                emailInput.placeholder = demoUser.email;
+                emailInput.value = demoUser.email;
+                passwordInput.value = demoUser.password;
+            }
+            
+            const badgeEl = document.querySelector('.profile-badge');
+            if (badgeEl) {
+                badgeEl.style.background = profile === 'SDR' ? '#e0f5f1' : '#dbeafe';
+                badgeEl.style.color = profile === 'SDR' ? '#027075' : '#1e40af';
+            }
+        }
+
+        sdrOption.addEventListener('click', () => setProfile('SDR'));
+        closerOption.addEventListener('click', () => setProfile('Closer'));
+
+        // ============================================================
+        // TELA DE LOGIN - SUBMISSÃO
+        // ============================================================
+        const loginForm = document.getElementById('loginForm');
+        const messageBox = document.getElementById('messageBox');
+        const loginBtn = document.getElementById('loginBtn');
+
+        function showMessage(text, type = 'error') {
+            messageBox.className = `message ${type}`;
+            messageBox.textContent = text;
+            clearTimeout(window.messageTimeout);
+            window.messageTimeout = setTimeout(() => {
+                messageBox.className = 'message';
+            }, 4500);
+        }
+
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const email = emailInput.value.trim();
+            const password = passwordInput.value.trim();
+
+            if (!email || !password) {
+                showMessage('Preencha todos os campos.', 'error');
+                return;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showMessage('Digite um e-mail válido.', 'error');
+                return;
+            }
+
+            const user = DEMO_USERS.find(u => u.email === email && u.password === password);
+
+            if (!user) {
+                showMessage('❌ E-mail ou senha incorretos.', 'error');
+                return;
+            }
+
+            if (user.profile !== selectedProfile) {
+                showMessage(`⚠️ Este usuário é "${user.profile}", mas você selecionou "${selectedProfile}".`, 'error');
+                return;
+            }
+
+            loginBtn.disabled = true;
+            loginBtn.innerHTML = '<span class="spinner"></span> Entrando...';
+            showMessage(`✅ Bem-vindo(a), ${user.name}!`, 'success');
+
+            setTimeout(() => {
+                login(user);
+                loginBtn.disabled = false;
+                loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Entrar como <span id="btnProfileLabel">' + selectedProfile + '</span>';
+            }, 1500);
+        });
+
+        // ============================================================
+        // EVENTOS DOS LINKS DE LOGIN
+        // ============================================================
+        document.getElementById('goToRegister').addEventListener('click', function(e) {
+            e.preventDefault();
+            showMessage('🔜 Funcionalidade de cadastro em breve!', 'success');
+        });
+
+        document.getElementById('forgotPassword').addEventListener('click', function(e) {
+            e.preventDefault();
+            showMessage('📧 Link de redefinição enviado (simulação).', 'success');
+        });
+
+        // ============================================================
+        // INICIALIZAÇÃO
+        // ============================================================
+        setProfile('SDR');
+        const sdrUser = DEMO_USERS.find(u => u.profile === 'SDR');
+        if (sdrUser) {
+            emailInput.value = sdrUser.email;
+            passwordInput.value = sdrUser.password;
+        }
+        document.getElementById('demoEmail').textContent = 'sdr@leadscope.com';
+
+        renderSDRLeads(leadsData);
+        renderCloserLeads(leadsData.filter(l => l.status === 'Pronto'));
+
+        console.log('✅ LeadScope - Sistema Completo carregado!');
+        console.log('👤 Usuários: SDR: sdr@leadscope.com | Closer: closer@leadscope.com');
+        console.log('🔑 Senha: 123456');
+        console.log('📊 Total de leads:', leadsData.length);
+        console.log('📋 Leads prontos:', leadsData.filter(l => l.status === 'Pronto').length);
+    </script>
+
+</body>
+</html>
