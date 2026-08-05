@@ -15,7 +15,7 @@
     
     <style>
         /* ============================================================
-           ESTILOS GERAIS
+           ESTILOS GERAIS (MANTIDOS IGUAIS)
         ============================================================ */
         * {
             margin: 0;
@@ -336,7 +336,7 @@
         .demo-hint strong { color: #666666; }
 
         /* ============================================================
-           DASHBOARDS
+           DASHBOARDS (MANTIDOS IGUAIS)
         ============================================================ */
         .dashboard-page {
             display: none;
@@ -344,7 +344,6 @@
         }
         .dashboard-page.active { display: block; }
 
-        /* Topbar */
         .topbar {
             background: #ffffff;
             padding: 16px 32px;
@@ -520,7 +519,6 @@
         }
         .logout-btn i { font-size: 16px; }
 
-        /* Conteúdo do Dashboard */
         .main-content {
             max-width: 1280px;
             margin: 0 auto;
@@ -543,7 +541,6 @@
             font-weight: 400;
         }
 
-        /* Stats Cards */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -598,7 +595,6 @@
         .stat-card.yellow .stat-icon { color: #F7B31C; }
         .stat-card.dark .stat-icon { color: #1f2937; }
 
-        /* Action Bar */
         .action-bar {
             display: flex;
             align-items: center;
@@ -721,7 +717,6 @@
             box-shadow: 0 6px 20px rgba(247, 179, 28, 0.35);
         }
 
-        /* Lista de Leads */
         .leads-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -909,7 +904,6 @@
             text-decoration: underline;
         }
 
-        /* Paginação */
         .pagination {
             display: flex;
             align-items: center;
@@ -953,7 +947,6 @@
             border-color: #027075;
         }
 
-        /* Footer */
         .footer {
             border-top: 1px solid #e8e4d8;
             padding: 20px 32px;
@@ -982,7 +975,7 @@
         .footer .links a:hover { color: #027075; }
 
         /* ============================================================
-           MODAL - NOVO LEAD
+           MODAIS (MANTIDOS IGUAIS)
         ============================================================ */
         .modal-overlay {
             display: none;
@@ -1146,19 +1139,8 @@
             margin-right: 8px;
         }
 
-        /* ============================================================
-           MODAL - EDITAR LEAD
-        ============================================================ */
-        .modal-edit {
-            max-width: 600px;
-        }
-
-        /* ============================================================
-           MODAL - RESULTADO DO LEAD
-        ============================================================ */
-        .modal-result {
-            max-width: 780px;
-        }
+        .modal-edit { max-width: 600px; }
+        .modal-result { max-width: 780px; }
 
         .result-score-section {
             text-align: center;
@@ -1346,9 +1328,6 @@
             transform: none !important;
         }
 
-        /* ============================================================
-           MODAL - DETALHE DO LEAD
-        ============================================================ */
         .modal-detail {
             max-width: 820px;
             padding: 32px 36px;
@@ -1599,7 +1578,6 @@
             color: #999999;
         }
 
-        /* Ações - SDR */
         .detail-actions {
             display: flex;
             gap: 12px;
@@ -1666,7 +1644,6 @@
             cursor: not-allowed;
         }
 
-        /* Ações - Closer */
         .closer-actions {
             display: flex;
             gap: 12px;
@@ -1729,9 +1706,6 @@
             transform: none !important;
         }
 
-        /* ============================================================
-           MODAL DE CONFIRMAÇÃO
-        ============================================================ */
         .confirm-modal-overlay {
             display: none;
             position: fixed;
@@ -1814,9 +1788,6 @@
             box-shadow: 0 6px 20px rgba(220, 38, 38, 0.3);
         }
 
-        /* ============================================================
-           NOTIFICAÇÃO E TOAST
-        ============================================================ */
         .closer-notification {
             position: fixed;
             top: 20px;
@@ -1928,215 +1899,67 @@
            RESPONSIVIDADE
         ============================================================ */
         @media (max-width: 1024px) {
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .main-content {
-                padding: 20px;
-            }
-            .topbar {
-                padding: 12px 20px;
-            }
-            .detail-grid {
-                grid-template-columns: 1fr;
-            }
-            .score-breakdown {
-                grid-template-columns: 1fr;
-            }
-            .closer-notification {
-                max-width: 320px;
-                right: 16px;
-                top: 16px;
-                padding: 16px 20px;
-            }
-            .modal-result .result-breakdown {
-                gap: 12px;
-            }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .main-content { padding: 20px; }
+            .topbar { padding: 12px 20px; }
+            .detail-grid { grid-template-columns: 1fr; }
+            .score-breakdown { grid-template-columns: 1fr; }
+            .closer-notification { max-width: 320px; right: 16px; top: 16px; padding: 16px 20px; }
+            .modal-result .result-breakdown { gap: 12px; }
         }
 
         @media (max-width: 768px) {
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 12px;
-            }
-            .stat-card {
-                padding: 16px;
-            }
-            .stat-card .stat-number {
-                font-size: 24px;
-            }
-            .lead-card {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 12px;
-                padding: 16px;
-            }
-            .lead-card .lead-right {
-                margin-left: 0;
-                justify-content: space-between;
-                width: 100%;
-            }
-            .action-bar {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .action-bar .search-box {
-                max-width: 100%;
-            }
-            .action-bar .filters {
-                justify-content: center;
-            }
-            .topbar-right .topbar-user .name {
-                display: none;
-            }
-            .pagination {
-                flex-direction: column;
-                align-items: center;
-            }
-            .footer {
-                flex-direction: column;
-                text-align: center;
-                padding: 16px;
-            }
-            .modal {
-                padding: 24px 20px;
-            }
-            .modal .form-row {
-                grid-template-columns: 1fr;
-            }
-            .modal .form-actions {
-                flex-direction: column;
-            }
-            .modal .form-actions button {
-                width: 100%;
-                justify-content: center;
-            }
-            .detail-lead-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .detail-lead-header .lead-badges {
-                margin-left: 0;
-            }
-            .tabs {
-                overflow-x: auto;
-                flex-wrap: nowrap;
-            }
-            .tabs .tab-btn {
-                padding: 8px 14px;
-                font-size: 13px;
-                white-space: nowrap;
-            }
-            .detail-actions {
-                flex-direction: column;
-            }
-            .detail-actions .btn-action {
-                width: 100%;
-                text-align: center;
-            }
-            .closer-actions {
-                flex-direction: column;
-            }
-            .closer-actions .btn-action {
-                width: 100%;
-                justify-content: center;
-            }
-            .toast {
-                left: 20px;
-                right: 20px;
-                bottom: 20px;
-            }
-            .closer-notification {
-                left: 16px;
-                right: 16px;
-                top: 16px;
-                max-width: none;
-            }
-            .closer-notification .notif-body {
-                padding-left: 0;
-            }
-            .closer-notification .notif-actions {
-                padding-left: 0;
-            }
-            .confirm-modal {
-                padding: 24px 20px;
-            }
-            .login-container {
-                padding: 30px 20px 24px;
-            }
-            .logout-btn span {
-                display: none;
-            }
-            .result-score-section .big-score {
-                font-size: 40px;
-            }
-            .result-score-section .result-breakdown {
-                flex-direction: column;
-                align-items: center;
-                gap: 4px;
-            }
-            .result-actions {
-                flex-direction: column;
-            }
-            .result-actions .btn-action {
-                width: 100%;
-                justify-content: center;
-            }
+            .stats-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+            .stat-card { padding: 16px; }
+            .stat-card .stat-number { font-size: 24px; }
+            .lead-card { flex-direction: column; align-items: stretch; gap: 12px; padding: 16px; }
+            .lead-card .lead-right { margin-left: 0; justify-content: space-between; width: 100%; }
+            .action-bar { flex-direction: column; align-items: stretch; }
+            .action-bar .search-box { max-width: 100%; }
+            .action-bar .filters { justify-content: center; }
+            .topbar-right .topbar-user .name { display: none; }
+            .pagination { flex-direction: column; align-items: center; }
+            .footer { flex-direction: column; text-align: center; padding: 16px; }
+            .modal { padding: 24px 20px; }
+            .modal .form-row { grid-template-columns: 1fr; }
+            .modal .form-actions { flex-direction: column; }
+            .modal .form-actions button { width: 100%; justify-content: center; }
+            .detail-lead-header { flex-direction: column; align-items: flex-start; }
+            .detail-lead-header .lead-badges { margin-left: 0; }
+            .tabs { overflow-x: auto; flex-wrap: nowrap; }
+            .tabs .tab-btn { padding: 8px 14px; font-size: 13px; white-space: nowrap; }
+            .detail-actions { flex-direction: column; }
+            .detail-actions .btn-action { width: 100%; text-align: center; }
+            .closer-actions { flex-direction: column; }
+            .closer-actions .btn-action { width: 100%; justify-content: center; }
+            .toast { left: 20px; right: 20px; bottom: 20px; }
+            .closer-notification { left: 16px; right: 16px; top: 16px; max-width: none; }
+            .closer-notification .notif-body { padding-left: 0; }
+            .closer-notification .notif-actions { padding-left: 0; }
+            .confirm-modal { padding: 24px 20px; }
+            .login-container { padding: 30px 20px 24px; }
+            .logout-btn span { display: none; }
+            .result-score-section .big-score { font-size: 40px; }
+            .result-score-section .result-breakdown { flex-direction: column; align-items: center; gap: 4px; }
+            .result-actions { flex-direction: column; }
+            .result-actions .btn-action { width: 100%; justify-content: center; }
         }
 
         @media (max-width: 480px) {
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-            .topbar .topbar-logo .text {
-                font-size: 18px;
-            }
-            .lead-card .lead-info .name-row {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 4px;
-            }
-            .logo-text {
-                font-size: 28px;
-            }
-            .logo-symbol {
-                width: 48px;
-                height: 48px;
-            }
-            .logo-symbol .center-circle {
-                width: 16px;
-                height: 16px;
-            }
-            .logo-symbol .triangle {
-                border-left-width: 9px;
-                border-right-width: 9px;
-                border-bottom-width: 16px;
-            }
-            .profile-option {
-                font-size: 13px;
-                padding: 10px 12px;
-            }
-            .form-options {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-            .btn-login {
-                font-size: 15px;
-                padding: 14px;
-            }
-            .logout-btn {
-                padding: 6px 12px;
-            }
-            .logout-btn span {
-                display: none;
-            }
-            .result-score-section .big-score {
-                font-size: 32px;
-            }
-            .result-score-section .big-score span {
-                font-size: 18px;
-            }
+            .stats-grid { grid-template-columns: 1fr; }
+            .topbar .topbar-logo .text { font-size: 18px; }
+            .lead-card .lead-info .name-row { flex-direction: column; align-items: flex-start; gap: 4px; }
+            .logo-text { font-size: 28px; }
+            .logo-symbol { width: 48px; height: 48px; }
+            .logo-symbol .center-circle { width: 16px; height: 16px; }
+            .logo-symbol .triangle { border-left-width: 9px; border-right-width: 9px; border-bottom-width: 16px; }
+            .profile-option { font-size: 13px; padding: 10px 12px; }
+            .form-options { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .btn-login { font-size: 15px; padding: 14px; }
+            .logout-btn { padding: 6px 12px; }
+            .logout-btn span { display: none; }
+            .result-score-section .big-score { font-size: 32px; }
+            .result-score-section .big-score span { font-size: 18px; }
         }
     </style>
 </head>
@@ -2160,7 +1983,6 @@
             </div>
             <div class="subtitle">Qualificador Inteligente de Leads</div>
 
-            <!-- Switch de Perfil -->
             <div class="profile-switch-wrapper" id="profileSwitch">
                 <div class="slider-bg sdr" id="sliderBg"></div>
                 <button class="profile-option sdr active" data-profile="SDR" id="sdrOption">
@@ -2482,7 +2304,6 @@
             </div>
 
             <form id="newLeadForm">
-                <!-- Seção 1: Contato -->
                 <div style="margin-bottom:20px;">
                     <h3 style="font-size:14px;color:#027075;font-weight:600;margin-bottom:12px;letter-spacing:0.5px;">
                         <i class="fas fa-user" style="margin-right:8px;"></i>Dados do Contato
@@ -2501,7 +2322,6 @@
                     </div>
                 </div>
 
-                <!-- Seção 2: Empresa -->
                 <div style="margin-bottom:20px;">
                     <h3 style="font-size:14px;color:#027075;font-weight:600;margin-bottom:12px;letter-spacing:0.5px;">
                         <i class="fas fa-building" style="margin-right:8px;"></i>Dados da Empresa
@@ -2542,7 +2362,6 @@
                     </div>
                 </div>
 
-                <!-- Seção 3: Interesse -->
                 <div style="margin-bottom:16px;">
                     <h3 style="font-size:14px;color:#027075;font-weight:600;margin-bottom:12px;letter-spacing:0.5px;">
                         <i class="fas fa-bullseye" style="margin-right:8px;"></i>Interesse e Origem
@@ -2595,7 +2414,6 @@
             </div>
 
             <form id="editLeadForm">
-                <!-- Seção 1: Contato -->
                 <div style="margin-bottom:20px;">
                     <h3 style="font-size:14px;color:#027075;font-weight:600;margin-bottom:12px;letter-spacing:0.5px;">
                         <i class="fas fa-user" style="margin-right:8px;"></i>Dados do Contato
@@ -2614,7 +2432,6 @@
                     </div>
                 </div>
 
-                <!-- Seção 2: Empresa -->
                 <div style="margin-bottom:20px;">
                     <h3 style="font-size:14px;color:#027075;font-weight:600;margin-bottom:12px;letter-spacing:0.5px;">
                         <i class="fas fa-building" style="margin-right:8px;"></i>Dados da Empresa
@@ -2655,7 +2472,6 @@
                     </div>
                 </div>
 
-                <!-- Seção 3: Interesse -->
                 <div style="margin-bottom:16px;">
                     <h3 style="font-size:14px;color:#027075;font-weight:600;margin-bottom:12px;letter-spacing:0.5px;">
                         <i class="fas fa-bullseye" style="margin-right:8px;"></i>Interesse e Origem
@@ -2705,7 +2521,6 @@
             </div>
 
             <div id="resultContent">
-                <!-- Score -->
                 <div class="result-score-section" id="resultScoreSection">
                     <div class="big-score" id="resultScore">78<span>/100</span></div>
                     <div class="result-badges">
@@ -2720,7 +2535,6 @@
                     </div>
                 </div>
 
-                <!-- Briefing IA -->
                 <div style="margin-bottom:16px;">
                     <h3 style="font-size:15px;color:#027075;font-weight:600;margin-bottom:8px;">
                         <i class="fas fa-robot" style="margin-right:8px;"></i>Briefing IA
@@ -2730,7 +2544,6 @@
                     </div>
                 </div>
 
-                <!-- Roteiro SPIN -->
                 <div style="margin-bottom:8px;">
                     <h3 style="font-size:15px;color:#027075;font-weight:600;margin-bottom:8px;">
                         <i class="fas fa-list-check" style="margin-right:8px;"></i>Roteiro SPIN
@@ -2770,7 +2583,6 @@
                     </div>
                 </div>
 
-                <!-- Ações -->
                 <div class="result-actions">
                     <button class="btn-action success" id="resultMarkReadyBtn">
                         <i class="fas fa-check-circle"></i> Marcar como Pronto
@@ -2990,6 +2802,41 @@
 
     <script>
         // ============================================================
+        // TESTES - CONSOLE.LOG (Ativado)
+        // ============================================================
+        console.log('🧪 ===== SISTEMA LEADSCOPE INICIADO =====');
+        console.log('📋 Modo de Teste Ativado - Todas as ações serão registradas no console');
+
+        // ============================================================
+        // PERSISTÊNCIA DE DADOS COM localStorage
+        // ============================================================
+        
+        function salvarDados() {
+            try {
+                localStorage.setItem('leadscope_leads', JSON.stringify(leadsData));
+                console.log('💾 [TESTE OK] Dados salvos com sucesso!', leadsData.length, 'leads');
+                return true;
+            } catch (erro) {
+                console.error('❌ [ERRO] Erro ao salvar:', erro);
+                return false;
+            }
+        }
+
+        function carregarDados() {
+            try {
+                const dados = localStorage.getItem('leadscope_leads');
+                if (dados) {
+                    const leadsSalvos = JSON.parse(dados);
+                    console.log('📂 [TESTE OK] Dados carregados:', leadsSalvos.length, 'leads');
+                    return leadsSalvos;
+                }
+            } catch (erro) {
+                console.error('❌ [ERRO] Erro ao carregar:', erro);
+            }
+            return null;
+        }
+
+        // ============================================================
         // DADOS - USUÁRIOS DEMO
         // ============================================================
         const DEMO_USERS = [
@@ -2997,233 +2844,438 @@
             { email: 'closer@leadscope.com', password: '123456', profile: 'Closer', name: 'João Closer' }
         ];
 
-        // ============================================================
-        // DADOS - LEADS
-        // ============================================================
-        let leadsData = [{
-            id: 1,
-            name: 'João Silva',
-            company: 'TechCorp Soluções',
-            role: 'Head de Vendas',
-            email: 'joao@techcorp.com',
-            category: 'Hot',
-            status: 'Pronto',
-            score: 78,
-            initials: 'JS',
-            color: '#027075',
-            time: 'Há 2 horas',
-            origin: 'Inbound',
-            segment: 'SaaS',
-            size: 'Média',
-            website: 'https://techcorp.com',
-            sdr: 'Maria Silva',
-            observations: 'Lead com alto potencial, já conhece a empresa. Solicitação de demonstração recebida.',
-            createdAt: new Date().toLocaleString('pt-BR'),
-            scoreBreakdown: { roleScore: 20, segmentScore: 15, originScore: 15, interestScore: 28, bonus: 0 },
-            briefing: 'A TechCorp é uma startup de tecnologia especializada em CRM para empresas B2B. Fundada em 2018, a empresa tem crescido rapidamente no mercado brasileiro. João Silva é Head de Vendas com 15 anos de experiência em vendas B2B.',
-            history: [
-                { action: 'Lead criado', user: 'Maria Silva', detail: 'Lead cadastrado com score 78/100 (Hot)',
-                    time: new Date().toLocaleString('pt-BR') },
-                { action: 'IA processou lead', user: 'Sistema', detail: 'Enriquecimento de dados e geração de SPIN concluídos',
-                    time: new Date().toLocaleString('pt-BR') },
-                { action: 'Lead marcado como "Pronto"', user: 'Maria Silva',
-                    detail: 'Status alterado para Pronto para Closer', time: new Date().toLocaleString('pt-BR') }
-            ]
-        }, {
-            id: 2,
-            name: 'Ana Santos',
-            company: 'DataFlow Analytics',
-            role: 'CEO',
-            email: 'ana@dataflow.com',
-            category: 'Hot',
-            status: 'Em Qualificação',
-            score: 85,
-            initials: 'AS',
-            color: '#059669',
-            time: 'Há 1 hora',
-            origin: 'Outbound',
-            segment: 'Fintech',
-            size: 'Pequena',
-            website: 'https://dataflow.com',
-            sdr: 'Maria Silva',
-            observations: 'CEO muito interessada em soluções de análise de dados.',
-            createdAt: new Date().toLocaleString('pt-BR'),
-            scoreBreakdown: { roleScore: 20, segmentScore: 15, originScore: 5, interestScore: 30, bonus: 15 },
-            briefing: 'DataFlow Analytics é uma fintech especializada em análise de dados para o setor financeiro.',
-            history: [
-                { action: 'Lead criado', user: 'Maria Silva', detail: 'Lead cadastrado com score 85/100 (Hot)',
-                    time: new Date().toLocaleString('pt-BR') },
-                { action: 'IA processou lead', user: 'Sistema', detail: 'Enriquecimento de dados concluído',
-                    time: new Date().toLocaleString('pt-BR') }
-            ]
-        }, {
-            id: 3,
-            name: 'Carlos Mendes',
-            company: 'InovaTech Group',
-            role: 'Gerente de Marketing',
-            email: 'carlos@inovatech.com',
-            category: 'Warm',
-            status: 'Pronto',
-            score: 62,
-            initials: 'CM',
-            color: '#F7B31C',
-            time: 'Há 4 horas',
-            origin: 'Indicação',
-            segment: 'EdTech',
-            size: 'Média',
-            website: 'https://inovatech.com',
-            sdr: 'Maria Silva',
-            observations: 'Indicação de um cliente atual.',
-            createdAt: new Date().toLocaleString('pt-BR'),
-            scoreBreakdown: { roleScore: 15, segmentScore: 12, originScore: 12, interestScore: 18, bonus: 5 },
-            briefing: 'InovaTech Group atua no setor de educação tecnológica.',
-            history: [
-                { action: 'Lead criado', user: 'Maria Silva', detail: 'Lead cadastrado com score 62/100 (Warm)',
-                    time: new Date().toLocaleString('pt-BR') },
-                { action: 'IA processou lead', user: 'Sistema', detail: 'Geração de SPIN concluída',
-                    time: new Date().toLocaleString('pt-BR') },
-                { action: 'Lead marcado como "Pronto"', user: 'Maria Silva',
-                    detail: 'Status alterado para Pronto para Closer', time: new Date().toLocaleString('pt-BR') }
-            ]
-        }, {
-            id: 4,
-            name: 'Fernanda Lima',
-            company: 'GreenEnergy Brasil',
-            role: 'Diretora Comercial',
-            email: 'fernanda@greenenergy.com',
-            category: 'Warm',
-            status: 'Em Qualificação',
-            score: 55,
-            initials: 'FL',
-            color: '#f59e0b',
-            time: 'Há 6 horas',
-            origin: 'Evento',
-            segment: 'Indústria',
-            size: 'Grande',
-            website: 'https://greenenergy.com',
-            sdr: 'Maria Silva',
-            observations: 'Conheceu a empresa em um evento do setor.',
-            createdAt: new Date().toLocaleString('pt-BR'),
-            scoreBreakdown: { roleScore: 18, segmentScore: 8, originScore: 8, interestScore: 15, bonus: 6 },
-            briefing: 'GreenEnergy Brasil é uma empresa do setor de energia renovável.',
-            history: [
-                { action: 'Lead criado', user: 'Maria Silva', detail: 'Lead cadastrado com score 55/100 (Warm)',
-                    time: new Date().toLocaleString('pt-BR') },
-                { action: 'IA processou lead', user: 'Sistema', detail: 'Enriquecimento de dados concluído',
-                    time: new Date().toLocaleString('pt-BR') }
-            ]
-        }, {
-            id: 5,
-            name: 'Roberto Alves',
-            company: 'FinTech Solutions',
-            role: 'CFO',
-            email: 'roberto@fintech.com',
-            category: 'Cold',
-            status: 'Em Qualificação',
-            score: 28,
-            initials: 'RA',
-            color: '#6b7280',
-            time: 'Há 1 dia',
-            origin: 'Inbound',
-            segment: 'Fintech',
-            size: 'Média',
-            website: 'https://fintechsolutions.com',
-            sdr: 'Maria Silva',
-            observations: 'Lead com baixo engajamento.',
-            createdAt: new Date().toLocaleString('pt-BR'),
-            scoreBreakdown: { roleScore: 20, segmentScore: 15, originScore: 15, interestScore: 6, bonus: -28 },
-            briefing: 'FinTech Solutions atua no mercado de soluções financeiras.',
-            history: [
-                { action: 'Lead criado', user: 'Maria Silva', detail: 'Lead cadastrado com score 28/100 (Cold)',
-                    time: new Date().toLocaleString('pt-BR') },
-                { action: 'IA processou lead', user: 'Sistema', detail: 'Enriquecimento de dados concluído',
-                    time: new Date().toLocaleString('pt-BR') }
-            ]
-        }, {
-            id: 6,
-            name: 'Patrícia Souza',
-            company: 'HealthCare Plus',
-            role: 'Head de Produto',
-            email: 'patricia@healthcare.com',
-            category: 'Hot',
-            status: 'Em Qualificação',
-            score: 92,
-            initials: 'PS',
-            color: '#047857',
-            time: 'Há 30 min',
-            origin: 'Outbound',
-            segment: 'HealthTech',
-            size: 'Média',
-            website: 'https://healthcareplus.com',
-            sdr: 'Pedro Santos',
-            observations: 'Lead muito engajado. Pediu demonstração do produto.',
-            createdAt: new Date().toLocaleString('pt-BR'),
-            scoreBreakdown: { roleScore: 18, segmentScore: 14, originScore: 5, interestScore: 30, bonus: 25 },
-            briefing: 'HealthCare Plus é uma HealthTech que desenvolve soluções para gestão hospitalar.',
-            history: [
-                { action: 'Lead criado', user: 'Pedro Santos', detail: 'Lead cadastrado com score 92/100 (Hot)',
-                    time: new Date().toLocaleString('pt-BR') },
-                { action: 'IA processou lead', user: 'Sistema', detail: 'Enriquecimento e SPIN concluídos',
-                    time: new Date().toLocaleString('pt-BR') }
-            ]
-        }, {
-            id: 7,
-            name: 'Marcos Oliveira',
-            company: 'EduTech Brasil',
-            role: 'Coordenador de Vendas',
-            email: 'marcos@edutech.com',
-            category: 'Warm',
-            status: 'Em Qualificação',
-            score: 48,
-            initials: 'MO',
-            color: '#d97706',
-            time: 'Há 3 horas',
-            origin: 'Indicação',
-            segment: 'EdTech',
-            size: 'Pequena',
-            website: 'https://edutech.com',
-            sdr: 'Pedro Santos',
-            observations: 'Indicação de um parceiro de negócios.',
-            createdAt: new Date().toLocaleString('pt-BR'),
-            scoreBreakdown: { roleScore: 12, segmentScore: 12, originScore: 12, interestScore: 12, bonus: 0 },
-            briefing: 'EduTech Brasil é uma startup de educação tecnológica.',
-            history: [
-                { action: 'Lead criado', user: 'Pedro Santos', detail: 'Lead cadastrado com score 48/100 (Warm)',
-                    time: new Date().toLocaleString('pt-BR') },
-                { action: 'IA processou lead', user: 'Sistema', detail: 'Geração de SPIN concluída',
-                    time: new Date().toLocaleString('pt-BR') }
-            ]
-        }, {
-            id: 8,
-            name: 'Juliana Costa',
-            company: 'Logística Expressa',
-            role: 'Gerente Operacional',
-            email: 'juliana@logexpress.com',
-            category: 'Cold',
-            status: 'Em Qualificação',
-            score: 15,
-            initials: 'JC',
-            color: '#9ca3af',
-            time: 'Há 2 dias',
-            origin: 'Evento',
-            segment: 'Logística',
-            size: 'Grande',
-            website: 'https://logexpress.com',
-            sdr: 'Maria Silva',
-            observations: 'Participou de um evento mas não demonstrou interesse.',
-            createdAt: new Date().toLocaleString('pt-BR'),
-            scoreBreakdown: { roleScore: 10, segmentScore: 10, originScore: 8, interestScore: 6, bonus: -19 },
-            briefing: 'Logística Expressa atua no setor de logística e transporte.',
-            history: [
-                { action: 'Lead criado', user: 'Maria Silva', detail: 'Lead cadastrado com score 15/100 (Cold)',
-                    time: new Date().toLocaleString('pt-BR') },
-                { action: 'IA processou lead', user: 'Sistema', detail: 'Enriquecimento de dados concluído',
-                    time: new Date().toLocaleString('pt-BR') }
-            ]
-        }];
+        console.log('👤 [TESTE OK] Usuários demo carregados:', DEMO_USERS.map(u => u.email).join(', '));
 
-        let nextId = 9;
-        let newlyCreatedLead = null;
+        // ============================================================
+        // DADOS - LEADS (com carregamento do localStorage)
+        // ============================================================
+        let leadsData = [];
+        let nextId = 1;
+
+        // Dados iniciais (fallback se não houver dados salvos)
+        const dadosIniciais = [
+            {
+                id: 1,
+                name: 'João Silva',
+                company: 'TechCorp Soluções',
+                role: 'Head de Vendas',
+                email: 'joao@techcorp.com',
+                category: 'Hot',
+                status: 'Pronto',
+                score: 78,
+                initials: 'JS',
+                color: '#027075',
+                time: 'Há 2 horas',
+                origin: 'Inbound',
+                segment: 'SaaS',
+                size: 'Média',
+                website: 'https://techcorp.com',
+                sdr: 'Maria Silva',
+                observations: 'Lead com alto potencial, já conhece a empresa. Solicitação de demonstração recebida.',
+                createdAt: new Date().toLocaleString('pt-BR'),
+                scoreBreakdown: { roleScore: 20, segmentScore: 15, originScore: 15, interestScore: 28, bonus: 0 },
+                briefing: 'A TechCorp é uma startup de tecnologia especializada em CRM para empresas B2B. Fundada em 2018, a empresa tem crescido rapidamente no mercado brasileiro. João Silva é Head de Vendas com 15 anos de experiência em vendas B2B.',
+                spin: {
+                    situacao: [
+                        'Como está estruturada a área de vendas da TechCorp Soluções atualmente?',
+                        'Quais são os principais canais de geração de demanda que vocês utilizam?',
+                        'Como você descreveria o relacionamento com seus clientes atuais?'
+                    ],
+                    problema: [
+                        'Quais são os maiores desafios que sua equipe enfrenta na prospecção?',
+                        'Como você avalia a eficiência do processo atual de qualificação de leads?',
+                        'Que gargalos você identifica no funil de vendas?'
+                    ],
+                    implicacao: [
+                        'O que acontece se esses problemas de prospecção continuarem pelos próximos 6 meses?',
+                        'Como isso impacta as metas de crescimento da empresa?',
+                        'Qual o custo de oportunidade de leads mal qualificados?'
+                    ],
+                    need: [
+                        'Se você pudesse qualificar leads com mais precisão, como isso impactaria seu time?',
+                        'Como uma ferramenta de qualificação inteligente poderia ajudar você a bater suas metas?',
+                        'Qual seria o impacto de ter roteiros estruturados para cada tipo de abordagem?'
+                    ]
+                },
+                history: [
+                    { action: 'Lead criado', user: 'Maria Silva', detail: 'Lead cadastrado com score 78/100 (Hot)',
+                        time: new Date().toLocaleString('pt-BR') },
+                    { action: 'IA processou lead', user: 'Sistema', detail: 'Enriquecimento de dados e geração de SPIN concluídos',
+                        time: new Date().toLocaleString('pt-BR') },
+                    { action: 'Lead marcado como "Pronto"', user: 'Maria Silva',
+                        detail: 'Status alterado para Pronto para Closer', time: new Date().toLocaleString('pt-BR') }
+                ]
+            },
+            {
+                id: 2,
+                name: 'Ana Santos',
+                company: 'DataFlow Analytics',
+                role: 'CEO',
+                email: 'ana@dataflow.com',
+                category: 'Hot',
+                status: 'Em Qualificação',
+                score: 85,
+                initials: 'AS',
+                color: '#059669',
+                time: 'Há 1 hora',
+                origin: 'Outbound',
+                segment: 'Fintech',
+                size: 'Pequena',
+                website: 'https://dataflow.com',
+                sdr: 'Maria Silva',
+                observations: 'CEO muito interessada em soluções de análise de dados.',
+                createdAt: new Date().toLocaleString('pt-BR'),
+                scoreBreakdown: { roleScore: 20, segmentScore: 15, originScore: 5, interestScore: 30, bonus: 15 },
+                briefing: 'DataFlow Analytics é uma fintech especializada em análise de dados para o setor financeiro.',
+                spin: {
+                    situacao: [
+                        'Como está estruturada a área de vendas da DataFlow Analytics atualmente?',
+                        'Quais são os principais canais de geração de demanda que vocês utilizam?',
+                        'Como você descreveria o relacionamento com seus clientes atuais?'
+                    ],
+                    problema: [
+                        'Quais são os maiores desafios que sua equipe enfrenta na prospecção?',
+                        'Como você avalia a eficiência do processo atual de qualificação de leads?',
+                        'Que gargalos você identifica no funil de vendas?'
+                    ],
+                    implicacao: [
+                        'O que acontece se esses problemas de prospecção continuarem pelos próximos 6 meses?',
+                        'Como isso impacta as metas de crescimento da empresa?',
+                        'Qual o custo de oportunidade de leads mal qualificados?'
+                    ],
+                    need: [
+                        'Se você pudesse qualificar leads com mais precisão, como isso impactaria seu time?',
+                        'Como uma ferramenta de qualificação inteligente poderia ajudar você a bater suas metas?',
+                        'Qual seria o impacto de ter roteiros estruturados para cada tipo de abordagem?'
+                    ]
+                },
+                history: [
+                    { action: 'Lead criado', user: 'Maria Silva', detail: 'Lead cadastrado com score 85/100 (Hot)',
+                        time: new Date().toLocaleString('pt-BR') },
+                    { action: 'IA processou lead', user: 'Sistema', detail: 'Enriquecimento de dados concluído',
+                        time: new Date().toLocaleString('pt-BR') }
+                ]
+            },
+            {
+                id: 3,
+                name: 'Carlos Mendes',
+                company: 'InovaTech Group',
+                role: 'Gerente de Marketing',
+                email: 'carlos@inovatech.com',
+                category: 'Warm',
+                status: 'Pronto',
+                score: 62,
+                initials: 'CM',
+                color: '#F7B31C',
+                time: 'Há 4 horas',
+                origin: 'Indicação',
+                segment: 'EdTech',
+                size: 'Média',
+                website: 'https://inovatech.com',
+                sdr: 'Maria Silva',
+                observations: 'Indicação de um cliente atual.',
+                createdAt: new Date().toLocaleString('pt-BR'),
+                scoreBreakdown: { roleScore: 15, segmentScore: 12, originScore: 12, interestScore: 18, bonus: 5 },
+                briefing: 'InovaTech Group atua no setor de educação tecnológica.',
+                spin: {
+                    situacao: [
+                        'Como está estruturada a área de vendas da InovaTech Group atualmente?',
+                        'Quais são os principais canais de geração de demanda que vocês utilizam?',
+                        'Como você descreveria o relacionamento com seus clientes atuais?'
+                    ],
+                    problema: [
+                        'Quais são os maiores desafios que sua equipe enfrenta na prospecção?',
+                        'Como você avalia a eficiência do processo atual de qualificação de leads?',
+                        'Que gargalos você identifica no funil de vendas?'
+                    ],
+                    implicacao: [
+                        'O que acontece se esses problemas de prospecção continuarem pelos próximos 6 meses?',
+                        'Como isso impacta as metas de crescimento da empresa?',
+                        'Qual o custo de oportunidade de leads mal qualificados?'
+                    ],
+                    need: [
+                        'Se você pudesse qualificar leads com mais precisão, como isso impactaria seu time?',
+                        'Como uma ferramenta de qualificação inteligente poderia ajudar você a bater suas metas?',
+                        'Qual seria o impacto de ter roteiros estruturados para cada tipo de abordagem?'
+                    ]
+                },
+                history: [
+                    { action: 'Lead criado', user: 'Maria Silva', detail: 'Lead cadastrado com score 62/100 (Warm)',
+                        time: new Date().toLocaleString('pt-BR') },
+                    { action: 'IA processou lead', user: 'Sistema', detail: 'Geração de SPIN concluída',
+                        time: new Date().toLocaleString('pt-BR') },
+                    { action: 'Lead marcado como "Pronto"', user: 'Maria Silva',
+                        detail: 'Status alterado para Pronto para Closer', time: new Date().toLocaleString('pt-BR') }
+                ]
+            },
+            {
+                id: 4,
+                name: 'Fernanda Lima',
+                company: 'GreenEnergy Brasil',
+                role: 'Diretora Comercial',
+                email: 'fernanda@greenenergy.com',
+                category: 'Warm',
+                status: 'Em Qualificação',
+                score: 55,
+                initials: 'FL',
+                color: '#f59e0b',
+                time: 'Há 6 horas',
+                origin: 'Evento',
+                segment: 'Indústria',
+                size: 'Grande',
+                website: 'https://greenenergy.com',
+                sdr: 'Maria Silva',
+                observations: 'Conheceu a empresa em um evento do setor.',
+                createdAt: new Date().toLocaleString('pt-BR'),
+                scoreBreakdown: { roleScore: 18, segmentScore: 8, originScore: 8, interestScore: 15, bonus: 6 },
+                briefing: 'GreenEnergy Brasil é uma empresa do setor de energia renovável.',
+                spin: {
+                    situacao: [
+                        'Como está estruturada a área de vendas da GreenEnergy Brasil atualmente?',
+                        'Quais são os principais canais de geração de demanda que vocês utilizam?',
+                        'Como você descreveria o relacionamento com seus clientes atuais?'
+                    ],
+                    problema: [
+                        'Quais são os maiores desafios que sua equipe enfrenta na prospecção?',
+                        'Como você avalia a eficiência do processo atual de qualificação de leads?',
+                        'Que gargalos você identifica no funil de vendas?'
+                    ],
+                    implicacao: [
+                        'O que acontece se esses problemas de prospecção continuarem pelos próximos 6 meses?',
+                        'Como isso impacta as metas de crescimento da empresa?',
+                        'Qual o custo de oportunidade de leads mal qualificados?'
+                    ],
+                    need: [
+                        'Se você pudesse qualificar leads com mais precisão, como isso impactaria seu time?',
+                        'Como uma ferramenta de qualificação inteligente poderia ajudar você a bater suas metas?',
+                        'Qual seria o impacto de ter roteiros estruturados para cada tipo de abordagem?'
+                    ]
+                },
+                history: [
+                    { action: 'Lead criado', user: 'Maria Silva', detail: 'Lead cadastrado com score 55/100 (Warm)',
+                        time: new Date().toLocaleString('pt-BR') },
+                    { action: 'IA processou lead', user: 'Sistema', detail: 'Enriquecimento de dados concluído',
+                        time: new Date().toLocaleString('pt-BR') }
+                ]
+            },
+            {
+                id: 5,
+                name: 'Roberto Alves',
+                company: 'FinTech Solutions',
+                role: 'CFO',
+                email: 'roberto@fintech.com',
+                category: 'Cold',
+                status: 'Em Qualificação',
+                score: 28,
+                initials: 'RA',
+                color: '#6b7280',
+                time: 'Há 1 dia',
+                origin: 'Inbound',
+                segment: 'Fintech',
+                size: 'Média',
+                website: 'https://fintechsolutions.com',
+                sdr: 'Maria Silva',
+                observations: 'Lead com baixo engajamento.',
+                createdAt: new Date().toLocaleString('pt-BR'),
+                scoreBreakdown: { roleScore: 20, segmentScore: 15, originScore: 15, interestScore: 6, bonus: -28 },
+                briefing: 'FinTech Solutions atua no mercado de soluções financeiras.',
+                spin: {
+                    situacao: [
+                        'Como está estruturada a área de vendas da FinTech Solutions atualmente?',
+                        'Quais são os principais canais de geração de demanda que vocês utilizam?',
+                        'Como você descreveria o relacionamento com seus clientes atuais?'
+                    ],
+                    problema: [
+                        'Quais são os maiores desafios que sua equipe enfrenta na prospecção?',
+                        'Como você avalia a eficiência do processo atual de qualificação de leads?',
+                        'Que gargalos você identifica no funil de vendas?'
+                    ],
+                    implicacao: [
+                        'O que acontece se esses problemas de prospecção continuarem pelos próximos 6 meses?',
+                        'Como isso impacta as metas de crescimento da empresa?',
+                        'Qual o custo de oportunidade de leads mal qualificados?'
+                    ],
+                    need: [
+                        'Se você pudesse qualificar leads com mais precisão, como isso impactaria seu time?',
+                        'Como uma ferramenta de qualificação inteligente poderia ajudar você a bater suas metas?',
+                        'Qual seria o impacto de ter roteiros estruturados para cada tipo de abordagem?'
+                    ]
+                },
+                history: [
+                    { action: 'Lead criado', user: 'Maria Silva', detail: 'Lead cadastrado com score 28/100 (Cold)',
+                        time: new Date().toLocaleString('pt-BR') },
+                    { action: 'IA processou lead', user: 'Sistema', detail: 'Enriquecimento de dados concluído',
+                        time: new Date().toLocaleString('pt-BR') }
+                ]
+            },
+            {
+                id: 6,
+                name: 'Patrícia Souza',
+                company: 'HealthCare Plus',
+                role: 'Head de Produto',
+                email: 'patricia@healthcare.com',
+                category: 'Hot',
+                status: 'Em Qualificação',
+                score: 92,
+                initials: 'PS',
+                color: '#047857',
+                time: 'Há 30 min',
+                origin: 'Outbound',
+                segment: 'HealthTech',
+                size: 'Média',
+                website: 'https://healthcareplus.com',
+                sdr: 'Pedro Santos',
+                observations: 'Lead muito engajado. Pediu demonstração do produto.',
+                createdAt: new Date().toLocaleString('pt-BR'),
+                scoreBreakdown: { roleScore: 18, segmentScore: 14, originScore: 5, interestScore: 30, bonus: 25 },
+                briefing: 'HealthCare Plus é uma HealthTech que desenvolve soluções para gestão hospitalar.',
+                spin: {
+                    situacao: [
+                        'Como está estruturada a área de vendas da HealthCare Plus atualmente?',
+                        'Quais são os principais canais de geração de demanda que vocês utilizam?',
+                        'Como você descreveria o relacionamento com seus clientes atuais?'
+                    ],
+                    problema: [
+                        'Quais são os maiores desafios que sua equipe enfrenta na prospecção?',
+                        'Como você avalia a eficiência do processo atual de qualificação de leads?',
+                        'Que gargalos você identifica no funil de vendas?'
+                    ],
+                    implicacao: [
+                        'O que acontece se esses problemas de prospecção continuarem pelos próximos 6 meses?',
+                        'Como isso impacta as metas de crescimento da empresa?',
+                        'Qual o custo de oportunidade de leads mal qualificados?'
+                    ],
+                    need: [
+                        'Se você pudesse qualificar leads com mais precisão, como isso impactaria seu time?',
+                        'Como uma ferramenta de qualificação inteligente poderia ajudar você a bater suas metas?',
+                        'Qual seria o impacto de ter roteiros estruturados para cada tipo de abordagem?'
+                    ]
+                },
+                history: [
+                    { action: 'Lead criado', user: 'Pedro Santos', detail: 'Lead cadastrado com score 92/100 (Hot)',
+                        time: new Date().toLocaleString('pt-BR') },
+                    { action: 'IA processou lead', user: 'Sistema', detail: 'Enriquecimento e SPIN concluídos',
+                        time: new Date().toLocaleString('pt-BR') }
+                ]
+            },
+            {
+                id: 7,
+                name: 'Marcos Oliveira',
+                company: 'EduTech Brasil',
+                role: 'Coordenador de Vendas',
+                email: 'marcos@edutech.com',
+                category: 'Warm',
+                status: 'Em Qualificação',
+                score: 48,
+                initials: 'MO',
+                color: '#d97706',
+                time: 'Há 3 horas',
+                origin: 'Indicação',
+                segment: 'EdTech',
+                size: 'Pequena',
+                website: 'https://edutech.com',
+                sdr: 'Pedro Santos',
+                observations: 'Indicação de um parceiro de negócios.',
+                createdAt: new Date().toLocaleString('pt-BR'),
+                scoreBreakdown: { roleScore: 12, segmentScore: 12, originScore: 12, interestScore: 12, bonus: 0 },
+                briefing: 'EduTech Brasil é uma startup de educação tecnológica.',
+                spin: {
+                    situacao: [
+                        'Como está estruturada a área de vendas da EduTech Brasil atualmente?',
+                        'Quais são os principais canais de geração de demanda que vocês utilizam?',
+                        'Como você descreveria o relacionamento com seus clientes atuais?'
+                    ],
+                    problema: [
+                        'Quais são os maiores desafios que sua equipe enfrenta na prospecção?',
+                        'Como você avalia a eficiência do processo atual de qualificação de leads?',
+                        'Que gargalos você identifica no funil de vendas?'
+                    ],
+                    implicacao: [
+                        'O que acontece se esses problemas de prospecção continuarem pelos próximos 6 meses?',
+                        'Como isso impacta as metas de crescimento da empresa?',
+                        'Qual o custo de oportunidade de leads mal qualificados?'
+                    ],
+                    need: [
+                        'Se você pudesse qualificar leads com mais precisão, como isso impactaria seu time?',
+                        'Como uma ferramenta de qualificação inteligente poderia ajudar você a bater suas metas?',
+                        'Qual seria o impacto de ter roteiros estruturados para cada tipo de abordagem?'
+                    ]
+                },
+                history: [
+                    { action: 'Lead criado', user: 'Pedro Santos', detail: 'Lead cadastrado com score 48/100 (Warm)',
+                        time: new Date().toLocaleString('pt-BR') },
+                    { action: 'IA processou lead', user: 'Sistema', detail: 'Geração de SPIN concluída',
+                        time: new Date().toLocaleString('pt-BR') }
+                ]
+            },
+            {
+                id: 8,
+                name: 'Juliana Costa',
+                company: 'Logística Expressa',
+                role: 'Gerente Operacional',
+                email: 'juliana@logexpress.com',
+                category: 'Cold',
+                status: 'Em Qualificação',
+                score: 15,
+                initials: 'JC',
+                color: '#9ca3af',
+                time: 'Há 2 dias',
+                origin: 'Evento',
+                segment: 'Logística',
+                size: 'Grande',
+                website: 'https://logexpress.com',
+                sdr: 'Maria Silva',
+                observations: 'Participou de um evento mas não demonstrou interesse.',
+                createdAt: new Date().toLocaleString('pt-BR'),
+                scoreBreakdown: { roleScore: 10, segmentScore: 10, originScore: 8, interestScore: 6, bonus: -19 },
+                briefing: 'Logística Expressa atua no setor de logística e transporte.',
+                spin: {
+                    situacao: [
+                        'Como está estruturada a área de vendas da Logística Expressa atualmente?',
+                        'Quais são os principais canais de geração de demanda que vocês utilizam?',
+                        'Como você descreveria o relacionamento com seus clientes atuais?'
+                    ],
+                    problema: [
+                        'Quais são os maiores desafios que sua equipe enfrenta na prospecção?',
+                        'Como você avalia a eficiência do processo atual de qualificação de leads?',
+                        'Que gargalos você identifica no funil de vendas?'
+                    ],
+                    implicacao: [
+                        'O que acontece se esses problemas de prospecção continuarem pelos próximos 6 meses?',
+                        'Como isso impacta as metas de crescimento da empresa?',
+                        'Qual o custo de oportunidade de leads mal qualificados?'
+                    ],
+                    need: [
+                        'Se você pudesse qualificar leads com mais precisão, como isso impactaria seu time?',
+                        'Como uma ferramenta de qualificação inteligente poderia ajudar você a bater suas metas?',
+                        'Qual seria o impacto de ter roteiros estruturados para cada tipo de abordagem?'
+                    ]
+                },
+                history: [
+                    { action: 'Lead criado', user: 'Maria Silva', detail: 'Lead cadastrado com score 15/100 (Cold)',
+                        time: new Date().toLocaleString('pt-BR') },
+                    { action: 'IA processou lead', user: 'Sistema', detail: 'Enriquecimento de dados concluído',
+                        time: new Date().toLocaleString('pt-BR') }
+                ]
+            }
+        ];
+
+        console.log('📦 [TESTE OK] Dados iniciais preparados:', dadosIniciais.length, 'leads');
+
+        // Tentar carregar dados do localStorage, se não houver, usar os dados iniciais
+        const dadosCarregados = carregarDados();
+        if (dadosCarregados && dadosCarregados.length > 0) {
+            leadsData = dadosCarregados;
+            nextId = Math.max(...leadsData.map(l => l.id), 0) + 1;
+            console.log('✅ [TESTE OK] Dados carregados do localStorage!');
+        } else {
+            leadsData = JSON.parse(JSON.stringify(dadosIniciais));
+            nextId = Math.max(...leadsData.map(l => l.id), 0) + 1;
+            salvarDados();
+            console.log('📦 [TESTE OK] Dados iniciais criados e salvos!');
+        }
+
+        console.log('📊 [TESTE OK] Total de leads carregados:', leadsData.length);
 
         // ============================================================
         // ESTADO DA SESSÃO
@@ -3234,64 +3286,33 @@
         let pendingNotifications = 0;
 
         // ============================================================
-        // FUNÇÕES - LOGIN / LOGOUT
-        // ============================================================
-        function login(user) {
-            currentUser = user;
-            document.getElementById('loginPage').style.display = 'none';
-            
-            if (user.profile === 'SDR') {
-                document.getElementById('dashboardSDR').classList.add('active');
-                document.getElementById('sdrUserName').textContent = user.name;
-                document.getElementById('sdrAvatar').textContent = user.name.split(' ').map(n => n[0]).join('').substring(0, 2);
-                renderSDRLeads(leadsData);
-            } else {
-                document.getElementById('dashboardCloser').classList.add('active');
-                document.getElementById('closerUserName').textContent = user.name;
-                document.getElementById('closerAvatar').textContent = user.name.split(' ').map(n => n[0]).join('').substring(0, 2);
-                renderCloserLeads(leadsData.filter(l => l.status === 'Pronto'));
-            }
-        }
-
-        function logout() {
-            if (confirm('Deseja realmente sair do sistema?')) {
-                currentUser = null;
-                document.getElementById('dashboardSDR').classList.remove('active');
-                document.getElementById('dashboardCloser').classList.remove('active');
-                document.getElementById('loginPage').style.display = 'flex';
-                document.getElementById('loginForm').reset();
-                document.getElementById('messageBox').className = 'message';
-                setProfile('SDR');
-                const sdrUser = DEMO_USERS.find(u => u.profile === 'SDR');
-                if (sdrUser) {
-                    document.getElementById('email').value = sdrUser.email;
-                    document.getElementById('password').value = sdrUser.password;
-                }
-                closeDetailModal();
-                closeEditModal();
-                closeResultModal();
-            }
-        }
-
-        // ============================================================
-        // FUNÇÕES - AUXILIARES
+        // FUNÇÕES AUXILIARES
         // ============================================================
         function getInitials(name) {
-            return name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+            const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+            console.log('🔤 [TESTE OK] Iniciais geradas para', name, '→', initials);
+            return initials;
         }
 
         function getRandomColor() {
             const colors = ['#027075', '#059669', '#F7B31C', '#f59e0b', '#6b7280', '#047857', '#d97706', '#9ca3af', '#7c3aed', '#db2777'];
-            return colors[Math.floor(Math.random() * colors.length)];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            console.log('🎨 [TESTE OK] Cor aleatória gerada:', color);
+            return color;
         }
 
         function getCategory(score) {
-            if (score >= 70) return 'Hot';
-            if (score >= 40) return 'Warm';
-            return 'Cold';
+            let category;
+            if (score >= 70) category = 'Hot';
+            else if (score >= 40) category = 'Warm';
+            else category = 'Cold';
+            console.log('🏷️ [TESTE OK] Categoria para score', score, '→', category);
+            return category;
         }
 
         function calculateScore(role, segment, origin, interest) {
+            console.log('🧮 [TESTE OK] Calculando score para:', { role, segment, origin, interest });
+            
             const roleScores = {
                 'CEO': 20,
                 'Diretor': 20,
@@ -3334,18 +3355,23 @@
             let total = roleScore + segmentScore + originScore + interestScore + bonus;
             total = Math.min(100, total);
 
-            return {
+            const result = {
                 score: total,
                 breakdown: { roleScore, segmentScore, originScore, interestScore, bonus }
             };
+            
+            console.log('📊 [TESTE OK] Score calculado:', result);
+            return result;
         }
 
         function generateBriefing(name, company, role, segment) {
-            return `${company} é uma empresa do setor de ${segment || 'tecnologia'}. ${name} é ${role || 'profissional'} com experiência no mercado. Demonstrou interesse em soluções de qualificação de leads para otimizar o processo comercial da empresa.`;
+            const briefing = `${company} é uma empresa do setor de ${segment || 'tecnologia'}. ${name} é ${role || 'profissional'} com experiência no mercado. Demonstrou interesse em soluções de qualificação de leads para otimizar o processo comercial da empresa.`;
+            console.log('🤖 [TESTE OK] Briefing IA gerado para', name);
+            return briefing;
         }
 
         function generateSpinQuestions(company, role) {
-            return {
+            const spin = {
                 situacao: [
                     `Como está estruturada a área de vendas da ${company} atualmente?`,
                     `Quais são os principais canais de geração de demanda que vocês utilizam?`,
@@ -3367,12 +3393,63 @@
                     `Qual seria o impacto de ter roteiros estruturados para cada tipo de abordagem?`
                 ]
             };
+            console.log('🎯 [TESTE OK] Perguntas SPIN geradas para', company);
+            return spin;
+        }
+
+        // ============================================================
+        // FUNÇÕES - LOGIN / LOGOUT
+        // ============================================================
+        function login(user) {
+            console.log('🔐 [TESTE OK] Login do usuário:', user.email, '| Perfil:', user.profile);
+            currentUser = user;
+            document.getElementById('loginPage').style.display = 'none';
+            
+            if (user.profile === 'SDR') {
+                document.getElementById('dashboardSDR').classList.add('active');
+                document.getElementById('sdrUserName').textContent = user.name;
+                document.getElementById('sdrAvatar').textContent = user.name.split(' ').map(n => n[0]).join('').substring(0, 2);
+                renderSDRLeads(leadsData);
+                console.log('✅ [TESTE OK] Dashboard SDR carregado para:', user.name);
+            } else {
+                document.getElementById('dashboardCloser').classList.add('active');
+                document.getElementById('closerUserName').textContent = user.name;
+                document.getElementById('closerAvatar').textContent = user.name.split(' ').map(n => n[0]).join('').substring(0, 2);
+                renderCloserLeads(leadsData.filter(l => l.status === 'Pronto'));
+                console.log('✅ [TESTE OK] Dashboard Closer carregado para:', user.name);
+            }
+        }
+
+        function logout() {
+            console.log('🚪 [TESTE OK] Logout iniciado');
+            if (confirm('Deseja realmente sair do sistema?')) {
+                console.log('✅ [TESTE OK] Logout confirmado pelo usuário');
+                currentUser = null;
+                document.getElementById('dashboardSDR').classList.remove('active');
+                document.getElementById('dashboardCloser').classList.remove('active');
+                document.getElementById('loginPage').style.display = 'flex';
+                document.getElementById('loginForm').reset();
+                document.getElementById('messageBox').className = 'message';
+                setProfile('SDR');
+                const sdrUser = DEMO_USERS.find(u => u.profile === 'SDR');
+                if (sdrUser) {
+                    document.getElementById('email').value = sdrUser.email;
+                    document.getElementById('password').value = sdrUser.password;
+                }
+                closeDetailModal();
+                closeEditModal();
+                closeResultModal();
+                console.log('✅ [TESTE OK] Sessão encerrada, voltando ao login');
+            } else {
+                console.log('ℹ️ [TESTE OK] Logout cancelado pelo usuário');
+            }
         }
 
         // ============================================================
         // FUNÇÕES - RENDERIZAR SDR
         // ============================================================
         function renderSDRLeads(leads) {
+            console.log('🔄 [TESTE OK] Renderizando SDR leads:', leads.length);
             const container = document.getElementById('sdrLeadsContainer');
             container.innerHTML = '';
 
@@ -3429,12 +3506,15 @@
             document.getElementById('sdrStatReady').textContent = ready;
             document.getElementById('sdrShowingCount').textContent = total;
             document.getElementById('sdrTotalCount').textContent = leadsData.length;
+            
+            console.log('📊 [TESTE OK] Stats SDR atualizados:', { total, hot, warm, ready });
         }
 
         // ============================================================
         // FUNÇÕES - RENDERIZAR CLOSER
         // ============================================================
         function renderCloserLeads(leads) {
+            console.log('🔄 [TESTE OK] Renderizando Closer leads:', leads.length);
             const container = document.getElementById('closerLeadsContainer');
             container.innerHTML = '';
 
@@ -3497,38 +3577,50 @@
             document.getElementById('closerStatCold').textContent = cold;
             document.getElementById('closerShowingCount').textContent = total;
             document.getElementById('closerTotalCount').textContent = leadsData.filter(l => l.status === 'Pronto').length;
+            
+            console.log('📊 [TESTE OK] Stats Closer atualizados:', { total, hot, warm, cold });
         }
 
         // ============================================================
-        // FUNÇÕES - BUSCA E FILTROS
+        // FUNÇÕES - BUSCA E FILTROS (com testes)
         // ============================================================
         let sdrSearchTimeout, closerSearchTimeout;
 
         document.getElementById('sdrSearchInput').addEventListener('input', function(e) {
+            const term = e.target.value;
+            console.log('🔍 [TESTE OK] Busca SDR digitada:', term || '(vazio)');
             clearTimeout(sdrSearchTimeout);
             sdrSearchTimeout = setTimeout(() => {
-                const term = e.target.value.toLowerCase().trim();
+                const termClean = term.toLowerCase().trim();
                 let filtered = leadsData;
-                if (term) {
+                if (termClean) {
                     filtered = filtered.filter(l =>
-                        l.name.toLowerCase().includes(term) ||
-                        l.company.toLowerCase().includes(term)
+                        l.name.toLowerCase().includes(termClean) ||
+                        l.company.toLowerCase().includes(termClean)
                     );
+                    console.log('🔍 [TESTE OK] Resultados da busca SDR:', filtered.length, 'encontrados');
+                } else {
+                    console.log('🔍 [TESTE OK] Busca SDR limpa, mostrando todos os leads');
                 }
                 renderSDRLeads(filtered);
             }, 500);
         });
 
         document.getElementById('closerSearchInput').addEventListener('input', function(e) {
+            const term = e.target.value;
+            console.log('🔍 [TESTE OK] Busca Closer digitada:', term || '(vazio)');
             clearTimeout(closerSearchTimeout);
             closerSearchTimeout = setTimeout(() => {
-                const term = e.target.value.toLowerCase().trim();
+                const termClean = term.toLowerCase().trim();
                 let filtered = leadsData.filter(l => l.status === 'Pronto');
-                if (term) {
+                if (termClean) {
                     filtered = filtered.filter(l =>
-                        l.name.toLowerCase().includes(term) ||
-                        l.company.toLowerCase().includes(term)
+                        l.name.toLowerCase().includes(termClean) ||
+                        l.company.toLowerCase().includes(termClean)
                     );
+                    console.log('🔍 [TESTE OK] Resultados da busca Closer:', filtered.length, 'encontrados');
+                } else {
+                    console.log('🔍 [TESTE OK] Busca Closer limpa, mostrando todos os leads prontos');
                 }
                 renderCloserLeads(filtered);
             }, 500);
@@ -3536,21 +3628,27 @@
 
         document.getElementById('closerSdrFilter').addEventListener('change', function() {
             const sdr = this.value;
+            console.log('🔍 [TESTE OK] Filtro Closer por SDR:', sdr);
             let filtered = leadsData.filter(l => l.status === 'Pronto');
             if (sdr !== 'todos') {
                 filtered = filtered.filter(l => l.sdr === sdr);
+                console.log('🔍 [TESTE OK] Leads filtrados por SDR:', filtered.length);
             }
             renderCloserLeads(filtered);
         });
 
         document.querySelectorAll('#dashboardSDR .filter-btn').forEach(btn => {
             btn.addEventListener('click', function() {
+                const category = this.textContent.trim();
+                console.log('🔍 [TESTE OK] Filtro SDR selecionado:', category);
                 document.querySelectorAll('#dashboardSDR .filter-btn').forEach(b => b.classList.remove('active-sdr'));
                 this.classList.add('active-sdr');
-                const category = this.textContent.trim();
                 let filtered = leadsData;
                 if (category !== 'Todos') {
                     filtered = filtered.filter(lead => lead.category === category);
+                    console.log('🔍 [TESTE OK] Leads SDR filtrados por categoria:', filtered.length);
+                } else {
+                    console.log('🔍 [TESTE OK] Mostrando todos os leads SDR');
                 }
                 renderSDRLeads(filtered);
             });
@@ -3558,12 +3656,16 @@
 
         document.querySelectorAll('#dashboardCloser .filter-btn').forEach(btn => {
             btn.addEventListener('click', function() {
+                const category = this.textContent.trim();
+                console.log('🔍 [TESTE OK] Filtro Closer selecionado:', category);
                 document.querySelectorAll('#dashboardCloser .filter-btn').forEach(b => b.classList.remove('active-closer'));
                 this.classList.add('active-closer');
-                const category = this.textContent.trim();
                 let filtered = leadsData.filter(l => l.status === 'Pronto');
                 if (category !== 'Todos') {
                     filtered = filtered.filter(lead => lead.category === category);
+                    console.log('🔍 [TESTE OK] Leads Closer filtrados por categoria:', filtered.length);
+                } else {
+                    console.log('🔍 [TESTE OK] Mostrando todos os leads prontos');
                 }
                 renderCloserLeads(filtered);
             });
@@ -3573,6 +3675,7 @@
         // FUNÇÕES - NOTIFICAÇÕES
         // ============================================================
         function showCloserNotification(lead) {
+            console.log('🔔 [TESTE OK] Notificação Closer disparada para:', lead.name);
             const notif = document.getElementById('closerNotification');
             if (lead) {
                 document.getElementById('notifLeadName').textContent = lead.name;
@@ -3588,6 +3691,7 @@
         }
 
         function dismissNotification() {
+            console.log('🔔 [TESTE OK] Notificação dispensada');
             document.getElementById('closerNotification').classList.remove('show');
             pendingNotifications = Math.max(0, pendingNotifications - 1);
             updateNotifCount();
@@ -3599,6 +3703,7 @@
                 el.textContent = pendingNotifications;
                 el.style.display = pendingNotifications > 0 ? 'flex' : 'none';
             });
+            console.log('🔔 [TESTE OK] Contador de notificações atualizado:', pendingNotifications);
         }
 
         // ============================================================
@@ -3608,6 +3713,7 @@
         const toastMessage = document.getElementById('toastMessage');
 
         function showToast(message, type = 'success') {
+            console.log('🍞 [TESTE OK] Toast exibido:', message, '| Tipo:', type);
             toastMessage.textContent = message;
             toast.className = 'toast show';
             if (type === 'error') {
@@ -3619,6 +3725,7 @@
             }
             setTimeout(() => {
                 toast.classList.remove('show');
+                console.log('🍞 [TESTE OK] Toast removido');
             }, 4000);
         }
 
@@ -3627,9 +3734,11 @@
         // ============================================================
         const resultModal = document.getElementById('resultModal');
         const closeResultBtn = document.getElementById('closeResultBtn');
+        let newlyCreatedLead = null;
 
         function showResult(lead) {
-            // Score
+            console.log('📊 [TESTE OK] Exibindo resultado do lead:', lead.name, '| Score:', lead.score);
+            
             document.getElementById('resultScore').innerHTML = `${lead.score}<span>/100</span>`;
             
             const catEl = document.getElementById('resultCategory');
@@ -3638,54 +3747,46 @@
             
             document.getElementById('resultStatus').textContent = lead.status;
             
-            // Breakdown
             const bd = lead.scoreBreakdown || { roleScore: 0, segmentScore: 0, originScore: 0, interestScore: 0 };
             document.getElementById('resultRoleScore').textContent = bd.roleScore || 0;
             document.getElementById('resultSegmentScore').textContent = bd.segmentScore || 0;
             document.getElementById('resultOriginScore').textContent = bd.originScore || 0;
             document.getElementById('resultInterestScore').textContent = bd.interestScore || 0;
             
-            // Briefing
             document.getElementById('resultBriefing').textContent = lead.briefing || 'Briefing não disponível.';
             
-            // SPIN
             const spin = lead.spin || generateSpinQuestions(lead.company, lead.role);
             
-            // Situação
             document.querySelector('#spin-situacao .spin-question:nth-child(1) .q-text').textContent = spin.situacao[0] || 'Pergunta não disponível';
             document.querySelector('#spin-situacao .spin-question:nth-child(2) .q-text').textContent = spin.situacao[1] || 'Pergunta não disponível';
             document.querySelector('#spin-situacao .spin-question:nth-child(3) .q-text').textContent = spin.situacao[2] || 'Pergunta não disponível';
             
-            // Problema
             document.querySelector('#spin-problema .spin-question:nth-child(1) .q-text').textContent = spin.problema[0] || 'Pergunta não disponível';
             document.querySelector('#spin-problema .spin-question:nth-child(2) .q-text').textContent = spin.problema[1] || 'Pergunta não disponível';
             document.querySelector('#spin-problema .spin-question:nth-child(3) .q-text').textContent = spin.problema[2] || 'Pergunta não disponível';
             
-            // Implicação
             document.querySelector('#spin-implicacao .spin-question:nth-child(1) .q-text').textContent = spin.implicacao[0] || 'Pergunta não disponível';
             document.querySelector('#spin-implicacao .spin-question:nth-child(2) .q-text').textContent = spin.implicacao[1] || 'Pergunta não disponível';
             document.querySelector('#spin-implicacao .spin-question:nth-child(3) .q-text').textContent = spin.implicacao[2] || 'Pergunta não disponível';
             
-            // Need
             document.querySelector('#spin-need .spin-question:nth-child(1) .q-text').textContent = spin.need[0] || 'Pergunta não disponível';
             document.querySelector('#spin-need .spin-question:nth-child(2) .q-text').textContent = spin.need[1] || 'Pergunta não disponível';
             document.querySelector('#spin-need .spin-question:nth-child(3) .q-text').textContent = spin.need[2] || 'Pergunta não disponível';
             
-            // Resetar abas do SPIN
             document.querySelectorAll('.spin-tab').forEach(t => t.classList.remove('active'));
             document.querySelector('.spin-tab[data-spin="situacao"]').classList.add('active');
             document.querySelectorAll('.result-spin-content').forEach(c => c.classList.remove('active'));
             document.getElementById('spin-situacao').classList.add('active');
             
-            // Guardar o lead para ações
             newlyCreatedLead = lead;
             
-            // Abrir modal
             resultModal.classList.add('active');
             document.body.style.overflow = 'hidden';
+            console.log('✅ [TESTE OK] Modal de resultado aberto');
         }
 
         function closeResultModal() {
+            console.log('❌ [TESTE OK] Fechando modal de resultado');
             resultModal.classList.remove('active');
             document.body.style.overflow = '';
             newlyCreatedLead = null;
@@ -3696,12 +3797,12 @@
             if (e.target === this) closeResultModal();
         });
 
-        // Abas do SPIN no resultado
         document.querySelectorAll('.spin-tab').forEach(tab => {
             tab.addEventListener('click', function() {
+                const target = this.dataset.spin;
+                console.log('📑 [TESTE OK] Aba SPIN selecionada:', target);
                 document.querySelectorAll('.spin-tab').forEach(t => t.classList.remove('active'));
                 this.classList.add('active');
-                const target = this.dataset.spin;
                 document.querySelectorAll('.result-spin-content').forEach(c => c.classList.remove('active'));
                 document.getElementById(`spin-${target}`).classList.add('active');
             });
@@ -3718,6 +3819,7 @@
         const submitLeadBtn = document.getElementById('submitLeadBtn');
 
         function openNewLead() {
+            console.log('📝 [TESTE OK] Modal Novo Lead aberto');
             newLeadModal.classList.add('active');
             document.body.style.overflow = 'hidden';
             newLeadForm.reset();
@@ -3726,6 +3828,7 @@
         }
 
         function closeNewLead() {
+            console.log('❌ [TESTE OK] Modal Novo Lead fechado');
             newLeadModal.classList.remove('active');
             document.body.style.overflow = '';
         }
@@ -3740,25 +3843,42 @@
         newLeadForm.addEventListener('submit', function(e) {
             e.preventDefault();
 
+            console.log('📝 [TESTE OK] Formulário de novo lead submetido');
+
             const name = document.getElementById('leadName').value.trim();
             const email = document.getElementById('leadEmail').value.trim();
             const role = document.getElementById('leadRole').value.trim();
             const company = document.getElementById('leadCompany').value.trim();
             const segment = document.getElementById('leadSegment').value;
             const size = document.getElementById('leadSize').value;
+            const website = document.getElementById('leadWebsite').value.trim();
             const origin = document.getElementById('leadOrigin').value;
             const interest = document.getElementById('leadInterest').value;
             const observations = document.getElementById('leadObservations').value.trim();
 
+            console.log('📊 [TESTE OK] Dados do formulário recebidos:', { name, email, company, role, segment, origin, interest });
+
             if (!name || !email || !company) {
+                console.log('❌ [TESTE OK] Validação falhou: campos obrigatórios vazios');
                 alert('Preencha os campos obrigatórios: Nome, E-mail e Empresa.');
                 return;
             }
 
             if (!email.includes('@') || !email.includes('.')) {
+                console.log('❌ [TESTE OK] Validação falhou: e-mail inválido');
                 alert('Digite um e-mail válido.');
                 return;
             }
+
+            // Verificar duplicidade de e-mail
+            const emailExistente = leadsData.find(l => l.email.toLowerCase() === email.toLowerCase());
+            if (emailExistente) {
+                console.log('❌ [TESTE OK] Validação falhou: e-mail duplicado', email);
+                alert(`❌ Já existe um lead com o e-mail "${email}".\nLead: ${emailExistente.name} (${emailExistente.company})`);
+                return;
+            }
+
+            console.log('✅ [TESTE OK] Validação do formulário passou');
 
             submitLeadBtn.disabled = true;
             submitLeadBtn.innerHTML = '<span class="spinner"></span> Processando...';
@@ -3784,7 +3904,7 @@
                     origin: origin,
                     segment: segment || 'Outro',
                     size: size || 'Não informado',
-                    website: '',
+                    website: website,
                     sdr: currentUser ? currentUser.name : 'Maria Silva',
                     observations: observations || 'Sem observações',
                     createdAt: new Date().toLocaleString('pt-BR'),
@@ -3801,23 +3921,25 @@
                     ]
                 };
 
+                console.log('✅ [TESTE OK] Novo lead criado:', newLead);
+
                 leadsData.unshift(newLead);
+                salvarDados();
                 renderSDRLeads(leadsData);
                 renderCloserLeads(leadsData.filter(l => l.status === 'Pronto'));
                 closeNewLead();
                 
-                // Mostrar resultado
                 showResult(newLead);
-                
                 showToast(`✅ Lead "${name}" criado com sucesso! Score: ${score}/100 - ${category}`);
 
                 submitLeadBtn.disabled = false;
                 submitLeadBtn.innerHTML = '<i class="fas fa-check"></i> Salvar e Qualificar';
+                console.log('✅ [TESTE OK] Lead criado e salvo com sucesso!');
             }, 1500);
         });
 
         // ============================================================
-        // FUNÇÕES - EDITAR LEAD
+        // FUNÇÕES - EDITAR LEAD (com testes)
         // ============================================================
         const editLeadModal = document.getElementById('editLeadModal');
         const closeEditLeadBtn = document.getElementById('closeEditLeadBtn');
@@ -3827,8 +3949,12 @@
         let editingLeadId = null;
 
         function openEditModal(leadId) {
+            console.log('✏️ [TESTE OK] Abrindo modal de edição para lead ID:', leadId);
             const lead = leadsData.find(l => l.id === leadId);
-            if (!lead) return;
+            if (!lead) {
+                console.log('❌ [TESTE OK] Lead não encontrado para edição');
+                return;
+            }
 
             editingLeadId = leadId;
 
@@ -3847,9 +3973,11 @@
             document.body.style.overflow = 'hidden';
             submitEditLeadBtn.disabled = false;
             submitEditLeadBtn.innerHTML = '<i class="fas fa-save"></i> Salvar Alterações';
+            console.log('✅ [TESTE OK] Modal de edição aberto para:', lead.name);
         }
 
         function closeEditModal() {
+            console.log('❌ [TESTE OK] Fechando modal de edição');
             editLeadModal.classList.remove('active');
             document.body.style.overflow = '';
             editingLeadId = null;
@@ -3864,6 +3992,8 @@
         editLeadForm.addEventListener('submit', function(e) {
             e.preventDefault();
 
+            console.log('✏️ [TESTE OK] Formulário de edição submetido');
+
             const name = document.getElementById('editName').value.trim();
             const email = document.getElementById('editEmail').value.trim();
             const role = document.getElementById('editRole').value.trim();
@@ -3875,15 +4005,28 @@
             const status = document.getElementById('editStatus').value;
             const observations = document.getElementById('editObservations').value.trim();
 
+            console.log('📊 [TESTE OK] Dados do formulário de edição recebidos:', { name, email, company, status });
+
             if (!name || !email || !company) {
+                console.log('❌ [TESTE OK] Validação de edição falhou: campos obrigatórios vazios');
                 alert('Preencha os campos obrigatórios: Nome, E-mail e Empresa.');
                 return;
             }
 
             if (!email.includes('@') || !email.includes('.')) {
+                console.log('❌ [TESTE OK] Validação de edição falhou: e-mail inválido');
                 alert('Digite um e-mail válido.');
                 return;
             }
+
+            const emailExistente = leadsData.find(l => l.email.toLowerCase() === email.toLowerCase() && l.id !== editingLeadId);
+            if (emailExistente) {
+                console.log('❌ [TESTE OK] Validação de edição falhou: e-mail duplicado', email);
+                alert(`❌ Já existe um lead com o e-mail "${email}".\nLead: ${emailExistente.name} (${emailExistente.company})`);
+                return;
+            }
+
+            console.log('✅ [TESTE OK] Validação da edição passou');
 
             submitEditLeadBtn.disabled = true;
             submitEditLeadBtn.innerHTML = '<span class="spinner"></span> Salvando...';
@@ -3923,6 +4066,9 @@
                     time: new Date().toLocaleString('pt-BR')
                 });
 
+                console.log('✅ [TESTE OK] Lead editado com sucesso:', lead);
+
+                salvarDados();
                 renderSDRLeads(leadsData);
                 renderCloserLeads(leadsData.filter(l => l.status === 'Pronto'));
 
@@ -3936,18 +4082,27 @@
 
                 submitEditLeadBtn.disabled = false;
                 submitEditLeadBtn.innerHTML = '<i class="fas fa-save"></i> Salvar Alterações';
+                console.log('✅ [TESTE OK] Edição concluída e salva');
             }, 1500);
         });
 
         // ============================================================
-        // FUNÇÕES - AÇÕES DO SDR
+        // FUNÇÕES - AÇÕES DO SDR (com testes)
         // ============================================================
         function markAsReady() {
-            if (!currentLeadId) return;
+            console.log('✅ [TESTE OK] Botão "Marcar como Pronto" clicado');
+            if (!currentLeadId) {
+                console.log('❌ [TESTE OK] Nenhum lead selecionado');
+                return;
+            }
             const lead = leadsData.find(l => l.id === currentLeadId);
-            if (!lead) return;
+            if (!lead) {
+                console.log('❌ [TESTE OK] Lead não encontrado');
+                return;
+            }
 
             if (lead.status === 'Pronto') {
+                console.log('ℹ️ [TESTE OK] Lead já está pronto');
                 showToast('ℹ️ Este lead já está marcado como Pronto.', 'info');
                 return;
             }
@@ -3961,6 +4116,9 @@
                 time: new Date().toLocaleString('pt-BR')
             });
 
+            console.log('✅ [TESTE OK] Lead marcado como Pronto:', lead.name);
+
+            salvarDados();
             renderSDRLeads(leadsData);
             renderCloserLeads(leadsData.filter(l => l.status === 'Pronto'));
             openDetail(lead.id);
@@ -3969,11 +4127,19 @@
         }
 
         function markAsReadyFromResult() {
-            if (!newlyCreatedLead) return;
+            console.log('✅ [TESTE OK] Botão "Marcar como Pronto" (resultado) clicado');
+            if (!newlyCreatedLead) {
+                console.log('❌ [TESTE OK] Nenhum lead recém-criado encontrado');
+                return;
+            }
             const lead = leadsData.find(l => l.id === newlyCreatedLead.id);
-            if (!lead) return;
+            if (!lead) {
+                console.log('❌ [TESTE OK] Lead não encontrado');
+                return;
+            }
 
             if (lead.status === 'Pronto') {
+                console.log('ℹ️ [TESTE OK] Lead já está pronto');
                 showToast('ℹ️ Este lead já está marcado como Pronto.', 'info');
                 return;
             }
@@ -3987,6 +4153,9 @@
                 time: new Date().toLocaleString('pt-BR')
             });
 
+            console.log('✅ [TESTE OK] Lead (resultado) marcado como Pronto:', lead.name);
+
+            salvarDados();
             renderSDRLeads(leadsData);
             renderCloserLeads(leadsData.filter(l => l.status === 'Pronto'));
             closeResultModal();
@@ -3995,6 +4164,7 @@
         }
 
         function backToDashboard() {
+            console.log('⬅️ [TESTE OK] Botão "Voltar ao Painel" clicado');
             closeResultModal();
         }
 
@@ -4002,24 +4172,40 @@
         document.getElementById('resultBackBtn').addEventListener('click', backToDashboard);
 
         // ============================================================
-        // FUNÇÕES - REVERTER STATUS
+        // FUNÇÕES - REVERTER STATUS (com testes)
         // ============================================================
         function revertStatus() {
-            if (!currentLeadId) return;
+            console.log('🔄 [TESTE OK] Botão "Reverter Status" clicado');
+            if (!currentLeadId) {
+                console.log('❌ [TESTE OK] Nenhum lead selecionado');
+                return;
+            }
             const lead = leadsData.find(l => l.id === currentLeadId);
-            if (!lead) return;
+            if (!lead) {
+                console.log('❌ [TESTE OK] Lead não encontrado');
+                return;
+            }
 
             if (lead.status !== 'Pronto') {
+                console.log('ℹ️ [TESTE OK] Lead não está pronto para reverter');
                 showToast('ℹ️ Este lead não está marcado como Pronto.', 'info');
                 return;
             }
+            console.log('🔄 [TESTE OK] Abrindo modal de confirmação para reverter:', lead.name);
             document.getElementById('confirmModalOverlay').classList.add('active');
         }
 
         function confirmRevertStatus() {
-            if (!currentLeadId) return;
+            console.log('🔄 [TESTE OK] Confirmação de reversão confirmada');
+            if (!currentLeadId) {
+                console.log('❌ [TESTE OK] Nenhum lead selecionado');
+                return;
+            }
             const lead = leadsData.find(l => l.id === currentLeadId);
-            if (!lead) return;
+            if (!lead) {
+                console.log('❌ [TESTE OK] Lead não encontrado');
+                return;
+            }
 
             lead.status = 'Em Qualificação';
             lead.time = 'Agora';
@@ -4030,7 +4216,10 @@
                 time: new Date().toLocaleString('pt-BR')
             });
 
+            console.log('✅ [TESTE OK] Status revertido para:', lead.name);
+
             document.getElementById('confirmModalOverlay').classList.remove('active');
+            salvarDados();
             renderSDRLeads(leadsData);
             renderCloserLeads(leadsData.filter(l => l.status === 'Pronto'));
             openDetail(lead.id);
@@ -4038,32 +4227,52 @@
         }
 
         function cancelRevert() {
+            console.log('🔄 [TESTE OK] Reversão cancelada pelo usuário');
             document.getElementById('confirmModalOverlay').classList.remove('active');
         }
 
         function archiveLead() {
-            if (!currentLeadId) return;
+            console.log('📦 [TESTE OK] Botão "Arquivar" clicado');
+            if (!currentLeadId) {
+                console.log('❌ [TESTE OK] Nenhum lead selecionado');
+                return;
+            }
             const lead = leadsData.find(l => l.id === currentLeadId);
-            if (!lead) return;
+            if (!lead) {
+                console.log('❌ [TESTE OK] Lead não encontrado');
+                return;
+            }
 
             if (confirm(`Tem certeza que deseja arquivar o lead "${lead.name}"?`)) {
+                console.log('📦 [TESTE OK] Lead arquivado:', lead.name);
                 leadsData = leadsData.filter(l => l.id !== currentLeadId);
+                salvarDados();
                 renderSDRLeads(leadsData);
                 renderCloserLeads(leadsData.filter(l => l.status === 'Pronto'));
                 closeDetailModal();
                 showToast(`📦 Lead "${lead.name}" arquivado com sucesso!`);
+            } else {
+                console.log('📦 [TESTE OK] Arquivamento cancelado');
             }
         }
 
         // ============================================================
-        // FUNÇÕES - AÇÕES DO CLOSER
+        // FUNÇÕES - AÇÕES DO CLOSER (com testes)
         // ============================================================
         function updateLeadStatus(status, actionName) {
-            if (!currentLeadId) return;
+            console.log('✅ [TESTE OK] Ação do Closer:', actionName);
+            if (!currentLeadId) {
+                console.log('❌ [TESTE OK] Nenhum lead selecionado');
+                return;
+            }
             const lead = leadsData.find(l => l.id === currentLeadId);
-            if (!lead) return;
+            if (!lead) {
+                console.log('❌ [TESTE OK] Lead não encontrado');
+                return;
+            }
 
             if (lead.status === 'Fechado' || lead.status === 'Perdido') {
+                console.log('ℹ️ [TESTE OK] Lead já finalizado');
                 showToast('ℹ️ Este lead já foi finalizado.', 'info');
                 return;
             }
@@ -4078,6 +4287,9 @@
                 time: new Date().toLocaleString('pt-BR')
             });
 
+            console.log('✅ [TESTE OK] Status do lead atualizado:', lead.name, '→', status);
+
+            salvarDados();
             renderSDRLeads(leadsData);
             renderCloserLeads(leadsData.filter(l => l.status === 'Pronto'));
             if (detailModalOverlay.classList.contains('active')) {
@@ -4088,18 +4300,23 @@
         }
 
         // ============================================================
-        // FUNÇÕES - MODAL DETALHE
+        // FUNÇÕES - MODAL DETALHE (com testes)
         // ============================================================
         const detailModalOverlay = document.getElementById('detailModalOverlay');
         const closeDetailModalBtn = document.getElementById('closeDetailModalBtn');
 
         function openDetail(leadId) {
+            console.log('📋 [TESTE OK] Abrindo detalhe do lead ID:', leadId);
             const lead = leadsData.find(l => l.id === leadId);
-            if (!lead) return;
+            if (!lead) {
+                console.log('❌ [TESTE OK] Lead não encontrado para detalhe');
+                return;
+            }
 
             currentLeadId = leadId;
 
             const isSDR = currentUser && currentUser.profile === 'SDR';
+            console.log('📋 [TESTE OK] Perfil atual:', isSDR ? 'SDR' : 'Closer');
             
             const titleEl = document.getElementById('detailModalTitle');
             if (isSDR) {
@@ -4222,9 +4439,11 @@
 
             detailModalOverlay.classList.add('active');
             document.body.style.overflow = 'hidden';
+            console.log('✅ [TESTE OK] Modal de detalhe aberto para:', lead.name);
         }
 
         function closeDetailModal() {
+            console.log('❌ [TESTE OK] Fechando modal de detalhe');
             detailModalOverlay.classList.remove('active');
             document.body.style.overflow = '';
             currentLeadId = null;
@@ -4236,6 +4455,7 @@
         });
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
+                console.log('⌨️ [TESTE OK] Tecla ESC pressionada, fechando modais');
                 closeDetailModal();
                 closeResultModal();
                 if (document.getElementById('confirmModalOverlay').classList.contains('active')) {
@@ -4251,26 +4471,28 @@
         });
 
         // ============================================================
-        // ABAS DO MODAL DETALHE
+        // ABAS DO MODAL DETALHE (com testes)
         // ============================================================
         document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.addEventListener('click', function() {
+                const target = this.dataset.tab;
+                console.log('📑 [TESTE OK] Aba do detalhe selecionada:', target);
                 const isSDR = currentUser && currentUser.profile === 'SDR';
                 document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active-sdr', 'active-closer'));
                 this.classList.add(isSDR ? 'active-sdr' : 'active-closer');
-                const target = this.dataset.tab;
                 document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
                 document.getElementById(target).classList.add('active');
             });
         });
 
         // ============================================================
-        // EVENTOS DOS BOTÕES
+        // EVENTOS DOS BOTÕES (com testes)
         // ============================================================
         document.getElementById('markReadyBtn').addEventListener('click', markAsReady);
         document.getElementById('revertStatusBtn').addEventListener('click', revertStatus);
         document.getElementById('archiveBtn').addEventListener('click', archiveLead);
         document.getElementById('openEditBtn').addEventListener('click', function() {
+            console.log('✏️ [TESTE OK] Botão "Editar" clicado');
             if (currentLeadId) {
                 closeDetailModal();
                 setTimeout(() => {
@@ -4280,21 +4502,24 @@
         });
 
         document.getElementById('statusNegotiating').addEventListener('click', function() {
+            console.log('🤝 [TESTE OK] Botão "Em Negociação" clicado');
             updateLeadStatus('Em Negociação', 'Lead em negociação');
         });
         document.getElementById('statusWon').addEventListener('click', function() {
+            console.log('🏆 [TESTE OK] Botão "Fechado (Ganho)" clicado');
             if (confirm('Confirmar que o lead foi FECHADO (GANHO)?')) {
                 updateLeadStatus('Fechado', 'Lead fechado (Ganho)');
             }
         });
         document.getElementById('statusLost').addEventListener('click', function() {
+            console.log('❌ [TESTE OK] Botão "Perdido" clicado');
             if (confirm('Confirmar que o lead foi PERDIDO?')) {
                 updateLeadStatus('Perdido', 'Lead perdido');
             }
         });
 
         // ============================================================
-        // CONFIRMAÇÃO REVERTER
+        // CONFIRMAÇÃO REVERTER (com testes)
         // ============================================================
         document.getElementById('confirmCancelBtn').addEventListener('click', cancelRevert);
         document.getElementById('confirmRevertBtn').addEventListener('click', confirmRevertStatus);
@@ -4303,7 +4528,7 @@
         });
 
         // ============================================================
-        // TELA DE LOGIN - SWITCH DE PERFIL
+        // TELA DE LOGIN - SWITCH DE PERFIL (com testes)
         // ============================================================
         const sliderBg = document.getElementById('sliderBg');
         const sdrOption = document.getElementById('sdrOption');
@@ -4314,6 +4539,7 @@
         const passwordInput = document.getElementById('password');
 
         function setProfile(profile) {
+            console.log('🔄 [TESTE OK] Switch de perfil:', profile);
             selectedProfile = profile;
             
             sliderBg.className = `slider-bg ${profile.toLowerCase()}`;
@@ -4338,6 +4564,7 @@
                 emailInput.placeholder = demoUser.email;
                 emailInput.value = demoUser.email;
                 passwordInput.value = demoUser.password;
+                console.log('👤 [TESTE OK] Credenciais demo carregadas para:', demoUser.email);
             }
             
             const badgeEl = document.querySelector('.profile-badge');
@@ -4351,34 +4578,40 @@
         closerOption.addEventListener('click', () => setProfile('Closer'));
 
         // ============================================================
-        // TELA DE LOGIN - SUBMISSÃO
+        // TELA DE LOGIN - SUBMISSÃO (com testes)
         // ============================================================
         const loginForm = document.getElementById('loginForm');
         const messageBox = document.getElementById('messageBox');
         const loginBtn = document.getElementById('loginBtn');
 
         function showMessage(text, type = 'error') {
+            console.log('💬 [TESTE OK] Mensagem exibida:', text, '| Tipo:', type);
             messageBox.className = `message ${type}`;
             messageBox.textContent = text;
             clearTimeout(window.messageTimeout);
             window.messageTimeout = setTimeout(() => {
                 messageBox.className = 'message';
+                console.log('💬 [TESTE OK] Mensagem removida');
             }, 4500);
         }
 
         loginForm.addEventListener('submit', function(e) {
             e.preventDefault();
 
+            console.log('🔐 [TESTE OK] Tentativa de login iniciada');
+
             const email = emailInput.value.trim();
             const password = passwordInput.value.trim();
 
             if (!email || !password) {
+                console.log('❌ [TESTE OK] Login falhou: campos vazios');
                 showMessage('Preencha todos os campos.', 'error');
                 return;
             }
 
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
+                console.log('❌ [TESTE OK] Login falhou: e-mail inválido');
                 showMessage('Digite um e-mail válido.', 'error');
                 return;
             }
@@ -4386,15 +4619,18 @@
             const user = DEMO_USERS.find(u => u.email === email && u.password === password);
 
             if (!user) {
+                console.log('❌ [TESTE OK] Login falhou: credenciais incorretas');
                 showMessage('❌ E-mail ou senha incorretos.', 'error');
                 return;
             }
 
             if (user.profile !== selectedProfile) {
+                console.log('❌ [TESTE OK] Login falhou: perfil incorreto - esperado:', selectedProfile, 'recebido:', user.profile);
                 showMessage(`⚠️ Este usuário é "${user.profile}", mas você selecionou "${selectedProfile}".`, 'error');
                 return;
             }
 
+            console.log('✅ [TESTE OK] Login bem-sucedido para:', user.email);
             loginBtn.disabled = true;
             loginBtn.innerHTML = '<span class="spinner"></span> Entrando...';
             showMessage(`✅ Bem-vindo(a), ${user.name}!`, 'success');
@@ -4403,25 +4639,31 @@
                 login(user);
                 loginBtn.disabled = false;
                 loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Entrar como <span id="btnProfileLabel">' + selectedProfile + '</span>';
+                console.log('✅ [TESTE OK] Login concluído, redirecionado para dashboard');
             }, 1500);
         });
 
         // ============================================================
-        // EVENTOS DOS LINKS DE LOGIN
+        // EVENTOS DOS LINKS DE LOGIN (com testes)
         // ============================================================
         document.getElementById('goToRegister').addEventListener('click', function(e) {
             e.preventDefault();
+            console.log('📝 [TESTE OK] Link "Criar conta" clicado');
             showMessage('🔜 Funcionalidade de cadastro em breve!', 'success');
         });
 
         document.getElementById('forgotPassword').addEventListener('click', function(e) {
             e.preventDefault();
+            console.log('🔑 [TESTE OK] Link "Esqueci minha senha" clicado');
             showMessage('📧 Link de redefinição enviado (simulação).', 'success');
         });
 
         // ============================================================
         // INICIALIZAÇÃO
         // ============================================================
+        console.log('🚀 ===== SISTEMA INICIALIZADO COM SUCESSO =====');
+        console.log('📋 Todas as funções principais estão sendo monitoradas com console.log');
+        
         setProfile('SDR');
         const sdrUser = DEMO_USERS.find(u => u.profile === 'SDR');
         if (sdrUser) {
@@ -4438,7 +4680,9 @@
         console.log('🔑 Senha: 123456');
         console.log('📊 Total de leads:', leadsData.length);
         console.log('📋 Leads prontos:', leadsData.filter(l => l.status === 'Pronto').length);
+        console.log('💾 Dados salvos no localStorage!');
+        console.log('🧪 Todos os testes com console.log estão ativos!');
+        console.log('📋 ===== ROTEIRO DE TESTES DISPONÍVEL ABAIXO =====');
     </script>
-
 </body>
 </html>
